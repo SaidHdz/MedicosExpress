@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-white border-t border-slate-100 py-16 px-6">
+	<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-12">
+		
+		<!-- Izquierda: Autoridad -->
+		<div class="text-center md:text-left">
+			<h2 class="text-2xl font-black text-slate-900 mb-2 italic">
+				Médicos <span class="text-blue-600">Express</span>
+			</h2>
+			<div class="flex items-center justify-center md:justify-start gap-2 text-slate-500 font-bold text-sm">
+				<Icon name="lucide:shield-check" class="w-5 h-5 text-blue-600" />
+				Cédula Profesional: 12345678
+			</div>
+			<p class="text-slate-400 text-xs mt-4">
+				&copy; {currentYear} Todos los derechos reservados.
+			</p>
+		</div>
+
+		<!-- Centro: Navegación -->
+		<div class="flex flex-col items-center gap-4">
+			<p class="text-slate-900 font-bold uppercase tracking-[0.2em] text-xs mb-2">Explora</p>
+			<nav class="flex gap-8 text-slate-600 font-bold text-sm">
+				<a href="/" class="hover:text-blue-600 transition-colors">Inicio</a>
+				<a href="/#servicios" class="hover:text-blue-600 transition-colors">Servicios</a>
+				<a href="/privacidad" class="hover:text-blue-600 transition-colors">Privacidad</a>
+			</nav>
+		</div>
+
+		<!-- Derecha: Social y Créditos -->
+		<div class="flex flex-col items-center md:items-end gap-6">
+			<div class="flex gap-6 text-slate-400">
+				<a href="#" class="hover:text-blue-600 transition-colors"><Icon name="lucide:facebook" class="w-6 h-6" /></a>
+				<a href="#" class="hover:text-blue-600 transition-colors"><Icon name="lucide:instagram" class="w-6 h-6" /></a>
+				<a href="#" class="hover:text-blue-600 transition-colors"><Icon name="lucide:mail" class="w-6 h-6" /></a>
+			</div>
+			<p class="text-slate-400 text-sm font-medium">
+				Hecho en <span class="text-slate-900 font-bold">Reynosa</span> por <a href="https://github.com/said" class="text-blue-600 hover:underline">Said</a>
+			</p>
+		</div>
+
+	</div>
+</footer>

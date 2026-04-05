@@ -1,0 +1,34 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<header class="fixed top-0 left-0 right-0 z-[100] bg-white/80 backdrop-blur-md border-b border-slate-100">
+	<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+		
+		<!-- Logo -->
+		<a href="/" class="flex items-center gap-2 group">
+			<div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform">
+				<Icon name="lucide:stethoscope" class="w-6 h-6" />
+			</div>
+			<span class="text-xl font-black text-slate-900 italic tracking-tight">
+				Médicos <span class="text-blue-600">Express</span>
+			</span>
+		</a>
+
+		<!-- Navegación Desktop -->
+		<nav class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-600">
+			<a href="#servicios" class="hover:text-blue-600 transition-colors">Servicios</a>
+			<a href="#agendar" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95">
+				Agendar Cita
+			</a>
+		</nav>
+
+		<!-- Botón Móvil (Solo icono) -->
+		<div class="md:hidden">
+			<a href="#agendar" class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90">
+				<Icon name="lucide:calendar" class="w-6 h-6" />
+			</a>
+		</div>
+
+	</div>
+</header>
