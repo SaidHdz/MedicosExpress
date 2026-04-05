@@ -18,6 +18,10 @@
   --animate-bounce-slow: bounce-slow 4s ease-in-out infinite;
 }
 
+/* Configuración de Modo Oscuro para Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
 body {
   font-family: var(--font-sans);
+  @apply transition-colors duration-300;
 }
