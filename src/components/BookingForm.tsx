@@ -112,14 +112,35 @@ const BookingForm: React.FC = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Motivo de Consulta (Opcional)</label>
-                <textarea 
-                    rows={3}
-                    placeholder="Cuéntanos brevemente cómo podemos ayudarte..."
-                    className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 resize-none"
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                ></textarea>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Sucursal</label>
+                    <select 
+                        required
+                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none"
+                        onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
+                    >
+                        <option value="">Seleccionar Sucursal</option>
+                        <option value="Vista Hermosa">Vista Hermosa</option>
+                        <option value="Jarachina">Jarachina</option>
+                        <option value="López Portillo">López Portillo</option>
+                        <option value="Villa Esmeralda">Villa Esmeralda</option>
+                    </select>
+                </div>
+                <div className="flex flex-col gap-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Servicio</label>
+                    <select 
+                        required
+                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none"
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    >
+                        <option value="">Seleccionar Servicio</option>
+                        <option value="Consulta">Consulta General</option>
+                        <option value="Laboratorio">Laboratorio</option>
+                        <option value="Rayos X">Rayos X / Tomografía</option>
+                        <option value="Urgencias">Urgencias</option>
+                    </select>
+                </div>
             </div>
 
             <button 
@@ -134,7 +155,7 @@ const BookingForm: React.FC = () => {
             </button>
             
             <p className="text-center text-xs font-bold text-slate-400 dark:text-slate-500 px-4">
-                Al confirmar, el Dr. recibirá una notificación instantánea y se pondrá en contacto contigo.
+                🔒 Sus datos están protegidos bajo nuestro Aviso de Privacidad.
             </p>
         </form>
     );
