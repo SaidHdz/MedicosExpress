@@ -18,8 +18,10 @@ import ThemeToggle from './ThemeToggle';
 
 		<!-- Navegación Desktop -->
 		<nav class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600 dark:text-slate-300">
-			<a href="#servicios" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Servicios</a>
-			<ThemeToggle client:only="react" />
+			<div class="flex items-center gap-6">
+				<ThemeToggle client:only="react" />
+				<a href="#servicios" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Servicios</a>
+			</div>
 			<a href="#agendar" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95">
 				Agendar Cita
 			</a>

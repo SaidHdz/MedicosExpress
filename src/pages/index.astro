@@ -8,7 +8,7 @@ import { Image } from 'astro:assets';
 const heroImage = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1200&auto=format&fit=crop";
 ---
 
-<Layout title="Médicos Express: Excelencia Médica sin Esperas en Reynosa">
+<Layout title="Medic's Clínicas Express: Atención Médica Integral 24/7 en Reynosa">
 	<main class="bg-white dark:bg-slate-950 overflow-hidden transition-colors duration-300">
 		<!-- Hero Section -->
 		<section class="relative min-h-[85vh] flex items-center bg-slate-50 dark:bg-slate-950 overflow-hidden">
@@ -16,22 +16,22 @@ const heroImage = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?
 			
 			<div class="max-w-7xl mx-auto px-6 py-12 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
 				
-				<!-- Contenido: Texto (Primero en móvil) -->
+				<!-- Contenido: Texto -->
 				<div class="flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-1 mt-8 lg:mt-0">
-					<div class="mb-6 inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full text-sm font-bold tracking-wide uppercase border border-blue-100 dark:border-blue-900/30 animate-fade-in shadow-sm">
+					<div class="mb-6 inline-flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-full text-sm font-bold tracking-wide uppercase border border-red-100 dark:border-red-900/30 animate-fade-in shadow-sm">
 						<span class="relative flex h-3 w-3">
-							<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-							<span class="relative inline-flex rounded-full h-3 w-3 bg-blue-600 dark:bg-blue-500"></span>
+							<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+							<span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
 						</span>
-						Citas Disponibles Hoy
+						Atención inmediata sin previa cita en Urgencias
 					</div>
 
 					<h1 class="text-4xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 md:mb-8 leading-[1.05]">
-						Atención Médica <span class="text-blue-600 dark:text-blue-400">24/7</span> en Reynosa: Más Cerca de ti.
+						Atención Médica <span class="text-blue-600 dark:text-blue-400">Integral 24/7</span> en Reynosa.
 					</h1>
 					
 					<p class="text-lg md:text-2xl text-slate-600 dark:text-slate-300 mb-8 md:mb-10 max-w-xl leading-relaxed font-medium">
-						Agende su cita en menos de 1 minuto en nuestras sucursales <span class="text-slate-900 dark:text-white font-bold underline decoration-blue-500/30 dark:decoration-blue-400/30 decoration-4 underline-offset-4 tracking-tight text-base md:text-lg">Vista Hermosa, Jarachina, López Portillo o Villa Esmeralda</span>. Sin llamadas, sin esperas.
+						Cuidamos de ti y tu familia con tecnología de vanguardia y especialistas certificados. Agenda tu cita en segundos desde tu celular.
 					</p>
 					
 					<div class="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
@@ -40,19 +40,19 @@ const heroImage = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?
 							class="group bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 px-10 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98] flex items-center justify-center gap-3 text-xl"
 						>
 							<Icon name="lucide:calendar-check" class="w-7 h-7" />
-							Agendar Cita por WhatsApp
+							Agendar Cita Ahora
 							<Icon name="lucide:arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
 						</a>
 						<a 
-							href="#sucursales"
+							href="#servicios"
 							class="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-800 text-slate-700 dark:text-slate-200 font-bold py-5 px-10 rounded-2xl transition-all hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-[0.98] text-xl shadow-sm text-center"
 						>
-							Nuestras Sucursales
+							Nuestros Servicios
 						</a>
 					</div>
 				</div>
 
-				<!-- Contenido: Imagen Optimizada (Segundo en móvil) -->
+				<!-- Contenido: Imagen -->
 				<div class="relative order-2 lg:order-2 flex justify-center lg:justify-end overflow-visible">
 					<div class="relative w-full max-w-[450px] lg:max-w-none">
 						<div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-100 dark:bg-blue-900/20 rounded-full opacity-50 blur-3xl -z-10"></div>
@@ -66,7 +66,6 @@ const heroImage = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?
 							loading="eager"
 						/>
 						
-						<!-- Tarjeta flotante de confianza con z-index alto -->
 						<div class="absolute -bottom-6 -right-4 md:right-10 bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-2xl border border-slate-50 dark:border-slate-700 z-30 hidden sm:block animate-bounce-slow">
 							<div class="flex items-center gap-4">
 								<div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white">
@@ -83,8 +82,67 @@ const heroImage = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?
 			</div>
 		</section>
 
+		<!-- Membresía Medic's Members -->
+		<section class="py-24 px-6 bg-gradient-to-br from-blue-600 to-blue-800 dark:from-blue-900 dark:to-slate-950 relative overflow-hidden">
+			<div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+			<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+				<div>
+					<div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-400/20 text-blue-100 rounded-full text-sm font-bold tracking-widest uppercase mb-6 border border-white/10">
+						Membresía Anual
+					</div>
+					<h2 class="text-4xl md:text-6xl font-black text-white mb-8 leading-tight italic">
+						Únete a <br/>
+						<span class="text-blue-300">Medic's Members</span>
+					</h2>
+					<p class="text-xl text-blue-100 mb-10 leading-relaxed font-medium">
+						El programa de salud más completo de Reynosa. Protege tu bienestar y tu economía durante todo un año.
+					</p>
+					
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-10">
+						{[
+							{ label: "Consulta General", val: "12%" },
+							{ label: "Laboratorios", val: "15%" },
+							{ label: "Farmacia", val: "10%" },
+							{ label: "Rayos X", val: "10%" },
+							{ label: "Ultrasonidos y TAC", val: "5%" },
+							{ label: "Paquetes y Promos", val: "5%" }
+						].map(item => (
+							<div class="flex items-center justify-between py-3 border-b border-white/10">
+								<span class="text-blue-50 font-medium">{item.label}</span>
+								<span class="text-blue-300 font-black text-xl">{item.val} Desc.</span>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="bg-white dark:bg-slate-900 p-10 md:p-16 rounded-[3rem] shadow-2xl border border-white/10 relative">
+					<div class="absolute -top-8 -right-8 w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center text-slate-900 flex-col rotate-12 shadow-xl border-4 border-white dark:border-slate-800">
+						<span class="text-sm font-black uppercase">Vigencia</span>
+						<span class="text-2xl font-black italic">1 AÑO</span>
+					</div>
+					<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 italic">Beneficio Exclusivo</h3>
+					<p class="text-4xl md:text-5xl font-black text-blue-600 dark:text-blue-400 mb-8 tracking-tighter uppercase leading-tight">
+						2 Consultas <br/> <span class="text-blue-800 dark:text-blue-300">Gratis</span>
+					</p>
+					<p class="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+						Recibe dos consultas generales sin costo al año y acceso preferencial a todos nuestros servicios con descuento inmediato.
+					</p>
+					
+					<div class="mb-10 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-2xl border border-blue-100 dark:border-blue-800 text-center">
+						<p class="text-slate-900 dark:text-white font-bold leading-relaxed">
+							Incluye a cada miembro de tu familia por solo <span class="text-blue-600 dark:text-blue-400">$50 más</span>
+						</p>
+					</div>
+
+					<button class="w-full py-5 bg-slate-900 dark:bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-xl active:scale-95 text-xl">
+						Adquirir Mi Membresía
+					</button>
+				</div>
+			</div>
+		</section>
+
 		<!-- Sistema Medic's Pro -->
-		<section class="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300">
+		<section class="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300 border-b border-slate-100 dark:border-slate-900">
 			<div class="max-w-7xl mx-auto">
 				<div class="text-center mb-20">
 					<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">
@@ -93,82 +151,91 @@ const heroImage = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?
 					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
 						El Sistema <span class="text-blue-600 dark:text-blue-400 italic">Medic's Pro</span>
 					</h3>
-					<p class="mt-6 text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-						Automatización diseñada para que tú te enfoques en tu salud mientras nosotros gestionamos el resto.
-					</p>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<!-- Paso 01 -->
 					<div class="group relative p-10 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-1 overflow-hidden">
 						<div class="absolute -bottom-6 -right-2 text-9xl font-black text-slate-200/50 dark:text-slate-800/30 group-hover:text-blue-600/5 transition-colors italic pointer-events-none select-none">01</div>
-						<div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg shadow-blue-200 dark:shadow-none relative z-10">
+						<div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg relative z-10">
 							<Icon name="lucide:calendar-days" class="w-6 h-6" />
 						</div>
 						<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 relative z-10">Agendamiento 24/7</h4>
-						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">
-							El paciente elige sucursal y horario desde su cel, incluso de madrugada.
-						</p>
+						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">El paciente elige sucursal y horario desde su cel, incluso de madrugada.</p>
 					</div>
-					<!-- Paso 02 -->
 					<div class="group relative p-10 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-1 overflow-hidden">
 						<div class="absolute -bottom-6 -right-2 text-9xl font-black text-slate-200/50 dark:text-slate-800/30 group-hover:text-blue-600/5 transition-colors italic pointer-events-none select-none">02</div>
-						<div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg shadow-blue-200 dark:shadow-none relative z-10">
+						<div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg relative z-10">
 							<Icon name="lucide:cpu" class="w-6 h-6" />
 						</div>
 						<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 relative z-10">Validación Inteligente</h4>
-						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">
-							El sistema revisa la disponibilidad real para evitar que se empalmen citas.
-						</p>
+						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">El sistema revisa la disponibilidad real para evitar que se empalmen citas.</p>
 					</div>
-					<!-- Paso 03 -->
 					<div class="group relative p-10 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-1 overflow-hidden">
 						<div class="absolute -bottom-6 -right-2 text-9xl font-black text-slate-200/50 dark:text-slate-800/30 group-hover:text-blue-600/5 transition-colors italic pointer-events-none select-none">03</div>
-						<div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg shadow-blue-200 dark:shadow-none relative z-10">
+						<div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg relative z-10">
 							<Icon name="lucide:message-square-check" class="w-6 h-6" />
 						</div>
 						<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 relative z-10">Confirmación Instantánea</h4>
-						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">
-							El doctor y el paciente reciben un WhatsApp con los datos de la cita al momento.
-						</p>
+						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">El doctor y el paciente reciben un WhatsApp con los datos de la cita al momento.</p>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Services Section -->
-		<section id="servicios" class="py-32 px-6 bg-white dark:bg-slate-900 rounded-t-[3rem] md:rounded-t-[5rem] shadow-[0_-20px_50px_-10px_rgba(0,0,0,0.05)] dark:shadow-none transition-colors duration-300">
+		<section id="servicios" class="py-32 px-6 bg-white dark:bg-slate-900 transition-colors duration-300">
 			<div class="max-w-7xl mx-auto">
 				<div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-20 px-4">
 					<div class="max-w-2xl">
-						<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">
-							Nuestros Servicios
-						</h2>
-						<h3 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">
-							Cuidado Integral para ti y <span class="text-slate-400 dark:text-slate-600">tu familia.</span>
-						</h3>
+						<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">Nuestros Servicios</h2>
+						<h3 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">Cuidado Integral para ti y <span class="text-slate-400 dark:text-slate-600">tu familia.</span></h3>
 					</div>
-					<p class="text-lg text-slate-500 dark:text-slate-400 font-medium max-w-md">
-						Soluciones médicas rápidas con la calidez y profesionalismo que mereces en cada consulta.
-					</p>
+					<p class="text-lg text-slate-500 dark:text-slate-400 font-medium max-w-md">Soluciones médicas rápidas con la calidez y profesionalismo que mereces en cada consulta.</p>
 				</div>
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<ServiceCard 
-						title="Consulta General" 
-						description="Atención médica integral para diagnósticos precisos y tratamientos efectivos de padecimientos comunes."
-						iconName="lucide:stethoscope"
-					/>
-					<ServiceCard 
-						title="Urgencias Médicas" 
-						description="Atención inmediata para situaciones que requieren cuidado urgente sin previa cita."
-						iconName="lucide:ambulance"
-					/>
-					<ServiceCard 
-						title="Laboratorio y Rayos X" 
-						description="Estudios de diagnóstico precisos con tecnología de vanguardia y entrega de resultados digitales."
-						iconName="lucide:microscope"
-					/>
+					<ServiceCard title="Consulta Médica General" description="Atención primaria para toda la familia con diagnósticos precisos." iconName="lucide:stethoscope" />
+					<ServiceCard title="Urgencias 24 Horas" description="Listos para atenderte en cualquier momento, los 365 días del año." iconName="lucide:ambulance" />
+					<ServiceCard title="Laboratorio Clínico" description="Resultados precisos y rápidos con tecnología de vanguardia." iconName="lucide:microscope" />
+					<ServiceCard title="Gabinete de Imagen" description="Rayos X y Tomografía de alta resolución para diagnósticos claros." iconName="lucide:monitor-dot" />
+					<ServiceCard title="Control de Enfermedades" description="Manejo especializado de Diabetes e Hipertensión Arterial." iconName="lucide:activity" />
+					<ServiceCard title="Servicio a Empresas" description="Certificados médicos y salud ocupacional para tu personal." iconName="lucide:building-2" />
+				</div>
+			</div>
+		</section>
+
+		<!-- Especialidades Section -->
+		<section class="py-32 px-6 bg-white dark:bg-slate-900 overflow-hidden">
+			<div class="max-w-7xl mx-auto">
+				<div class="text-center mb-20">
+					<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">Autoridad Médica</h2>
+					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">Especialistas <span class="text-blue-600 dark:text-blue-400 italic">Certificados</span></h3>
+					<p class="mt-6 text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">Expertos altamente calificados dedicados a brindar una atención humana y de excelencia.</p>
+				</div>
+
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+					{[
+						{ name: "Ginecología", desc: "Salud integral para la mujer con la calidez y privacidad que mereces.", icon: "lucide:flower-2" },
+						{ name: "Pediatría", desc: "Cuidado experto y preventivo para el sano crecimiento de tus hijos.", icon: "lucide:baby" },
+						{ name: "Traumatología", desc: "Especialistas en la recuperación de movilidad y lesiones musculares.", icon: "lucide:bone" },
+						{ name: "Urgenciología", desc: "Atención crítica inmediata con los protocolos médicos más avanzados.", icon: "lucide:ambulance" },
+						{ name: "Cirugía General", desc: "Procedimientos quirúrgicos seguros realizados por manos expertas.", icon: "lucide:scissors" },
+						{ name: "Pediatría Cardiología", desc: "Diagnóstico y tratamiento especializado para el corazón de los más pequeños.", icon: "lucide:heart-pulse" }
+					].map(spec => (
+						<div class="group p-8 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-2">
+							<div class="w-14 h-14 bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+								<Icon name={spec.icon} class="w-7 h-7" />
+							</div>
+							<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{spec.name}</h4>
+							<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{spec.desc}</p>
+							<div class="mt-6 pt-6 border-t border-slate-200/50 dark:border-slate-700/50">
+								<a href="#agendar" class="text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-2 group/link">
+									Agendar con especialista
+									<Icon name="lucide:chevron-right" class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+								</a>
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 		</section>
@@ -177,162 +244,50 @@ const heroImage = "https://images.unsplash.com/photo-1622253692010-333f2da6031d?
 		<section id="sucursales" class="py-32 px-6 bg-slate-50 dark:bg-slate-950">
 			<div class="max-w-7xl mx-auto">
 				<div class="text-center mb-20">
-					<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">
-						Nuestras Ubicaciones
-					</h2>
-					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
-						Siempre hay un <span class="text-blue-600 dark:text-blue-400">Medic's</span> cerca de ti.
-					</h3>
+					<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">Nuestras Ubicaciones</h2>
+					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight italic">Un Medic's siempre cerca de ti</h3>
 				</div>
-
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-					<!-- Sucursal 1 -->
-					<div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all group">
-						<div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-							<Icon name="lucide:map-pin" class="w-6 h-6" />
+					{[
+						{ name: "La Joya", addr: "Ave. La Joya S/N, Col. Villa Esmeralda", info: "Laboratorio y Farmacia", link: "https://maps.app.goo.gl/XkcsJr2DZC9eenXW6" },
+						{ name: "José López Portillo", addr: "Ave. José López Portillo #450", info: "Atención 24 hrs", link: "https://maps.app.goo.gl/6uGYLDiuNpGa4jFLA" },
+						{ name: "Las Lomas", addr: "Av. Las Lomas 117, Col. Las Lomas", info: "Especialidades Médicas", link: "https://maps.app.goo.gl/Pg7nBcy1CMbMju799" },
+						{ name: "Vista Hermosa", addr: "Av. Vista Hermosa 911, Col. Vista Hermosa", info: "Atención 24 hrs", link: "https://maps.app.goo.gl/ur25d1Mi1HFKAmFL9" }
+					].map(loc => (
+						<div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl group flex flex-col h-full">
+							<div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform flex-shrink-0"><Icon name="lucide:map-pin" class="w-6 h-6" /></div>
+							<h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{loc.name}</h4>
+							<p class="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">{loc.addr}</p>
+							<div class="mb-8">
+								<div class="inline-flex items-center gap-2 text-xs font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full italic">{loc.info}</div>
+							</div>
+							<a href={loc.link} target="_blank" class="mt-auto flex items-center justify-center gap-2 w-full py-3 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm hover:bg-blue-600 hover:text-white transition-all">Ver en Maps <Icon name="lucide:external-link" class="w-4 h-4" /></a>
 						</div>
-						<h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Vista Hermosa</h4>
-						<p class="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
-							Ave. Vista Hermosa #911, Col. Vista Hermosa.
-						</p>
-						<div class="inline-flex items-center gap-2 text-xs font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full mb-6">
-							<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-							Atención 24 hrs
-						</div>
-						<a href="https://maps.google.com" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm hover:bg-blue-600 hover:text-white transition-all">
-							Ver en Maps <Icon name="lucide:external-link" class="w-4 h-4" />
-						</a>
-					</div>
-
-					<!-- Sucursal 2 -->
-					<div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all group">
-						<div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-							<Icon name="lucide:map-pin" class="w-6 h-6" />
-						</div>
-						<h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Jarachina</h4>
-						<p class="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
-							Libramiento Monterrey-Matamoros #1000.
-						</p>
-						<div class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full mb-6">
-							Servicio de Tomografía
-						</div>
-						<a href="https://maps.google.com" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm hover:bg-blue-600 hover:text-white transition-all">
-							Ver en Maps <Icon name="lucide:external-link" class="w-4 h-4" />
-						</a>
-					</div>
-
-					<!-- Sucursal 3 -->
-					<div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all group">
-						<div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-							<Icon name="lucide:map-pin" class="w-6 h-6" />
-						</div>
-						<h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">López Portillo</h4>
-						<p class="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
-							Ave. José López Portillo #450.
-						</p>
-						<div class="inline-flex items-center gap-2 text-xs font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-3 py-1 rounded-full mb-6">
-							<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-							Atención 24 hrs
-						</div>
-						<a href="https://maps.google.com" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm hover:bg-blue-600 hover:text-white transition-all">
-							Ver en Maps <Icon name="lucide:external-link" class="w-4 h-4" />
-						</a>
-					</div>
-
-					<!-- Sucursal 4 -->
-					<div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl hover:shadow-2xl transition-all group">
-						<div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-							<Icon name="lucide:map-pin" class="w-6 h-6" />
-						</div>
-						<h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Villa Esmeralda</h4>
-						<p class="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
-							Ave. La Joya S/N, Col. Villa Esmeralda.
-						</p>
-						<div class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full mb-6">
-							Laboratorio Clínico
-						</div>
-						<a href="https://maps.google.com" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm hover:bg-blue-600 hover:text-white transition-all">
-							Ver en Maps <Icon name="lucide:external-link" class="w-4 h-4" />
-						</a>
-					</div>
+					))}
 				</div>
 			</div>
 		</section>
 
 		<!-- Booking Section -->
-		<section id="agendar" class="py-32 px-6 bg-slate-50 dark:bg-slate-950">
+		<section id="agendar" class="py-32 px-6 bg-white dark:bg-slate-900">
 			<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 				<div>
-					<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">
-						Agenda tu Cita
-					</h2>
-					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">
-						Reserva en menos de <span class="text-blue-600 dark:text-blue-400 italic">60 segundos.</span>
-					</h3>
-					<p class="text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed font-medium">
-						Nuestro sistema automatizado notificará al Dr. instantáneamente. Recibirás una confirmación por WhatsApp en un par de minutos.
-					</p>
-					
+					<h2 class="text-sm font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400 mb-4">Agenda tu Cita</h2>
+					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">Reserva en menos de <span class="text-blue-600 dark:text-blue-400 italic">60 segundos.</span></h3>
+					<p class="text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed font-medium">Nuestro sistema automatizado notificará al personal médico instantáneamente.</p>
 					<div class="space-y-6">
-						<div class="flex items-center gap-4">
-							<div class="w-12 h-12 bg-white dark:bg-slate-900 rounded-2xl shadow-sm flex items-center justify-center text-blue-600 dark:text-blue-400">
-								<Icon name="lucide:check-circle-2" class="w-6 h-6" />
-							</div>
-							<p class="text-lg font-bold text-slate-700 dark:text-slate-300">Sin llamadas telefónicas</p>
-						</div>
-						<div class="flex items-center gap-4">
-							<div class="w-12 h-12 bg-white dark:bg-slate-900 rounded-2xl shadow-sm flex items-center justify-center text-blue-600 dark:text-blue-400">
-								<Icon name="lucide:check-circle-2" class="w-6 h-6" />
-							</div>
-							<p class="text-lg font-bold text-slate-700 dark:text-slate-300">Confirmación inmediata vía WhatsApp</p>
-						</div>
-						<div class="flex items-center gap-4">
-							<div class="w-12 h-12 bg-white dark:bg-slate-900 rounded-2xl shadow-sm flex items-center justify-center text-blue-600 dark:text-blue-400">
-								<Icon name="lucide:check-circle-2" class="w-6 h-6" />
-							</div>
-							<p class="text-lg font-bold text-slate-700 dark:text-slate-300">Ubicación céntrica en Reynosa</p>
-						</div>
+						{[ "Confirmación vía WhatsApp", "Sin filas de espera", "Médicos certificados"].map(text => (
+							<div class="flex items-center gap-4"><div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400"><Icon name="lucide:check-circle-2" class="w-6 h-6" /></div><p class="text-lg font-bold text-slate-700 dark:text-slate-300">{text}</p></div>
+						))}
 					</div>
 				</div>
-
-				<div class="relative">
-					<div class="absolute -inset-4 bg-blue-100/50 dark:bg-blue-900/20 blur-3xl rounded-[3rem] -z-10"></div>
-					<BookingForm client:load />
-				</div>
-			</div>
-		</section>
-		
-		<!-- Trust Badges Section -->
-		<section class="py-24 px-6 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
-			<div class="max-w-7xl mx-auto flex flex-col items-center gap-12 text-center">
-				<p class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">
-					Acreditación Médica Federal
-				</p>
-				<div class="flex flex-wrap justify-center gap-12 opacity-60 dark:opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-					<div class="flex items-center gap-3 font-black text-slate-800 dark:text-white text-xl">
-						<Icon name="lucide:shield-check" class="w-8 h-8 text-blue-600 dark:text-blue-400" />
-						Cédula Profesional
-					</div>
-					<div class="flex items-center gap-3 font-black text-slate-800 dark:text-white text-xl">
-						<Icon name="lucide:map-pin" class="w-8 h-8 text-blue-600 dark:text-blue-400" />
-						Reynosa, Tamps.
-					</div>
-					<div class="flex items-center gap-3 font-black text-slate-800 dark:text-white text-xl">
-						<Icon name="lucide:clock" class="w-8 h-8 text-blue-600 dark:text-blue-400" />
-						Atención Inmediata
-					</div>
-				</div>
+				<div class="relative"><div class="absolute -inset-4 bg-blue-100/50 dark:bg-blue-900/20 blur-3xl rounded-[3rem] -z-10"></div><BookingForm client:load /></div>
 			</div>
 		</section>
 	</main>
 </Layout>
 
 <style>
-	@keyframes fade-in {
-		from { opacity: 0; transform: translateY(-10px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
-	.animate-fade-in {
-		animation: fade-in 0.8s ease-out forwards;
-	}
+	@keyframes fade-in { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+	.animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
 </style>
