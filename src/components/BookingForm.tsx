@@ -131,10 +131,7 @@ const BookingForm: React.FC = () => {
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Sucursal</label>
                     <select required className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none" onChange={(e) => setFormData({ ...formData, branch: e.target.value })}>
                         <option value="">Seleccionar Sucursal</option>
-                        <option value="La Joya">La Joya</option>
-                        <option value="José López Portillo">José López Portillo</option>
-                        <option value="Las Lomas">Las Lomas</option>
-                        <option value="Vista Hermosa">Vista Hermosa</option>
+                        <option value="Sucursal Principal - Reynosa">Sucursal Principal - Reynosa</option>
                     </select>
                 </div>
 
@@ -142,17 +139,10 @@ const BookingForm: React.FC = () => {
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Servicio</label>
                     <select required className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none" onChange={(e) => setFormData({ ...formData, service: e.target.value })}>
                         <option value="">Seleccionar Servicio</option>
-                        <option value="Médico General">Médico General</option>
-                        <option value="Ginecología">Ginecología</option>
-                        <option value="Pediatría">Pediatría</option>
-                        <option value="Traumatología">Traumatología</option>
-                        <option value="Urgenciología">Urgenciología</option>
-                        <option value="Cirugía General">Cirugía General</option>
-                        <option value="Cardiología Pediátrica">Cardiología Pediátrica</option>
-                        <option value="Laboratorios">Laboratorios</option>
-                        <option value="Rayos X">Rayos X</option>
-                        <option value="Ultrasonidos y TAC">Ultrasonidos y TAC</option>
-                        <option value="Farmacia">Farmacia</option>
+                        <option value="Limpieza Dental (Profilaxis)">Limpieza Dental (Profilaxis)</option>
+                        <option value="Consulta de Valoración">Consulta de Valoración</option>
+                        <option value="Ortodoncia (Brackets)">Ortodoncia (Brackets)</option>
+                        <option value="Blanqueamiento Dental">Blanqueamiento Dental</option>
                     </select>
                 </div>
             </div>
