@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const BookingForm: React.FC = () => {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [loadingSlots, setLoadingSlots] = useState(false);
+    const [availableSlots, setAvailableSlots] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -9,17 +11,53 @@ const BookingForm: React.FC = () => {
         branch: '',
         service: '',
         date: '',
+        time: '',
         message: ''
     });
 
     const minDate = new Date().toISOString().split('T')[0];
+
+    // Lógica equivalente a cargarHorarios()
+    useEffect(() => {
+        const fetchAvailability = async () => {
+            // 4. Escuchar cuando cambien la fecha o la sucursal (vía dependencias del useEffect)
+            if (!formData.date || !formData.branch) return;
+
+            setLoadingSlots(true);
+            try {
+                // 2. Consulta a n8n
+                const response = await fetch(`https://ravyb.app.n8n.cloud/webhook/consultar-disponibilidad?fecha=${formData.date}&sucursal=${encodeURIComponent(formData.branch)}`);
+                const data = await response.json();
+                
+                // Debug: Para ver qué llega exactamente en la consola del navegador
+                console.log("Datos de n8n:", data);
+
+                // Manejamos si n8n manda un array o un objeto directo (Blindado)
+                const slots = Array.isArray(data) ? (data[0]?.availableSlots || []) : (data.availableSlots || []);
+                
+                // 3. Llenar el dropdown (vía estado)
+                if (slots.length > 0) {
+                    setAvailableSlots(slots);
+                } else {
+                    setAvailableSlots([]);
+                }
+            } catch (error) {
+                console.error("Error cargando horarios:", error);
+                setAvailableSlots([]);
+            } finally {
+                setLoadingSlots(false);
+            }
+        };
+
+        fetchAvailability();
+    }, [formData.date, formData.branch]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
 
         try {
-            const response = await fetch('https://ravyb.app.n8n.cloud/webhook-test/agendar-cita-reynosa', {
+            const response = await fetch('https://ravyb.app.n8n.cloud/webhook/agendar-cita-reynosa', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -88,9 +126,9 @@ const BookingForm: React.FC = () => {
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex flex-col gap-2">
-                    <label class="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Sucursal</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Sucursal</label>
                     <select required className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none" onChange={(e) => setFormData({ ...formData, branch: e.target.value })}>
                         <option value="">Seleccionar Sucursal</option>
                         <option value="La Joya">La Joya</option>
@@ -119,9 +157,34 @@ const BookingForm: React.FC = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Fecha Preferida</label>
-                <input required type="date" min={minDate} className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white" onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Fecha Preferida</label>
+                    <input required type="date" min={minDate} className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white" onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">
+                        {loadingSlots ? 'Consultando disponibilidad...' : 'Hora Preferida'}
+                    </label>
+                    <select 
+                        required 
+                        disabled={loadingSlots || !formData.date || !formData.branch}
+                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none disabled:opacity-50 disabled:cursor-not-allowed" 
+                        onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                        value={formData.time}
+                    >
+                        <option value="">{formData.date && formData.branch ? (loadingSlots ? 'Cargando...' : 'Seleccionar Hora') : 'Elige fecha y sucursal'}</option>
+                        {availableSlots.length > 0 ? (
+                            availableSlots.map(time => (
+                                <option key={time} value={time}>{time}</option>
+                            ))
+                        ) : (
+                            formData.date && formData.branch && !loadingSlots && (
+                                <option value="">Sin disponibilidad</option>
+                            )
+                        )}
+                    </select>
+                </div>
             </div>
 
             <button type="submit" disabled={status === 'loading' || formData.phone.length !== 10} className="group mt-4 bg-blue-600 disabled:bg-slate-300 dark:disabled:bg-slate-800 hover:bg-blue-700 text-white font-black py-5 px-10 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center justify-center gap-3 text-xl cursor-pointer disabled:cursor-not-allowed">
