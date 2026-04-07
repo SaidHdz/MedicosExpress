@@ -149,5 +149,5 @@ export const CLIENTS: Record<string, ClientConfig> = {
   }
 };
 
-const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'bidental';
-export const currentClient = CLIENTS[clientId] || CLIENTS['bidental'];
+const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'smylife';
+export const currentClient = CLIENTS[clientId] || CLIENTS['smylife'];
