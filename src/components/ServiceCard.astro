@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { currentClient } from '../config/clients';
 
 interface Props {
 	title: string;
@@ -10,8 +11,14 @@ interface Props {
 const { title, description, iconName } = Astro.props;
 ---
 
-<div class="group p-8 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:shadow-blue-100 dark:hover:shadow-blue-900/20 hover:-translate-y-2 flex flex-col items-start gap-4 cursor-default">
-	<div class="w-14 h-14 bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 dark:shadow-[0_0_20px_rgba(59,130,246,0.15)] group-hover:dark:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+<div 
+	class="group p-8 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col items-start gap-4 cursor-default"
+	style={`--primary: ${currentClient.primaryColor};`}
+>
+	<div 
+		class="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:text-white transition-all duration-300"
+		style={`background-color: ${currentClient.primaryColor}1A; color: ${currentClient.primaryColor}; --hover-bg: ${currentClient.primaryColor};`}
+	>
 		<Icon name={iconName} class="w-8 h-8" />
 	</div>
 	
@@ -23,3 +30,9 @@ const { title, description, iconName } = Astro.props;
 		{description}
 	</p>
 </div>
+
+<style>
+	.group:hover div[style*="--hover-bg"] {
+		background-color: var(--hover-bg) !important;
+	}
+</style>

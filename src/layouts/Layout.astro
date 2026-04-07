@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
+import { currentClient } from '../config/clients';
 
 interface Props {
 	title: string;
@@ -11,7 +12,7 @@ interface Props {
 
 const { 
 	title, 
-	description = "Smylife Dental: Agenda tu próxima sonrisa en menos de 60 segundos. Sistema automatizado de citas para Smylife Dental en Reynosa.",
+	description = currentClient.description,
 	image = "/og-image.jpg" 
 } = Astro.props;
 
@@ -23,7 +24,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://clinica-
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon-dental.svg" />
+		<link rel="icon" type="image/svg+xml" href={currentClient.favicon} />
 		<meta name="generator" content={Astro.generator} />
 		
 		<!-- SEO Primario -->

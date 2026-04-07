@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import ThemeToggle from './ThemeToggle';
+import { currentClient } from '../config/clients';
 ---
 
 <header class="fixed top-0 left-0 right-0 z-[100] bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 transition-colors duration-300">
@@ -8,11 +9,14 @@ import ThemeToggle from './ThemeToggle';
 		
 		<!-- Logo -->
 		<a href="#" class="flex items-center gap-2 group">
-			<div class="w-10 h-10 bg-[#00AEEF] rounded-xl flex items-center justify-center text-white shadow-lg shadow-[#00AEEF]/20 group-hover:scale-110 transition-transform">
-				<Icon name="lucide:smile" class="w-6 h-6" />
+			<div 
+				class="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform"
+				style={`background-color: ${currentClient.primaryColor}; shadow-color: ${currentClient.primaryColor}33;`}
+			>
+				<Icon name={currentClient.logoIcon} class="w-6 h-6" />
 			</div>
 			<span class="text-xl font-black text-slate-900 dark:text-white italic tracking-tight">
-				Smylife <span class="text-[#00AEEF]">Dental</span>
+				{currentClient.shortName} <span style={`color: ${currentClient.primaryColor};`}>{currentClient.name.split(' ').slice(1).join(' ')}</span>
 			</span>
 		</a>
 
@@ -20,9 +24,13 @@ import ThemeToggle from './ThemeToggle';
 		<nav class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600 dark:text-slate-300">
 			<div class="flex items-center gap-6">
 				<ThemeToggle client:only="react" />
-				<a href="#servicios" class="hover:text-[#00AEEF] transition-colors">Servicios</a>
+				<a href="#servicios" class="hover:opacity-80 transition-colors" style={`color: ${currentClient.primaryColor};`}>Servicios</a>
 			</div>
-			<a href="#agendar" class="bg-[#00AEEF] hover:bg-[#009ED9] text-white px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95">
+			<a 
+				href="#agendar" 
+				class="text-white px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+				style={`background-color: ${currentClient.primaryColor};`}
+			>
 				Agendar Cita
 			</a>
 		</nav>
@@ -30,7 +38,11 @@ import ThemeToggle from './ThemeToggle';
 		<!-- Botón Móvil (Solo icono) -->
 		<div class="md:hidden flex items-center gap-4">
 			<ThemeToggle client:only="react" />
-			<a href="#agendar" class="w-12 h-12 bg-[#00AEEF] text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90">
+			<a 
+				href="#agendar" 
+				class="w-12 h-12 text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90"
+				style={`background-color: ${currentClient.primaryColor};`}
+			>
 				<Icon name="lucide:calendar" class="w-6 h-6" />
 			</a>
 		</div>
