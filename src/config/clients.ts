@@ -74,7 +74,7 @@ export const CLIENTS: Record<string, ClientConfig> = {
     logoIcon: 'lucide:award',
     favicon: '/favicon-advance.svg',
     address: 'Blvd. Del Maestro 301, Segundo Piso, Col. Las Fuentes, Reynosa, Tamps.',
-    mapsLink: '#',
+    mapsLink: 'https://maps.app.goo.gl/VrSoEZ23bAQPcQUz7',
     schedule: 'Lunes a Viernes de 9:00 AM a 7:00 PM',
     services: [
       { title: 'Implantes Dentales', description: 'Restauración permanente con tecnología de mínima invasión.', icon: 'lucide:plus-circle' },
@@ -87,6 +87,35 @@ export const CLIENTS: Record<string, ClientConfig> = {
     ],
     bookingServices: ['Implantes Dentales', 'Ortodoncia Invisible', 'Diseño de Sonrisa'],
     branches: ['Las Fuentes']
+  },
+  'bidental': {
+    id: 'bidental',
+    name: 'BiDental Reynosa',
+    shortName: 'BiDental',
+    tagline: 'Creando una sonrisa para ti',
+    heroTitle: 'La clínica dental favorita de <span class="text-[var(--primary)]">Cumbres</span> ahora más cerca de ti.',
+    heroImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=1200&auto=format&fit=crop',
+    description: 'BiDental Reynosa: Odontología integral en Las Cumbres. Especialistas en endodoncia, ortodoncia y prótesis dental.',
+    primaryColor: '#19a9ad',
+    secondaryColor: '#148e91',
+    logoIcon: 'lucide:heart-handshake',
+    favicon: '/favicon-bidental.svg',
+    address: 'Blvd. Mil Cumbres #1015, Col. Las Cumbres, Reynosa, Tamps.',
+    mapsLink: '#',
+    schedule: 'Lunes a Viernes de 9:00 AM a 7:00 PM',
+    services: [
+      { title: 'Limpieza con Ultrasonido', description: 'Tecnología avanzada para una limpieza profunda y sin dolor.', icon: 'lucide:zap' },
+      { title: 'Resinas Estéticas', description: 'Restauraciones naturales que devuelven la belleza a tus dientes.', icon: 'lucide:sparkles' },
+      { title: 'Extracciones', description: 'Procedimientos seguros con el cuidado y profesionalismo que mereces.', icon: 'lucide:shield' }
+    ],
+    specialties: [
+      { name: 'Endodoncia', desc: 'Tratamientos especializados para salvar tus piezas dentales.', icon: 'lucide:activity' },
+      { name: 'Ortodoncia', desc: 'Corrección de posición dental con sistemas modernos.', icon: 'lucide:layers' },
+      { name: 'Prótesis Fija y Removible', desc: 'Restauración integral de la función y estética dental.', icon: 'lucide:smile' },
+      { name: 'Atención Infantil', desc: 'Cuidado dental experto y paciente para los más pequeños.', icon: 'lucide:baby' }
+    ],
+    bookingServices: ['Limpieza con Ultrasonido', 'Resinas Estéticas', 'Extracciones', 'Endodoncia', 'Ortodoncia'],
+    branches: ['Sucursal Cumbres']
   },
   'medicos-express': {
     id: 'medicos-express',
@@ -120,5 +149,5 @@ export const CLIENTS: Record<string, ClientConfig> = {
   }
 };
 
-const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'dental-advance';
-export const currentClient = CLIENTS[clientId] || CLIENTS['dental-advance'];
+const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'bidental';
+export const currentClient = CLIENTS[clientId] || CLIENTS['bidental'];
