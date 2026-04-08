@@ -221,32 +221,34 @@ const heroImage = currentClient.heroImage;
 						class="text-sm font-black uppercase tracking-[0.3em] mb-4"
 						style={`color: ${currentClient.primaryColor};`}
 					>
-						Nuestra Ubicación
+						Nuestras Ubicaciones
 					</h2>
-					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight italic">{currentClient.name} Reynosa</h3>
+					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight italic">{currentClient.shortName} Reynosa</h3>
 				</div>
-				<div class="flex justify-center">
-					<div class="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl group flex flex-col items-center text-center max-w-lg w-full">
-						<div 
-							class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-							style={`background-color: ${currentClient.primaryColor}1A; color: ${currentClient.primaryColor};`}
-						>
-							<Icon name="lucide:map-pin" class="w-8 h-8" />
+				<div class={`grid grid-cols-1 ${currentClient.branches.length > 1 ? 'md:grid-cols-2 lg:grid-cols-4' : 'max-w-lg mx-auto'} gap-8`}>
+					{currentClient.branches.map(branch => (
+						<div class="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl group flex flex-col items-center text-center transition-all hover:shadow-2xl hover:-translate-y-1">
+							<div 
+								class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+								style={`background-color: ${currentClient.primaryColor}1A; color: ${currentClient.primaryColor};`}
+							>
+								<Icon name="lucide:map-pin" class="w-8 h-8" />
+							</div>
+							<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">{branch.name}</h4>
+							<p class="text-slate-500 dark:text-slate-400 text-lg mb-8 leading-relaxed flex-grow">{branch.address}</p>
+							<div class="mb-10">
+								<div class="inline-flex items-center gap-2 text-sm font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-full italic">{branch.schedule}</div>
+							</div>
+							<a 
+								href={branch.mapsLink} 
+								target="_blank" 
+								class="flex items-center justify-center gap-3 w-full py-5 text-white rounded-2xl font-bold text-lg transition-all shadow-lg"
+								style={`background-color: ${currentClient.primaryColor}; shadow-color: ${currentClient.primaryColor}33;`}
+							>
+								Ver en Google Maps <Icon name="lucide:external-link" class="w-5 h-5" />
+							</a>
 						</div>
-						<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Sucursal Principal</h4>
-						<p class="text-slate-500 dark:text-slate-400 text-lg mb-8 leading-relaxed">{currentClient.address}</p>
-						<div class="mb-10">
-							<div class="inline-flex items-center gap-2 text-sm font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-full italic">{currentClient.schedule}</div>
-						</div>
-						<a 
-							href={currentClient.mapsLink} 
-							target="_blank" 
-							class="flex items-center justify-center gap-3 w-full py-5 text-white rounded-2xl font-bold text-lg transition-all shadow-lg"
-							style={`background-color: ${currentClient.primaryColor}; shadow-color: ${currentClient.primaryColor}33;`}
-						>
-							Ver en Google Maps <Icon name="lucide:external-link" class="w-5 h-5" />
-						</a>
-					</div>
+					))}
 				</div>
 			</div>
 		</section>

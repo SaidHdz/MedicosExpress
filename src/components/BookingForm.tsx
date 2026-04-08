@@ -94,7 +94,7 @@ const BookingForm: React.FC = () => {
                 </div>
                 <h3 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 italic tracking-tight">¡Solicitud Enviada!</h3>
                 <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl font-medium leading-relaxed max-w-sm">
-                    {currentClient.shortName} recibió tu mensaje. Revisa tu <span className="text-blue-600 dark:text-blue-400 font-bold">WhatsApp</span> en un momento para confirmar tu horario.
+                    {currentClient.shortName} recibió tu mensaje para la sucursal <span className="text-blue-600 dark:text-blue-400 font-bold">{formData.branch}</span>. Revisa tu <span className="text-blue-600 dark:text-blue-400 font-bold">WhatsApp</span> en un momento para confirmar tu horario.
                 </p>
                 <button onClick={() => setStatus('idle')} className="mt-10 text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center gap-2 group">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,7 +137,7 @@ const BookingForm: React.FC = () => {
                     <select required className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none" onChange={(e) => setFormData({ ...formData, branch: e.target.value })}>
                         <option value="">Seleccionar Sucursal</option>
                         {currentClient.branches.map(branch => (
-                            <option key={branch} value={branch}>{branch}</option>
+                            <option key={branch.name} value={branch.name}>{branch.name}</option>
                         ))}
                     </select>
                 </div>

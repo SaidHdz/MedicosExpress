@@ -26,7 +26,16 @@ export interface ClientConfig {
     icon: string;
   }[];
   bookingServices: string[];
-  branches: string[];
+  branches: {
+    name: string;
+    address: string;
+    mapsLink: string;
+    schedule: string;
+  }[];
+  testimonials: {
+    quote: string;
+    author: string;
+  }[];
 }
 
 export const CLIENTS: Record<string, ClientConfig> = {
@@ -59,7 +68,19 @@ export const CLIENTS: Record<string, ClientConfig> = {
       { name: 'Rehabilitación', desc: 'Prótesis e implantes para recuperar la funcionalidad y estética.', icon: 'lucide:wrench' }
     ],
     bookingServices: ['Limpieza Dental (Profilaxis)', 'Consulta de Valoración', 'Ortodoncia (Brackets)', 'Blanqueamiento Dental'],
-    branches: ['Sucursal Principal - Reynosa']
+    branches: [
+      { 
+        name: 'Sucursal Principal - Balcones', 
+        address: 'Parque Alcala #632, FRACC. Balcones de Alcala, Reynosa, Mexico', 
+        mapsLink: 'https://maps.app.goo.gl/VrSoEZ23bAQPcQUz7', 
+        schedule: 'Lunes a Sábado' 
+      }
+    ],
+    testimonials: [
+      { quote: "Mi tratamiento de ortodoncia con los Brackets de zafiro va increíble, casi no se notan y la atención es de primera.", author: "Valeria Villagrán" },
+      { quote: "Fui por una limpieza dental y salí con mi sonrisa renovada. El equipo es super profesional y las instalaciones muy modernas.", author: "Mauricio Santillán" },
+      { quote: "La mejor experiencia en blanqueamiento dental que he tenido. Sin sensibilidad y resultados reales desde la primera sesión.", author: "Ximena de la Fuente" }
+    ]
   },
   'dental-advance': {
     id: 'dental-advance',
@@ -86,7 +107,18 @@ export const CLIENTS: Record<string, ClientConfig> = {
       { name: 'Rehabilitación Oral', desc: 'Devolvemos la función y estética a tu boca de forma integral.', icon: 'lucide:smile' }
     ],
     bookingServices: ['Implantes Dentales', 'Ortodoncia Invisible', 'Diseño de Sonrisa'],
-    branches: ['Las Fuentes']
+    branches: [
+      { 
+        name: 'Sucursal Las Fuentes', 
+        address: 'Blvd. Del Maestro 301, Segundo Piso, Col. Las Fuentes, Reynosa, Tamps.', 
+        mapsLink: 'https://maps.app.goo.gl/VrSoEZ23bAQPcQUz7', 
+        schedule: 'Lunes a Viernes: 9AM - 7PM' 
+      }
+    ],
+    testimonials: [
+      { quote: "Excelente atención y tecnología. Mis implantes quedaron perfectos y el proceso fue mucho más rápido de lo que esperaba.", author: "Roberto Méndez" },
+      { quote: "El mejor diseño de sonrisa en Reynosa. Muy profesionales y cuidan cada detalle para que luzca natural.", author: "Elena Rodríguez" }
+    ]
   },
   'bidental': {
     id: 'bidental',
@@ -101,7 +133,7 @@ export const CLIENTS: Record<string, ClientConfig> = {
     logoIcon: 'lucide:heart-handshake',
     favicon: '/favicon-bidental.svg',
     address: 'Blvd. Mil Cumbres #1015, Col. Las Cumbres, Reynosa, Tamps.',
-    mapsLink: '#',
+    mapsLink: 'https://share.google/9pLJ4VNaAqPZWxOuN',
     schedule: 'Lunes a Viernes de 9:00 AM a 7:00 PM',
     services: [
       { title: 'Limpieza con Ultrasonido', description: 'Tecnología avanzada para una limpieza profunda y sin dolor.', icon: 'lucide:zap' },
@@ -115,7 +147,18 @@ export const CLIENTS: Record<string, ClientConfig> = {
       { name: 'Atención Infantil', desc: 'Cuidado dental experto y paciente para los más pequeños.', icon: 'lucide:baby' }
     ],
     bookingServices: ['Limpieza con Ultrasonido', 'Resinas Estéticas', 'Extracciones', 'Endodoncia', 'Ortodoncia'],
-    branches: ['Sucursal Cumbres']
+    branches: [
+      { 
+        name: 'Sucursal Cumbres', 
+        address: 'Blvd. Mil Cumbres #1015, Col. Las Cumbres, Reynosa, Tamps.', 
+        mapsLink: 'https://share.google/9pLJ4VNaAqPZWxOuN', 
+        schedule: 'Lunes a Viernes: 9AM - 7PM' 
+      }
+    ],
+    testimonials: [
+      { quote: "La atención con los niños es maravillosa, mis hijos ya no tienen miedo de ir al dentista gracias a BiDental.", author: "Carolina Garza" },
+      { quote: "Muy recomendados para endodoncias, no sentí nada de dolor y el trato fue excelente de principio a fin.", author: "Héctor Treviño" }
+    ]
   },
   'medicos-express': {
     id: 'medicos-express',
@@ -145,9 +188,67 @@ export const CLIENTS: Record<string, ClientConfig> = {
       { name: 'Cirugía General', desc: 'Procedimientos quirúrgicos seguros realizados por manos expertas.', icon: 'lucide:scissors' }
     ],
     bookingServices: ['Médico General', 'Ginecología', 'Pediatría', 'Traumatología', 'Laboratorios', 'Rayos X'],
-    branches: ['La Joya', 'José López Portillo', 'Las Lomas', 'Vista Hermosa']
+    branches: [
+      { name: 'La Joya', address: 'Sucursal La Joya, Reynosa', mapsLink: '#', schedule: '24/7' },
+      { name: 'José López Portillo', address: 'Sucursal López Portillo, Reynosa', mapsLink: '#', schedule: '24/7' },
+      { name: 'Las Lomas', address: 'Sucursal Las Lomas, Reynosa', mapsLink: '#', schedule: '24/7' },
+      { name: 'Vista Hermosa', address: 'Sucursal Vista Hermosa, Reynosa', mapsLink: '#', schedule: '24/7' }
+    ],
+    testimonials: [
+      { quote: "Atención rápida y profesional en urgencias. Muy agradecido con el trato recibido.", author: "Javier López" }
+    ]
+  },
+  'medident-reynosa': {
+    id: 'medident-reynosa',
+    name: 'MediDent Consultorio Dental',
+    shortName: 'MediDent',
+    tagline: 'Odontología Especializada y Estética',
+    heroTitle: 'Tu salud dental en manos de <span class="text-[var(--primary)]">especialistas</span>',
+    heroImage: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2000&auto=format&fit=crop',
+    description: 'MediDent Consultorio Dental en Reynosa. Especialistas en ortodoncia, endodoncia, cirugía bucal y estética dental. Agenda tu cita en segundos.',
+    primaryColor: '#004b8d',
+    secondaryColor: '#00a8e1',
+    logoIcon: 'lucide:smile',
+    favicon: '/favicon-medident.svg',
+    fbLink: 'https://www.facebook.com/MediDentReynosa',
+    igLink: 'https://www.instagram.com/medident__',
+    address: 'Circuito Independencia Esquina Sierra Vallejo, Reynosa, Tamps.',
+    mapsLink: 'https://maps.app.goo.gl/XvH7z7Y6Z8Q9W2v8',
+    schedule: 'Lunes a Viernes: 10:00 AM - 7:00 PM | Sábados: 10:00 AM - 2:00 PM',
+    services: [
+      { title: 'Limpieza Ultrasónica', description: 'Eliminación de sarro y placa con tecnología avanzada.', icon: 'lucide:sparkles' },
+      { title: 'Resinas Estéticas', description: 'Restauraciones dentales que lucen totalmente naturales.', icon: 'lucide:shield-check' },
+      { title: 'Blanqueamiento', description: 'Recupera el brillo de tu sonrisa en una sola sesión.', icon: 'lucide:sun' }
+    ],
+    specialties: [
+      { name: 'Ortodoncia', desc: 'Diseño de sonrisa con brackets y alineadores de última generación.', icon: 'lucide:smile' },
+      { name: 'Endodoncia', desc: 'Tratamientos de conducto para salvar tus piezas dentales.', icon: 'lucide:heart-pulse' },
+      { name: 'Cirugía Bucal', desc: 'Extracciones y cirugías de tercer molar (muelas del juicio) sin dolor.', icon: 'lucide:scissors' }
+    ],
+    bookingServices: [
+      'Consulta General',
+      'Limpieza Dental',
+      'Ortodoncia (Brackets)',
+      'Endodoncia',
+      'Cirugía Bucal',
+      'Blanqueamiento',
+      'Prótesis / Coronas'
+    ],
+    branches: [
+      {
+        name: 'MediDent Reynosa',
+        address: 'Circuito Independencia Esquina Sierra Vallejo, Reynosa, Tamps.',
+        mapsLink: 'https://maps.app.goo.gl/XvH7z7Y6Z8Q9W2v8',
+        schedule: 'Lunes a Viernes: 10:00 AM - 7:00 PM | Sábados: 10:00 AM - 2:00 PM'
+      }
+    ],
+    testimonials: [
+      { quote: "Excelente trato de los doctores, muy profesionales y la clínica está impecable.", author: "Juan Pérez" },
+      { quote: "Me encantó mi tratamiento de ortodoncia, los resultados se notan muy rápido.", author: "María García" },
+      { quote: "La mejor atención para mis hijos, los doctores son muy pacientes.", author: "Ricardo Treviño" }
+    ]
   }
 };
 
-const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'smylife';
-export const currentClient = CLIENTS[clientId] || CLIENTS['smylife'];
+const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'medident-reynosa';
+export const currentClient = CLIENTS[clientId] || CLIENTS['medident-reynosa'];
