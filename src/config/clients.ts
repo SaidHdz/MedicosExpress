@@ -247,8 +247,102 @@ export const CLIENTS: Record<string, ClientConfig> = {
       { quote: "Me encantó mi tratamiento de ortodoncia, los resultados se notan muy rápido.", author: "María García" },
       { quote: "La mejor atención para mis hijos, los doctores son muy pacientes.", author: "Ricardo Treviño" }
     ]
+  },
+  'dental-clinic-fuentes': {
+    id: 'dental-clinic-fuentes',
+    name: 'Dental Clinic',
+    shortName: 'Dental Clinic',
+    tagline: 'Cuidando tu sonrisa en Las Fuentes',
+    heroTitle: 'Atención dental de <span class="text-[var(--primary)]">primer nivel</span> cerca de ti',
+    heroImage: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2000&auto=format&fit=crop',
+    description: 'Dental Clinic en Las Fuentes Secc Lomas, Reynosa. Servicios dentales profesionales, limpieza, extracciones y odontología general. Agenda tu cita en línea.',
+    primaryColor: '#0ea5e9',
+    secondaryColor: '#1e293b',
+    logoIcon: 'lucide:smile',
+    favicon: '/favicon-dental-clinic.svg',
+    address: 'Circuito Independencia #117, Las Fuentes Secc Lomas, 88740 Reynosa, Tamps.',
+    mapsLink: 'https://maps.google.com/?cid=1318221552603488977',
+    schedule: 'Lunes a Viernes: 9:00 AM - 7:00 PM | Sábados: 9:00 AM - 2:00 PM',
+    services: [
+      { title: 'Limpieza Profesional', description: 'Mantenimiento preventivo para una salud bucal óptima.', icon: 'lucide:sparkles' },
+      { title: 'Consultas de Urgencia', description: 'Atención inmediata para dolores o molestias agudas.', icon: 'lucide:alarm-clock' },
+      { title: 'Resinas y Estética', description: 'Restauraciones duraderas con acabados naturales.', icon: 'lucide:gem' }
+    ],
+    specialties: [
+      { name: 'Odontología General', desc: 'Diagnóstico completo y planes de tratamiento personalizados.', icon: 'lucide:clipboard-list' },
+      { name: 'Extracciones', desc: 'Procedimientos seguros y con el mínimo de molestias.', icon: 'lucide:activity' },
+      { name: 'Prevención', desc: 'Aplicación de flúor y selladores para proteger tus dientes.', icon: 'lucide:shield-plus' }
+    ],
+    bookingServices: [
+      'Consulta de Valoración',
+      'Limpieza Dental',
+      'Dolor de muela (Urgencia)',
+      'Aplicación de Resina',
+      'Extracción Simple'
+    ],
+    branches: [
+      {
+        name: 'Dental Clinic - Lomas',
+        address: 'Circuito Independencia #117, Las Fuentes Secc Lomas, 88740 Reynosa, Tamps.',
+        mapsLink: 'https://maps.google.com/?cid=1318221552603488977',
+        schedule: 'Lunes a Viernes: 9:00 AM - 7:00 PM | Sábados: 9:00 AM - 2:00 PM'
+      }
+    ],
+    testimonials: [
+      { quote: "Excelente servicio y atención muy amable. Súper recomendados.", author: "Paciente de Google" },
+      { quote: "Muy profesionales en su trabajo, me sentí muy cómodo durante mi tratamiento.", author: "Reseña de Maps" },
+      { quote: "La clínica está muy limpia y el trato del doctor es de primera.", author: "Usuario Local" }
+    ]
+  },
+  'amka-clinica-dental': {
+    id: 'amka-clinica-dental',
+    name: 'Amka Clínica Dental & Ortodoncia',
+    shortName: 'Amka',
+    tagline: 'Especialistas en construir sonrisas',
+    heroTitle: "Construimos la <span class='text-[var(--primary)]'>sonrisa</span> que siempre has soñado",
+    heroImage: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=2000',
+    description: 'Amka Clínica Dental en Las Fuentes, Reynosa. Especialistas en Diseño de Sonrisa Digital (DSD), Invisalign e Implantes. Tecnología avanzada para tu salud bucal.',
+    primaryColor: '#0096a1',
+    secondaryColor: '#f8fafc',
+    logoIcon: 'lucide:smile-plus',
+    favicon: '/favicon-amka.svg',
+    fbLink: 'https://www.facebook.com/AMKA.REX',
+    igLink: 'https://www.instagram.com/AMKACLINICA',
+    address: 'Circuito Independencia #100, Las Fuentes Coloniales, 88703 Reynosa, Tamps.',
+    mapsLink: 'https://www.google.com/maps/search/Amka+Clinica+Dental+Reynosa',
+    schedule: 'Lunes a Viernes: 10:00 AM - 7:00 PM | Sábados: 10:00 AM - 2:00 PM',
+    services: [
+      { title: 'Limpieza Ultrasónica', description: 'Eliminación profunda de placa con tecnología de punta.', icon: 'lucide:sparkles' },
+      { title: 'Diseño de Sonrisa (DSD)', description: 'Planificamos tu nueva sonrisa digitalmente antes de empezar.', icon: 'lucide:monitor-smartphone' },
+      { title: 'Ortodoncia Invisible', description: 'Alinea tus dientes con la discreción de Invisalign.', icon: 'lucide:layers' }
+    ],
+    specialties: [
+      { name: 'Implantología', desc: 'Recupera la funcionalidad y estética de tus piezas perdidas.', icon: 'lucide:shield-check' },
+      { name: 'Rehabilitación Oral', desc: 'Tratamientos integrales para casos complejos y estéticos.', icon: 'lucide:stethoscope' },
+      { name: 'Estética Dental', desc: 'Carillas y blanqueamientos de alta gama.', icon: 'lucide:gem' }
+    ],
+    bookingServices: [
+      'Consulta de Especialidad',
+      'Limpieza Dental Pro',
+      'Valoración Invisalign',
+      'Diagnóstico Digital (DSD)',
+      'Urgencia Dental'
+    ],
+    branches: [
+      {
+        name: 'Amka Las Fuentes',
+        address: 'Circuito Independencia #100, Las Fuentes Coloniales, 88703 Reynosa, Tamps.',
+        mapsLink: 'https://www.google.com/maps/search/Amka+Clinica+Dental+Reynosa',
+        schedule: 'Lunes a Viernes: 10:00 AM - 7:00 PM | Sábados: 10:00 AM - 2:00 PM'
+      }
+    ],
+    testimonials: [
+      { quote: "Excelente atención y resultados increíbles con mi tratamiento de Invisalign.", author: "Paciente Real" },
+      { quote: "Muy profesionales, usan tecnología que no he visto en otros consultorios de Reynosa.", author: "Usuario de Facebook" },
+      { quote: "El trato es de primera y la clínica está súper moderna.", author: "Reseña Local" }
+    ]
   }
 };
 
-const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'medident-reynosa';
-export const currentClient = CLIENTS[clientId] || CLIENTS['medident-reynosa'];
+const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'amka-clinica-dental';
+export const currentClient = CLIENTS[clientId] || CLIENTS['amka-clinica-dental'];
