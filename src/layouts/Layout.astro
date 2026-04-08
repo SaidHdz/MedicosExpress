@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
-import { currentClient, debugId } from '../config/clients';
+import { currentClient } from '../config/clients';
 
 interface Props {
 	title: string;
@@ -68,10 +68,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://clinica-
 		</script>
 	</head>
 	<body class="bg-white text-gray-900 antialiased overflow-x-hidden flex flex-col min-h-screen">
-		<div class="fixed top-0 left-0 right-0 bg-red-600 text-white text-[10px] font-mono z-[9999] py-1 px-4 flex justify-between items-center opacity-80 hover:opacity-100 transition-opacity">
-			<span>DEBUG: Netlify_ID: [{debugId}] | Resolved_ID: [{currentClient.id}]</span>
-			<span>Build: {new Date().toLocaleTimeString()}</span>
-		</div>
 		<Navbar />
 		<div class="flex-grow pt-20">
 			<slot />
