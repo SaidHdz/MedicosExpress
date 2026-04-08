@@ -341,9 +341,126 @@ export const CLIENTS: Record<string, ClientConfig> = {
       { quote: "Muy profesionales, usan tecnología que no he visto en otros consultorios de Reynosa.", author: "Usuario de Facebook" },
       { quote: "El trato es de primera y la clínica está súper moderna.", author: "Reseña Local" }
     ]
+  },
+  'dental-art-reynosa': {
+    id: 'dental-art-reynosa',
+    name: 'Dental-Art - Dra. Aranda Guerrero',
+    shortName: 'Dental-Art',
+    tagline: 'Diseño de sonrisa y estética dental de alta gama',
+    heroTitle: "Crafting <span class='text-[var(--primary)]'>confident</span> smiles",
+    heroImage: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=2000',
+    description: 'Clínica Dental-Art en Jardines de Jarachina Sur. Especialistas en Carillas, Diseño de Sonrisa y Estética Dental. Dra. Aranda Guerrero.',
+    primaryColor: '#c2a38a',
+    secondaryColor: '#1a1a1a',
+    logoIcon: 'lucide:sparkles',
+    favicon: '/favicon-dentalart.svg',
+    fbLink: 'https://www.facebook.com/dentalart.reynosa',
+    igLink: 'https://www.instagram.com/dentalart.reynosa',
+    address: 'Jardines de Jarachina Sur, 88736 Reynosa, Tamps.',
+    mapsLink: 'https://maps.app.goo.gl/aranda-guerrero-link',
+    schedule: 'Lunes a Viernes: 10AM - 7PM',
+    services: [
+      { title: 'Carillas Dentales', description: 'Transforma tu sonrisa con porcelana de alta calidad.', icon: 'lucide:gem' },
+      { title: 'Diseño de Sonrisa', description: 'Planificación estética personalizada para tu rostro.', icon: 'lucide:smile' },
+      { title: 'Blanqueamiento Pro', description: 'Resultados brillantes en una sola sesión.', icon: 'lucide:sun' }
+    ],
+    specialties: [
+      { name: 'Prótesis Fija', desc: 'Restauraciones duraderas y estéticas.', icon: 'lucide:shield-check' },
+      { name: 'Cirugía y Extracciones', desc: 'Procedimientos seguros con tecnología avanzada.', icon: 'lucide:scissors' }
+    ],
+    bookingServices: ['Consulta Estética', 'Valoración Carillas', 'Limpieza Pro', 'Blanqueamiento'],
+    branches: [
+      {
+        name: 'Dental-Art Jarachina',
+        address: 'Jardines de Jarachina Sur, 88736 Reynosa, Tamps.',
+        mapsLink: 'https://maps.app.goo.gl/aranda-guerrero-link',
+        schedule: 'Lunes a Viernes: 10AM - 7PM'
+      }
+    ],
+    testimonials: [
+      { quote: "La Dra. Aranda tiene un ojo increíble para la estética. Mis carillas se ven totalmente naturales.", author: "Reseña de Google" },
+      { quote: "Excelente ubicación y la clínica está impecable. Muy recomendada para diseño de sonrisa.", author: "Usuario de Facebook" }
+    ]
+  },
+  'lotus-clinica-dental': {
+    id: 'lotus-clinica-dental',
+    name: 'Lotus Clínica Dental',
+    shortName: 'Lotus',
+    tagline: 'Especialistas en sonrisas impecables',
+    heroTitle: "Tu mejor <span class='text-[var(--primary)]'>sonrisa</span> al mejor precio",
+    heroImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=1200&auto=format&fit=crop',
+    description: 'Lotus Clínica Dental en Vista Hermosa, Reynosa. Limpieza + Consulta gratis por $450 MXN. Especialistas en ortodoncia y resinas.',
+    primaryColor: '#2e86ab',
+    secondaryColor: '#f1f5f9',
+    logoIcon: 'lucide:flower-2',
+    favicon: '/favicon-dental.svg',
+    fbLink: 'https://www.facebook.com/lotusclinicadental',
+    igLink: 'https://www.instagram.com/lotusclinicadental',
+    address: 'Calle 23 #528 Col. Vista Hermosa, 88710 Reynosa, Tamps.',
+    mapsLink: 'https://maps.app.goo.gl/lotus-link',
+    schedule: 'Lunes a Sábado: 9AM - 8PM',
+    services: [
+      { title: 'Limpieza + Consulta', description: 'Aprovecha nuestro paquete de bienvenida por solo $450 MXN.', icon: 'lucide:ticket' },
+      { title: 'Resina Estética', description: 'Reparación dental desde $450 MXN.', icon: 'lucide:shield' },
+      { title: 'Brackets', description: 'Ortodoncia con mensualidades accesibles desde $2,500.', icon: 'lucide:smile' }
+    ],
+    specialties: [
+      { name: 'Endodoncia', desc: 'Salvamos tu diente con precisión.', icon: 'lucide:activity' },
+      { name: 'Extracciones', desc: 'Atención rápida y sin dolor.', icon: 'lucide:scissors' }
+    ],
+    bookingServices: ['Promo $450 (Limpieza+Consulta)', 'Resina Estética', 'Valoración Brackets', 'Urgencia'],
+    branches: [
+      {
+        name: 'Lotus Vista Hermosa',
+        address: 'Calle 23 #528 Col. Vista Hermosa, 88710 Reynosa, Tamps.',
+        mapsLink: 'https://maps.app.goo.gl/lotus-link',
+        schedule: 'Lunes a Sábado: 9AM - 8PM'
+      }
+    ],
+    testimonials: [
+      { quote: "Excelente precio y el trato es muy humano. La limpieza de $450 vale muchísimo la pena.", author: "Juan Manuel R." },
+      { quote: "Muy profesionales con los brackets, las mensualidades son muy cómodas.", author: "Sofía G." }
+    ]
+  },
+  'salcido-dental-clinic': {
+    id: 'salcido-dental-clinic',
+    name: 'Salcido Dental Clinic',
+    shortName: 'Salcido',
+    tagline: 'Te haremos sonreír de nuevo',
+    heroTitle: "Soluciones <span class='text-[var(--primary)]'>dentales</span> integrales en Reynosa",
+    heroImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=2000',
+    description: 'Salcido Dental Clinic en Col. Romita, Reynosa. Dr. Tomas Salcido. Expertos en reconstrucción dental e implantes.',
+    primaryColor: '#0ea5e9',
+    secondaryColor: '#0f172a',
+    logoIcon: 'lucide:stethoscope',
+    favicon: '/favicon-dental.svg',
+    fbLink: 'https://www.facebook.com/salcidodentalclinic',
+    address: 'Romita 6521 Reynosa, TAMPS, 88730.',
+    mapsLink: 'https://maps.app.goo.gl/salcido-link',
+    schedule: 'Lunes a Viernes: 9AM - 7PM | Sábado: 9AM - 2PM',
+    services: [
+      { title: 'Implantes', description: 'Recupera la función y estética de tus dientes perdidos.', icon: 'lucide:anchor' },
+      { title: 'Reconstrucción', description: 'Casos complejos resueltos con excelencia.', icon: 'lucide:hammer' }
+    ],
+    specialties: [
+      { name: 'Odontología Integral', desc: 'Cuidado completo para toda la familia.', icon: 'lucide:users' },
+      { name: 'Urgencias 24/7', desc: 'Atención inmediata para casos críticos.', icon: 'lucide:ambulance' }
+    ],
+    bookingServices: ['Consulta General', 'Valoración Implantes', 'Limpieza', 'Dolor Agudo'],
+    branches: [
+      {
+        name: 'Salcido Romita',
+        address: 'Romita 6521 Reynosa, TAMPS, 88730.',
+        mapsLink: 'https://maps.app.goo.gl/salcido-link',
+        schedule: 'Lunes a Viernes: 9AM - 7PM | Sábado: 9AM - 2PM'
+      }
+    ],
+    testimonials: [
+      { quote: "El Dr. Salcido es un experto en implantes, mi proceso fue impecable y sin dolor.", author: "Paciente de Google" },
+      { quote: "Excelente atención en urgencias, me atendieron de inmediato un domingo.", author: "Reseña Local" }
+    ]
   }
 };
 
-export const debugId = import.meta.env.PUBLIC_CLIENT_ID || 'NO_RECIBIDO';
-const rawClientId = debugId.trim();
-export const currentClient = CLIENTS[rawClientId] || CLIENTS['amka-clinica-dental'];
+const rawClientId = import.meta.env.PUBLIC_CLIENT_ID?.trim() || 'salcido-dental-clinic';
+export const currentClient = CLIENTS[rawClientId] || CLIENTS['salcido-dental-clinic'];
