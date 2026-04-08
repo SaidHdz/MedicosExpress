@@ -344,5 +344,6 @@ export const CLIENTS: Record<string, ClientConfig> = {
   }
 };
 
-const rawClientId = import.meta.env.PUBLIC_CLIENT_ID?.trim() || 'amka-clinica-dental';
+export const debugId = import.meta.env.PUBLIC_CLIENT_ID || 'NO_RECIBIDO';
+const rawClientId = debugId.trim();
 export const currentClient = CLIENTS[rawClientId] || CLIENTS['amka-clinica-dental'];
