@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { CLIENTS } from '../config/clients';
+import { currentClient } from '../config/clients';
 
 const BookingForm: React.FC = () => {
-    // Selector de cliente para React (Lado Cliente)
-    const clientId = import.meta.env.PUBLIC_CLIENT_ID || 'amka-clinica-dental';
-    const currentClient = CLIENTS[clientId] || CLIENTS['amka-clinica-dental'];
-
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [loadingSlots, setLoadingSlots] = useState(false);
     const [availableSlots, setAvailableSlots] = useState<string[]>([]);
