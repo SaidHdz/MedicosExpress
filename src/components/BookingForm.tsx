@@ -27,7 +27,7 @@ const BookingForm: React.FC = () => {
             setLoadingSlots(true);
             try {
                 // 2. Consulta a n8n
-                const response = await fetch(`https://ravyb.app.n8n.cloud/webhook/consultar-disponibilidad?fecha=${formData.date}&sucursal=${encodeURIComponent(formData.branch)}`);
+                const response = await fetch(`https://n8n.srv1574981.hstgr.cloud/webhook/consultar-disponibilidad?fecha=${formData.date}&sucursal=${encodeURIComponent(formData.branch)}`);
                 const data = await response.json();
                 
                 // Debug: Para ver qué llega exactamente en la consola del navegador
@@ -58,7 +58,7 @@ const BookingForm: React.FC = () => {
         setStatus('loading');
 
         try {
-            const response = await fetch('https://ravyb.app.n8n.cloud/webhook/agendar-cita-reynosa', {
+            const response = await fetch('https://n8n.srv1574981.hstgr.cloud/webhook/agendar-cita-reynosa', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...formData, clientId: currentClient.id }),
