@@ -22,6 +22,11 @@ body {
 }
 
 /* Estilos de layout base para el wrapper */
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+}
+
 .wrapper {
   max-width: 600px;
   margin: 0 auto;
@@ -74,7 +79,7 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* Kanji Background */
+/* Kanji Background Restaurado */
 .kanji-bg {
   position: fixed;
   top: 0;
@@ -87,7 +92,7 @@ body {
   align-items: center;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.03;
+  opacity: 0.05;
 }
 
 .kanji-bg span {
@@ -95,7 +100,14 @@ body {
   font-weight: 200;
   font-size: 20vw;
   color: var(--text);
+  position: relative; /* Cambiado de absolute para que el flexbox los distribuya */
+  will-change: transform;
 }
+
+.k1 { top: 10%; left: 10%; }
+.k2 { top: 30%; right: 10%; }
+.k3 { bottom: 30%; left: 15%; }
+.k4 { bottom: 10%; right: 15%; }
 
 /* Countdown */
 .countdown-grid {
@@ -138,9 +150,34 @@ body {
   text-align: center;
   color: var(--accent);
   letter-spacing: 0.1em;
+  margin-bottom: 0;
 }
 
-/* Tracklist Refactored: CSS Hover Stable Animation */
+.released-container {
+  position: relative;
+  text-align: center;
+}
+
+.released-glitch {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--accent2);
+  margin-top: -1rem;
+  letter-spacing: 0.1em;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(3deg); opacity: 0.8; }
+  40% { transform: skew(-3deg); opacity: 1; }
+  60% { transform: skew(1deg); }
+  80% { transform: skew(-1deg); opacity: 0.9; }
+  100% { transform: skew(0deg); }
+}
+
+/* Tracklist Refactored: Click-based Stable Animation (Mobile Friendly) */
 .tracklist {
   list-style: none;
   padding: 0;
@@ -159,8 +196,8 @@ body {
   grid-template-rows: auto 0fr; /* Altura colapsada */
 }
 
-/* Estado Hover: Estable y manejado por el navegador */
-.track-item:hover {
+/* Estado Expandido por Clic */
+.track-item.is-expanded {
   background: var(--accent);
   border-color: var(--accent);
   grid-template-rows: auto 1fr; /* Altura expandida */
@@ -172,6 +209,7 @@ body {
   align-items: center;
   padding: 1.5rem;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .track-main {
@@ -211,15 +249,15 @@ body {
   transition: color 0.4s ease, transform 0.4s ease;
 }
 
-/* Cambios Visuales al hacer Hover */
-.track-item:hover .track-name,
-.track-item:hover .track-num,
-.track-item:hover .track-feat,
-.track-item:hover .track-icon {
+/* Cambios Visuales al estar Expandido */
+.track-item.is-expanded .track-name,
+.track-item.is-expanded .track-num,
+.track-item.is-expanded .track-feat,
+.track-item.is-expanded .track-icon {
   color: var(--bg);
 }
 
-.track-item:hover .track-icon {
+.track-item.is-expanded .track-icon {
   transform: rotate(180deg);
 }
 
@@ -239,16 +277,18 @@ body {
   transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
 }
 
-.track-item:hover .track-details {
+.track-item.is-expanded .track-details {
   opacity: 1;
   transform: translateY(0);
 }
 
 .spotify-preview {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  background: #000;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 4px solid var(--bg);
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  border-radius: 0;
 }
 
 .track-actions-row {
@@ -278,7 +318,37 @@ body {
   color: var(--accent);
 }
 
-/* Re-styling Pre-save for consistency */
+/* Pre-save Track Styles */
+.presave-track-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.presave-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--bg);
+  opacity: 0.8;
+  font-weight: 700;
+}
+
+.action-btn-link.presave-inner {
+  width: 100%;
+  max-width: 300px;
+  background: var(--bg);
+  color: var(--accent);
+  border: none;
+}
+
+.action-btn-link.presave-inner:hover {
+  background: #000;
+  color: #fff;
+}
 
 /* Pre-save Section */
 .presave-section {
@@ -317,15 +387,38 @@ body {
   box-shadow: 0 0 20px rgba(232, 201, 126, 0.4);
 }
 
-/* Responsividad básica */
+/* Responsividad mejorada para móviles */
 @media (max-width: 480px) {
+  .wrapper {
+    padding: 2rem 1.5rem;
+    gap: 3rem;
+  }
   .album-title {
-    font-size: 2.5rem;
+    font-size: 4rem;
+  }
+  .album-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+  }
+  .countdown-grid {
+    gap: 0.5rem;
+  }
+  .time-unit {
+    padding: 1rem 0.2rem;
   }
   .time-number {
     font-size: 1.8rem;
   }
   .track-name {
     font-size: 1.2rem;
+  }
+  .track-header {
+    padding: 1.2rem 1rem;
+  }
+  .track-main {
+    gap: 1rem;
+  }
+  .presave-title {
+    font-size: 1.5rem;
   }
 }
