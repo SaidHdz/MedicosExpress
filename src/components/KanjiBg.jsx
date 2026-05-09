@@ -20,7 +20,6 @@ export default function KanjiBg() {
           key={i} 
           className={`k${i + 1}`}
           style={{ 
-            // Todos los kanjis bajan ahora al mismo ritmo (factor 0.1)
             transform: `translateY(${offset * 0.1}px)`,
           }}
         >

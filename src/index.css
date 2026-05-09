@@ -79,7 +79,7 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* Kanji Background Restaurado */
+/* Kanji Background - Posicionamiento Absoluto para evitar errores de layout */
 .kanji-bg {
   position: fixed;
   top: 0;
@@ -87,9 +87,6 @@ body {
   width: 100%;
   height: 100%;
   z-index: 1;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   pointer-events: none;
   overflow: hidden;
   opacity: 0.05;
@@ -100,14 +97,14 @@ body {
   font-weight: 200;
   font-size: 20vw;
   color: var(--text);
-  position: relative; /* Cambiado de absolute para que el flexbox los distribuya */
+  position: absolute;
   will-change: transform;
 }
 
-.k1 { top: 10%; left: 10%; }
-.k2 { top: 30%; right: 10%; }
-.k3 { bottom: 30%; left: 15%; }
-.k4 { bottom: 10%; right: 15%; }
+.k1 { top: 5%; left: 5%; }
+.k2 { top: 25%; right: 5%; }
+.k3 { bottom: 25%; left: 8%; }
+.k4 { bottom: 5%; right: 8%; }
 
 /* Countdown */
 .countdown-grid {
@@ -389,6 +386,9 @@ body {
 
 /* Responsividad mejorada para móviles */
 @media (max-width: 480px) {
+  .app-container {
+    backdrop-filter: blur(4px); /* Menos blur en mobil para mejor rendimiento */
+  }
   .wrapper {
     padding: 2rem 1.5rem;
     gap: 3rem;
@@ -420,5 +420,8 @@ body {
   }
   .presave-title {
     font-size: 1.5rem;
+  }
+  .kanji-bg span {
+    font-size: 30vw; /* Más grandes en mobil para que llenen bien */
   }
 }
