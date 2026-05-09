@@ -18,8 +18,8 @@ export default function KanjiBg() {
       {kanjis.map((k, i) => (
         <span 
           key={i} 
-          className={`k${i + 1}`}
           style={{ 
+            // Todos los kanjis bajan sincronizados al mismo ritmo
             transform: `translateY(${offset * 0.1}px)`,
           }}
         >
