@@ -43,12 +43,19 @@ export default function Countdown() {
     </div>
   );
 
+  const unitLabels = {
+    days: "DÍAS",
+    hours: "HORAS",
+    mins: "MINS",
+    secs: "SEGS"
+  };
+
   return (
     <div className="countdown-grid">
       {Object.entries(timeLeft).map(([unit, val]) => (
         <div key={unit} className="time-unit">
           <span className="time-number">{String(val).padStart(2, "0")}</span>
-          <span className="time-label">{unit}</span>
+          <span className="time-label">{unitLabels[unit]}</span>
         </div>
       ))}
     </div>
