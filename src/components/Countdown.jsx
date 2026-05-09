@@ -8,12 +8,16 @@ export default function Countdown() {
     const tick = () => {
       const diff = RELEASE_DATE - new Date();
       if (diff <= 0) {
-        // Al llegar a cero, intentamos enviar una notificación si hay permiso
-        if (Notification.permission === "granted") {
-          new Notification("¡OMAKASE YA DISPONIBLE!", {
-            body: "El nuevo álbum de Álvaro Díaz ya está disponible en todas las plataformas.",
-            icon: "/icon-192.png"
-          });
+        // Al llegar a cero, intentamos enviar una notificación con guardia de seguridad
+        if (typeof window !== "undefined" && "Notification" in window && Notification.permission === "granted") {
+          try {
+            new Notification("¡OMAKASE YA DISPONIBLE!", {
+              body: "El nuevo álbum de Álvaro Díaz ya está disponible en todas las plataformas.",
+              icon: "/icon-192.png"
+            });
+          } catch (e) {
+            console.warn("Error enviando notificación:", e);
+          }
         }
         return setTimeLeft(null);
       }
@@ -25,9 +29,13 @@ export default function Countdown() {
       });
     };
     
-    // Solicitar permiso de notificación al montar
-    if (Notification.permission === "default") {
-      Notification.requestPermission();
+    // Solicitar permiso de notificación al montar con guardia de seguridad
+    if (typeof window !== "undefined" && "Notification" in window && Notification.permission === "default") {
+      try {
+        Notification.requestPermission();
+      } catch (e) {
+        console.warn("Error solicitando permisos de notificación:", e);
+      }
     }
 
     tick();
