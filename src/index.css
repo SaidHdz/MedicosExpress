@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:      #060608;
+  --surface: #0f0f12;
+  --border:  #1e1e24;
+  --accent:  #e8c97e;   /* gold */
+  --accent2: #c44a3b;   /* red */
+  --text:    #e8e4dc;
+  --muted:   #5a5a6a;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos de layout base para el wrapper */
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  min-height: 100vh;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* Tipografía por zona */
+.album-title {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 900;
+  font-size: 6rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0.2rem 0;
+  line-height: 1;
+}
+
+.album-subtitle {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 1em;
+  text-align: center;
+  color: var(--accent);
+  margin-left: 1em; /* Compensa el letter-spacing del último carácter */
+}
+
+.artist-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  text-align: center;
+  color: var(--muted);
+}
+
+.drop-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--accent2);
+  margin-bottom: 2rem;
+  letter-spacing: 0.1em;
+}
+
+/* Kanji Background */
+.kanji-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.03;
+}
+
+.kanji-bg span {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: 20vw;
+  color: var(--text);
+}
+
+/* Countdown */
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  padding: 1.5rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.time-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.time-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  letter-spacing: 0.2em;
+}
+
+.released {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  text-align: center;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+/* Tracklist Refactored: CSS Hover Stable Animation */
+.tracklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.track-item {
+  border: 1px solid var(--border);
+  transition: background-color 0.4s ease, border-color 0.4s ease, grid-template-rows 0.4s ease;
+  overflow: hidden;
+  background: transparent;
+  display: grid;
+  grid-template-rows: auto 0fr; /* Altura colapsada */
+}
+
+/* Estado Hover: Estable y manejado por el navegador */
+.track-item:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  grid-template-rows: auto 1fr; /* Altura expandida */
+}
+
+.track-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  cursor: pointer;
+}
+
+.track-main {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.track-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--accent);
+  transition: color 0.4s ease;
+}
+
+.track-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--text);
+  line-height: 1;
+  transition: color 0.4s ease;
+}
+
+.track-feat {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.4rem;
+  transition: color 0.4s ease;
+}
+
+.track-icon {
+  color: var(--muted);
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+/* Cambios Visuales al hacer Hover */
+.track-item:hover .track-name,
+.track-item:hover .track-num,
+.track-item:hover .track-feat,
+.track-item:hover .track-icon {
+  color: var(--bg);
+}
+
+.track-item:hover .track-icon {
+  transform: rotate(180deg);
+}
+
+/* Detalles */
+.track-details-container {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.track-details {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+}
+
+.track-item:hover .track-details {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.spotify-preview {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.track-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.action-btn-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.9rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.15);
+  color: var(--bg);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.action-btn-link:hover {
+  background: var(--bg);
+  color: var(--accent);
+}
+
+/* Re-styling Pre-save for consistency */
+
+/* Pre-save Section */
+.presave-section {
+  margin-top: 4rem;
+  padding: 4rem 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.presave-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.presave-btn {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 1rem 3rem;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.2em;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.presave-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(232, 201, 126, 0.4);
+}
+
+/* Responsividad básica */
+@media (max-width: 480px) {
+  .album-title {
+    font-size: 2.5rem;
+  }
+  .time-number {
+    font-size: 1.8rem;
+  }
+  .track-name {
+    font-size: 1.2rem;
+  }
+}
