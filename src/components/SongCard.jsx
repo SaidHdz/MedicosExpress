@@ -5,7 +5,6 @@ import TiltedCard from './TiltedCard';
 import ProfileCard from './ProfileCard';
 import { initialSongs } from '../data/songs';
 
-// Encapsulate overlay to safely use hooks inside render props
 const AlbumOverlay = ({ item, x, y, isMobile }) => {
   const parallaxX = useTransform(x, [0, 300], [-10, 10]);
   const parallaxY = useTransform(y, [0, 300], [-10, 10]);
@@ -41,12 +40,10 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
     offset: ["start end", "end start"]
   });
 
-  const springConfig = { stiffness: 90, damping: 25, mass: 0.8 };
-  const rotateXScroll = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [35, 0, -45]), springConfig);
-  const zScroll = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [-180, 0, -220]), springConfig);
-  const scaleScroll = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [0.88, 1.05, 0.88]), springConfig);
-  
-  const brightnessValue = useTransform(scrollYProgress, [0, 0.45, 0.5, 0.55, 1], [0.6, 1, 1, 1, 0.6]);
+  const springConfig = { stiffness: 100, damping: 30, mass: 0.5 };
+  const rotateXScroll = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [30, 0, -30]), springConfig);
+  const zScroll = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [-100, 0, -100]), springConfig);
+  const scaleScroll = useSpring(useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 0.95]), springConfig);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -64,31 +61,29 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
     rotateY: [-2, 2, -2]
   } : { rotateZ: 0, rotateX: 0, rotateY: 0 };
 
-  const handleCardClick = (e) => {
-    // Only trigger if the actual target is the clickable area, not accidental taps
-    e.stopPropagation();
-    onClick?.(item);
-  };
-
   return (
-    <div ref={containerRef} className="w-full h-full relative pointer-events-none">
+    <div ref={containerRef} className="w-full h-full relative">
       <motion.div 
         layoutId={`card-${item.id}`}
         transition={{ type: "spring", stiffness: 350, damping: 30, mass: 0.8 }}
-        className="w-full h-full absolute inset-0 z-10 pointer-events-auto"
+        className="w-full h-full absolute inset-0 z-10"
       >
         <motion.div
-          className="w-full h-full cursor-pointer relative preserve-3d"
-          animate={!isModalOpen ? (isMobile ? { rotateX: rotateXScroll.get(), z: zScroll.get(), scale: scaleScroll.get() } : desktopIdle) : { rotateX: 0, rotateY: 0, rotateZ: 0, z: 0, scale: 1 }}
+          className={`w-full h-full cursor-pointer relative preserve-3d overflow-hidden rounded-[30px] ${isMobile ? 'touch-none' : ''}`}
           style={isMobile && !isModalOpen ? { 
             rotateX: rotateXScroll, 
             z: zScroll, 
             scale: scaleScroll, 
-            perspective: "1500px",
-            filter: `brightness(${brightnessValue.get()})`
+            perspective: "1200px"
           } : {}}
+          animate={!isModalOpen && !isMobile ? desktopIdle : {}}
           transition={!isMobile && !isModalOpen ? { duration: 10, repeat: Infinity, ease: "easeInOut" } : { type: "spring", stiffness: 350, damping: 30 }}
-          onClick={handleCardClick}
+          // Strictly handle click only on this element
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onClick?.(item);
+          }}
         >
           {isAlbum ? (
             <TiltedCard
@@ -108,7 +103,7 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
               )}
             />
           ) : (
-            <div className="w-full h-full relative">
+            <div className="w-full h-full relative pointer-events-none">
               <ProfileCard
                 name={item.title}
                 title={item.quote}
@@ -117,7 +112,7 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
                 avatarUrl={item.cover}
                 behindGlowEnabled={!isMobile} 
                 enableTilt={!isMobile} 
-                onContactClick={() => onClick?.(item)}
+                onContactClick={() => {}} // Handle via parent click only on mobile
               />
               {!isMobile && (
                 <motion.div 
