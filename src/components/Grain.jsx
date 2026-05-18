@@ -1,8 +1,16 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Grain = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const mouseX = useMotionValue(0);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const mouseY = useMotionValue(0);
   
   const springX = useSpring(mouseX, { stiffness: 50, damping: 30 });
@@ -31,20 +39,24 @@ const Grain = () => {
         {/* Deepest Layer: Vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#000_100%)] opacity-60" />
         
-        {/* Middle Layer: Floating Orbs for depth */}
-        <motion.div 
-          style={{ x: bgX, y: bgY }}
-          className="absolute -inset-[10%] opacity-20"
-        >
-          <div className="absolute top-[10%] left-[20%] w-[40vw] h-[40vw] bg-wine-red/20 blur-[120px] rounded-full" />
-          <div className="absolute bottom-[10%] right-[20%] w-[30vw] h-[30vw] bg-amber-accent/10 blur-[100px] rounded-full" />
-        </motion.div>
+        {/* Middle Layer: Floating Orbs for depth - Disabled on Mobile */}
+        {!isMobile && (
+          <motion.div 
+            style={{ x: bgX, y: bgY }}
+            className="absolute -inset-[10%] opacity-20"
+          >
+            <div className="absolute top-[10%] left-[20%] w-[40vw] h-[40vw] bg-wine-red/20 blur-[120px] rounded-full" />
+            <div className="absolute bottom-[10%] right-[20%] w-[30vw] h-[30vw] bg-amber-accent/10 blur-[100px] rounded-full" />
+          </motion.div>
+        )}
 
-        {/* Top Layer: Subtle Floating Mesh/Grid */}
-        <motion.div 
-          style={{ x: circleX, y: circleY }}
-          className="absolute -inset-[5%] opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] contrast-200" 
-        />
+        {/* Top Layer: Subtle Floating Mesh/Grid - Disabled on Mobile */}
+        {!isMobile && (
+          <motion.div 
+            style={{ x: circleX, y: circleY }}
+            className="absolute -inset-[5%] opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] contrast-200" 
+          />
+        )}
       </div>
 
       {/* The Grain Overlay */}

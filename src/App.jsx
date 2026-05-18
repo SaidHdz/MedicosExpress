@@ -130,20 +130,26 @@ function App() {
 
       {/* Mobile Menu Overlay - Solo si no es producción */}
       {!isProduction && (
-        <div className={`fixed inset-0 z-[45] bg-deep-black transition-all duration-500 md:hidden ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className={`fixed inset-0 z-[45] bg-deep-black transition-all duration-500 md:hidden ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
+          <div className="absolute top-6 right-6">
+            <button className="p-3 text-aged-cream/60 bg-white/5 rounded-full" onClick={() => setIsMobileMenuOpen(false)}>
+              <CloseIcon size={32} />
+            </button>
+          </div>
+          
           <div className="flex flex-col items-center justify-center h-full gap-8 p-8">
             <button 
               onClick={() => { setIsFormOpen(true); setIsMobileMenuOpen(false); }}
-              className="w-full bg-wine-red py-6 rounded-2xl text-xl font-display italic flex items-center justify-center gap-4"
+              className="w-full bg-wine-red py-6 rounded-2xl text-xl font-display italic flex items-center justify-center gap-4 shadow-[0_0_30px_rgba(114,47,55,0.4)]"
             >
               <Plus size={24} /> Añadir Memoria
             </button>
             <div className="grid grid-cols-2 gap-4 w-full">
-              <button onClick={() => { exportCollection(); setIsMobileMenuOpen(false); }} className="bg-white/5 py-4 rounded-xl text-xs uppercase tracking-widest flex flex-col items-center gap-2">
-                <Download size={20} /> Exportar
+              <button onClick={() => { exportCollection(); setIsMobileMenuOpen(false); }} className="bg-white/5 py-6 rounded-xl text-xs uppercase tracking-widest flex flex-col items-center gap-3 border border-white/5">
+                <Download size={24} /> Exportar
               </button>
-              <label className="bg-white/5 py-4 rounded-xl text-xs uppercase tracking-widest flex flex-col items-center gap-2 cursor-pointer">
-                <Upload size={20} /> Importar
+              <label className="bg-white/5 py-6 rounded-xl text-xs uppercase tracking-widest flex flex-col items-center gap-3 border border-white/5 cursor-pointer">
+                <Upload size={24} /> Importar
                 <input type="file" accept=".json" className="hidden" onChange={(e) => {
                   const file = e.target.files[0];
                   if (file) {
@@ -154,8 +160,8 @@ function App() {
                 }} />
               </label>
             </div>
-            <button onClick={() => { resetCollection(); setIsMobileMenuOpen(false); }} className="mt-8 text-[10px] uppercase tracking-[0.3em] opacity-30 flex items-center gap-2">
-              <Trash2 size={12} /> Limpiar Archivo
+            <button onClick={() => { if(window.confirm('¿Borrar todo el archivo local?')) { resetCollection(); setIsMobileMenuOpen(false); } }} className="mt-12 text-[10px] uppercase tracking-[0.4em] opacity-30 flex items-center gap-2 py-4 px-8 border border-white/5 rounded-full">
+              <Trash2 size={14} /> Limpiar Archivo
             </button>
           </div>
         </div>

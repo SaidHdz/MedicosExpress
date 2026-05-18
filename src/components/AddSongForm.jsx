@@ -5,6 +5,7 @@ import { X, Plus, Music, User, Quote, Calendar, Image as ImageIcon, Trash2, Laye
 const moods = [
   { id: 'nostalgia', label: 'Nostalgia', color: '#8B2E2E' },
   { id: 'dolor', label: 'Dolor', color: '#4A148C' },
+  { id: 'tristeza', label: 'Tristeza', color: '#1A365D' },
   { id: 'amor', label: 'Amor', color: '#C2185B' },
   { id: 'rabia', label: 'Rabia', color: '#D32F2F' },
   { id: 'paz', label: 'Paz', color: '#FFBF00' }
