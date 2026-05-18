@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-deep-black: #050505;
+  --color-aged-cream: #fdfcf0;
+  --color-wine-red: #722f37;
+  --color-amber-accent: #d4af37;
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "DM Serif Text", serif;
+}
+
+@utility perspective-1000 {
+  perspective: 1000px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+}
+
+@utility rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@layer base {
+  :root {
+    background-color: var(--color-deep-black);
+    color: var(--color-aged-cream);
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar to match the essence */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-deep-black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-wine-red);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  
+  /* Selection color */
+  ::selection {
+    background-color: var(--color-wine-red);
+    color: var(--color-aged-cream);
+  }
+}
+
+@layer utilities {
+  .animate-shiny {
+    background: linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(253, 252, 240, 0.8) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: shiny 4s infinite linear;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-200%) skewX(-20deg); }
+  100% { transform: translateX(200%) skewX(-20deg); }
+}
+
+@keyframes shiny {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
