@@ -17,25 +17,21 @@ const Tutorial = () => {
     {
       title: "HOLA DETH",
       message: "Espero que sí estés viendo esto, es un regalo que te hice.",
-      icon: <Sparkles className="text-amber-accent w-12 h-12" />,
       button: "Continuar"
     },
     {
       title: "Nuestras Memorias",
-      message: "Aquí están las canciones que me hacen pensar en ti, y unas cuantas cartas que te escribí.",
-      icon: <Music className="text-wine-red w-12 h-12" />,
+      message: "Aquí están las canciones que me hacen pensar en ti, junto con los mensajes que te escribí.",
       button: "Ver más"
     },
     {
       title: "¿Cómo usarlo?",
-      message: "Solo dale clic a las portadas de las canciones o singles. Cada álbum tiene las canciones y sus mensajes dentro.",
-      icon: <MousePointer2 className="text-amber-accent w-12 h-12" />,
+      message: "Solo dale clic a las portadas de las canciones o álbumes. Dentro encontrarás la música y mis palabras para ti.",
       button: "Entendido"
     },
     {
       title: "ESPERO TE GUSTE",
       message: "Llevo dos meses trabajando en esto, ojalá te guste, te quiero.",
-      icon: <Sparkles className="text-wine-red w-12 h-12" />,
       button: "Entrar al Archivo"
     }
   ];
@@ -89,30 +85,29 @@ const Tutorial = () => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 className="space-y-8"
               >
-                <div className="flex justify-center">{steps[currentStep].icon}</div>
-                <div className="space-y-4">
-                  <h3 className="text-3xl md:text-4xl font-display italic text-white">{steps[currentStep].title}</h3>
-                  <p className="text-lg font-body opacity-60 leading-relaxed italic">{steps[currentStep].message}</p>
+                <div className="space-y-4 pt-4">
+                  <h3 className="text-4xl md:text-5xl font-display italic text-white leading-tight">{steps[currentStep].title}</h3>
+                  <p className="text-xl font-body opacity-60 leading-relaxed italic">{steps[currentStep].message}</p>
                 </div>
                 <button
                   onClick={handleNext}
-                  className="w-full bg-wine-red text-white py-5 rounded-2xl font-body uppercase tracking-[0.3em] text-[10px] font-bold hover:brightness-125 transition-all shadow-xl active:scale-95"
+                  className="w-full bg-wine-red text-white py-6 rounded-2xl font-body uppercase tracking-[0.3em] text-[10px] font-bold hover:brightness-125 transition-all shadow-xl active:scale-95 mt-4"
                 >
                   {steps[currentStep].button}
                 </button>
               </motion.div>
             </AnimatePresence>
             
-            <div className="mt-8 flex justify-center gap-2">
+            <div className="mt-12 flex justify-center gap-2">
               {steps.map((_, i) => (
                 <div 
                   key={i} 
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${i === currentStep ? 'w-6 bg-wine-red' : 'bg-white/10'}`} 
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${i === currentStep ? 'w-8 bg-wine-red' : 'bg-white/10'}`} 
                 />
               ))}
             </div>
