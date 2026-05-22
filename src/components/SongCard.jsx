@@ -78,7 +78,7 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
         }}
       >
         <motion.div
-          className={`w-full h-full cursor-pointer relative preserve-3d rounded-[30px] ${isMobile ? 'touch-none' : ''}`}
+          className={`w-full h-full cursor-pointer relative preserve-3d rounded-[30px] ${isMobile ? 'touch-pan-y' : ''}`}
           style={isMobile && !isModalOpen ? { 
             rotateX: rotateXScroll, 
             z: zScroll, 

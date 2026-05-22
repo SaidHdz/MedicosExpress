@@ -86,11 +86,12 @@ export default function TiltedCard({
       className="tilted-card-figure"
       style={{
         height: containerHeight,
-        width: containerWidth
+        width: containerWidth,
+        touchAction: 'pan-y'
       }}
-      onMouseMove={handleMouse}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={window.innerWidth >= 768 ? handleMouse : undefined}
+      onMouseEnter={window.innerWidth >= 768 ? handleMouseEnter : undefined}
+      onMouseLeave={window.innerWidth >= 768 ? handleMouseLeave : undefined}
     >
       {showMobileWarning && (
         <div className="tilted-card-mobile-alert">Efecto optimizado para escritorio.</div>
