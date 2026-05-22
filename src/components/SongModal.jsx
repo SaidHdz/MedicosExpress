@@ -18,8 +18,8 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit, onNext }) =>
         return;
       }
     }
-    // Si es single o el último track del álbum, pasar al siguiente ítem de la colección
-    onNext?.();
+    // Si es single o el último track del álbum, cerrar el modal
+    onClose();
   };
   
   useEffect(() => {
@@ -237,8 +237,13 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit, onNext }) =>
                   onClick={handleNextClick}
                   className="flex items-center gap-4 px-8 py-3 bg-wine-red text-white rounded-full text-[10px] uppercase tracking-[0.3em] font-bold hover:brightness-125 transition-all active:scale-95 shadow-lg group"
                 >
-                  Siguiente {item.type === 'album' && selectedSubSong ? 'Track' : 'Memoria'}
-                  <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  {item.type === 'album' && selectedSubSong && 
+                   item.displaySongs.findIndex(s => s.id === selectedSubSong.id) < item.displaySongs.length - 1 
+                   ? 'Siguiente Track' : 'Cerrar Memoria'}
+                  {item.type === 'album' && selectedSubSong && 
+                   item.displaySongs.findIndex(s => s.id === selectedSubSong.id) < item.displaySongs.length - 1 
+                   ? <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" /> 
+                   : <X size={16} className="group-hover:rotate-90 transition-transform" />}
                 </button>
               </footer>
             </div>

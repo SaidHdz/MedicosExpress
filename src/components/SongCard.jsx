@@ -73,6 +73,9 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
         layoutId={`card-${item.id}`}
         transition={{ type: "spring", stiffness: 350, damping: 30, mass: 0.8 }}
         className="w-full h-full absolute inset-0 z-10"
+        style={{
+          filter: `drop-shadow(0 20px 30px ${item.moodColor}22)`
+        }}
       >
         <motion.div
           className={`w-full h-full cursor-pointer relative preserve-3d rounded-[30px] ${isMobile ? 'touch-none' : ''}`}
