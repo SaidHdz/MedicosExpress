@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero = () => {
   const letters = "Rokola".split("");
@@ -80,7 +80,7 @@ const Hero = () => {
         <div className="space-y-6 max-w-lg">
           <div className="h-[1px] w-24 bg-gradient-to-r from-wine-red to-transparent shadow-[0_0_15px_var(--color-wine-red)]" />
           <p className="text-xl md:text-3xl font-body opacity-60 leading-relaxed italic tracking-tight">
-            "Canciones que me recuerdan a ti, a nosotros"
+            "Algunas canciones que me recuerdan a ti"
           </p>
         </div>
         

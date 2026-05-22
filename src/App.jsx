@@ -67,10 +67,29 @@ function App() {
 
   const displayCollection = getDisplayCollection();
 
-  const filteredCollection = displayCollection.filter(item => {
+  const filteredCollection = displayCollection.map(item => {
+    // Si es un álbum, pre-filtramos sus canciones para la visualización
+    const songsToFilter = item.songs || [];
+    const displaySongs = activeMood === 'all' 
+      ? songsToFilter 
+      : songsToFilter.filter(s => s.mood === activeMood);
+    
+    return {
+      ...item,
+      displaySongs: displaySongs
+    };
+  }).filter(item => {
     const itemYear = new Date(item.date).getFullYear();
     const currentYear = new Date().getFullYear();
-    const matchesMood = activeMood === 'all' || item.mood === activeMood;
+    
+    // Un ítem coincide si:
+    // 1. El mood es 'all'
+    // 2. Es un single y su mood coincide
+    // 3. Es un álbum y tiene al menos una canción que coincide (displaySongs no está vacío)
+    const matchesMood = activeMood === 'all' || 
+                       (item.type === 'single' && item.mood === activeMood) || 
+                       (item.type === 'album' && item.displaySongs.length > 0);
+                       
     const matchesYear = activeYear === 'all' || (activeYear === 'Older' ? itemYear < currentYear - 1 : itemYear === activeYear);
     const matchesType = activeType === 'all' || activeType === 'only-songs' || item.type === activeType;
     return matchesMood && matchesYear && matchesType;
@@ -170,7 +189,7 @@ function App() {
       <div className="pt-12 md:pt-24 pb-24">
         <Hero />
 
-        <main className="max-w-7xl mx-auto px-4 md:px-12">
+        <main className="max-w-7xl mx-auto px-4 md:px-12 relative">
           <FilterBar 
             activeMood={activeMood}
             onMoodChange={setActiveMood}

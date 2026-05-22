@@ -1,5 +1,5 @@
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { X, Calendar, Quote, User, Layers, Music, ChevronRight, Trash2, Edit2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Calendar, User, ChevronRight, Trash2, Edit2 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { initialSongs } from '../data/songs';
 import TextType from './TextType';
@@ -21,13 +21,10 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit }) => {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
+      setSelectedSubSong(null); // Reset when closing
     }
     return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) setSelectedSubSong(null);
-  }, [isOpen, item]);
 
   if (!item) return null;
   const isAlbum = item.type === 'album';
@@ -190,10 +187,16 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit }) => {
                         ) : (
                           <div className="grid grid-cols-1 gap-3 max-w-xl pb-10">
                             <span className="text-[9px] uppercase tracking-[0.4em] opacity-20 mb-4 block font-body">Tracks del archivo</span>
-                            {item.songs?.map((song) => (
+                            {item.displaySongs?.map((song) => (
                               <button key={song.id} onClick={() => { setSelectedSubSong(song); scrollRef.current?.scrollTo(0,0); }} className="w-full flex items-center justify-between p-6 bg-white/[0.03] hover:bg-wine-red/10 border border-white/5 rounded-2xl transition-all group text-left">
-                                <span className="font-body text-base opacity-70 group-hover:text-white transition-colors">{song.title}</span>
-                                <ChevronRight size={18} className="opacity-10 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-wine-red" />
+                                <div className="flex items-center gap-4">
+                                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: song.moodColor, boxShadow: `0 0 8px ${song.moodColor}` }} />
+                                  <span className="font-body text-base opacity-70 group-hover:text-white transition-colors">{song.title}</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <span className="text-[8px] uppercase tracking-widest opacity-30 font-body group-hover:opacity-100 transition-opacity">{song.mood}</span>
+                                  <ChevronRight size={18} className="opacity-10 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-wine-red" />
+                                </div>
                               </button>
                             ))}
                           </div>
@@ -206,6 +209,12 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit }) => {
                             <ChevronRight size={14} className="rotate-180" /> Volver al álbum
                           </button>
                         )}
+                        <div className="flex items-center gap-3">
+                          <div className="px-2 py-0.5 bg-white/5 rounded-full border border-white/10 flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: selectedSubSong.moodColor }} />
+                            <span className="text-[9px] uppercase tracking-widest opacity-60 font-body">{selectedSubSong.mood}</span>
+                          </div>
+                        </div>
                         <p className="text-2xl lg:text-4xl font-display italic leading-snug text-aged-cream/90 border-l-4 border-wine-red pl-8 py-2">"{selectedSubSong.quote}"</p>
                         <p className="text-lg lg:text-xl font-body leading-relaxed opacity-60 italic max-w-3xl">{selectedSubSong.interpretation}</p>
                       </motion.div>

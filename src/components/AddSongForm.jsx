@@ -14,33 +14,33 @@ const moods = [
 const AddSongForm = ({ isOpen, onClose, onAdd, initialData = null }) => {
   const [type, setType] = useState('single');
   const [formData, setFormData] = useState({
-    title: '', artist: '', cover: '', mood: 'nostalgia',
+    title: '', artist: '', cover: '', 
     date: new Date().toISOString().split('T')[0],
-    quote: '', interpretation: '', songs: []
+    quote: '', interpretation: '', mood: 'nostalgia', songs: []
   });
+
+  const resetForm = () => {
+    setFormData({
+      title: '', artist: '', cover: '',
+      date: new Date().toISOString().split('T')[0],
+      quote: '', interpretation: '', mood: 'nostalgia', songs: []
+    });
+    setType('single');
+  };
 
   useEffect(() => {
     if (initialData) {
       setFormData(initialData);
       setType(initialData.type);
-    } else {
+    } else if (isOpen) {
       resetForm();
     }
   }, [initialData, isOpen]);
 
-  const resetForm = () => {
-    setFormData({
-      title: '', artist: '', cover: '', mood: 'nostalgia',
-      date: new Date().toISOString().split('T')[0],
-      quote: '', interpretation: '', songs: []
-    });
-    setType('single');
-  };
-
   const addSongToAlbum = () => {
     setFormData({
       ...formData,
-      songs: [...formData.songs, { id: crypto.randomUUID(), title: '', quote: '', interpretation: '' }]
+      songs: [...formData.songs, { id: crypto.randomUUID(), title: '', quote: '', interpretation: '', mood: 'nostalgia' }]
     });
   };
 
@@ -55,13 +55,88 @@ const AddSongForm = ({ isOpen, onClose, onAdd, initialData = null }) => {
     });
   };
 
+  const compressImage = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 800;
+          const MAX_HEIGHT = 800;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+          resolve(dataUrl);
+        };
+      };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const moodColor = moods.find(m => m.id === formData.mood)?.color || '#f5f5dc';
-    onAdd({ ...formData, type, moodColor });
+    
+    // Para álbumes, el moodColor del álbum será el del primer track por defecto para la visualización en el grid
+    const mainMood = type === 'single' ? formData.mood : (formData.songs[0]?.mood || 'nostalgia');
+    const moodColor = moods.find(m => m.id === mainMood)?.color || '#f5f5dc';
+    
+    // Asegurar que cada canción tenga su color
+    const processedSongs = formData.songs.map(s => ({
+      ...s,
+      moodColor: moods.find(m => m.id === s.mood)?.color || '#f5f5dc'
+    }));
+
+    onAdd({ 
+      ...formData, 
+      type, 
+      mood: mainMood, 
+      moodColor,
+      songs: processedSongs 
+    });
     resetForm();
     onClose();
   };
+
+  const MoodSelector = ({ selected, onSelect, label = "¿Qué sentimiento te transmite?" }) => (
+    <div className="space-y-4">
+      <label className="text-[10px] uppercase tracking-[0.3em] opacity-30 font-body block">{label}</label>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {moods.map(m => (
+          <button
+            key={m.id}
+            type="button"
+            onClick={() => onSelect(m.id)}
+            className={`px-4 py-3 rounded-xl border transition-all flex flex-col items-center gap-2 group ${
+              selected === m.id ? 'bg-aged-cream border-aged-cream text-black shadow-lg scale-[1.02]' : 'bg-white/5 border-white/5 text-white/40 hover:border-white/10'
+            }`}
+          >
+            <div className="w-2 h-2 rounded-full transition-transform group-hover:scale-125" style={{ backgroundColor: m.color, boxShadow: selected === m.id ? `0 0 10px ${m.color}` : 'none' }} />
+            <span className="text-[9px] uppercase tracking-widest font-bold">{m.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <AnimatePresence>
@@ -185,34 +260,18 @@ const AddSongForm = ({ isOpen, onClose, onAdd, initialData = null }) => {
                       </div>
                       <label className="flex-shrink-0 bg-white/5 hover:bg-wine-red/10 border border-white/10 p-4 rounded-2xl cursor-pointer transition-all active:scale-95 group">
                         <Plus size={20} className="text-white/40 group-hover:text-wine-red" />
-                        <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                        <input type="file" accept="image/*" className="hidden" onChange={async (e) => {
                           const file = e.target.files[0];
                           if (file) {
-                            const reader = new FileReader();
-                            reader.onloadend = () => setFormData({ ...formData, cover: reader.result });
-                            reader.readAsDataURL(file);
+                            try {
+                              const compressedDataUrl = await compressImage(file);
+                              setFormData({ ...formData, cover: compressedDataUrl });
+                            } catch (error) {
+                              alert('Error al procesar la imagen. Inténtalo de nuevo.');
+                            }
                           }
                         }} />
                       </label>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <label className="text-[10px] uppercase tracking-[0.3em] opacity-30 font-body block">¿Qué sentimiento te transmite?</label>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                      {moods.map(m => (
-                        <button
-                          key={m.id}
-                          type="button"
-                          onClick={() => setFormData({...formData, mood: m.id})}
-                          className={`px-4 py-3 rounded-xl border transition-all flex flex-col items-center gap-2 group ${
-                            formData.mood === m.id ? 'bg-aged-cream border-aged-cream text-black shadow-lg scale-[1.02]' : 'bg-white/5 border-white/5 text-white/40 hover:border-white/10'
-                          }`}
-                        >
-                          <div className="w-2 h-2 rounded-full transition-transform group-hover:scale-125" style={{ backgroundColor: m.color, boxShadow: formData.mood === m.id ? `0 0 10px ${m.color}` : 'none' }} />
-                          <span className="text-[9px] uppercase tracking-widest font-bold">{m.label}</span>
-                        </button>
-                      ))}
                     </div>
                   </div>
                 </section>
@@ -221,6 +280,11 @@ const AddSongForm = ({ isOpen, onClose, onAdd, initialData = null }) => {
                 <section className="pt-10 border-t border-white/5">
                   {type === 'single' ? (
                     <div className="space-y-10">
+                      <MoodSelector 
+                        selected={formData.mood} 
+                        onSelect={(mood) => setFormData({...formData, mood})} 
+                      />
+                      
                       <div className="group relative space-y-4">
                         <div className="flex items-center gap-2 opacity-30">
                           <Quote size={14} className="text-wine-red" />
@@ -296,6 +360,12 @@ const AddSongForm = ({ isOpen, onClose, onAdd, initialData = null }) => {
                                   onChange={e => updateAlbumSong(song.id, 'title', e.target.value)}
                                 />
                               </div>
+
+                              <MoodSelector 
+                                label="Sentimiento para este track:"
+                                selected={song.mood} 
+                                onSelect={(mood) => updateAlbumSong(song.id, 'mood', mood)} 
+                              />
                               
                               <div className="grid grid-cols-1 gap-6">
                                 <div className="space-y-3">
