@@ -4,10 +4,23 @@ import { useState, useEffect, useRef } from 'react';
 import { initialSongs } from '../data/songs';
 import TextType from './TextType';
 
-const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit }) => {
+const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit, onNext }) => {
   const [selectedSubSong, setSelectedSubSong] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const scrollRef = useRef(null);
+  
+  const handleNextClick = () => {
+    if (item.type === 'album' && selectedSubSong) {
+      const currentIndex = item.displaySongs.findIndex(s => s.id === selectedSubSong.id);
+      if (currentIndex < item.displaySongs.length - 1) {
+        setSelectedSubSong(item.displaySongs[currentIndex + 1]);
+        scrollRef.current?.scrollTo(0,0);
+        return;
+      }
+    }
+    // Si es single o el último track del álbum, pasar al siguiente ítem de la colección
+    onNext?.();
+  };
   
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -56,16 +69,6 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit }) => {
           >
             {/* ACTION BUTTONS */}
             <div className="absolute top-4 right-4 lg:top-8 lg:right-8 z-[100] flex gap-2">
-              {!isProduction && (
-                <>
-                  <button onClick={() => onEdit(item)} className="p-2.5 rounded-full bg-black/40 text-white/40 hover:text-amber-accent transition-all backdrop-blur-md border border-white/5">
-                    <Edit2 size={18} />
-                  </button>
-                  <button onClick={handleDelete} className="p-2.5 rounded-full bg-black/40 text-white/40 hover:text-wine-red transition-all backdrop-blur-md border border-white/5">
-                    <Trash2 size={18} />
-                  </button>
-                </>
-              )}
               <button onClick={onClose} className="p-2.5 rounded-full bg-wine-red text-white shadow-lg active:scale-90 border border-wine-red/20">
                 <X size={18} />
               </button>
@@ -224,11 +227,19 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit }) => {
               </div>
 
               {/* FOOTER */}
-              <footer className="shrink-0 p-6 lg:p-8 border-t border-white/5 flex items-center justify-between text-[9px] uppercase tracking-[0.4em] opacity-20 font-body bg-[#080808]">
-                <div className="flex items-center gap-2">
+              <footer className="shrink-0 p-6 lg:p-8 border-t border-white/5 flex items-center justify-between bg-[#080808]">
+                <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.4em] opacity-20 font-body">
                   <Calendar size={14} />
                   {new Date(item.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </div>
+
+                <button 
+                  onClick={handleNextClick}
+                  className="flex items-center gap-4 px-8 py-3 bg-wine-red text-white rounded-full text-[10px] uppercase tracking-[0.3em] font-bold hover:brightness-125 transition-all active:scale-95 shadow-lg group"
+                >
+                  Siguiente {item.type === 'album' && selectedSubSong ? 'Track' : 'Memoria'}
+                  <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </button>
               </footer>
             </div>
           </motion.div>

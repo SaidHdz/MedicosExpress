@@ -1,4 +1,4 @@
-﻿export const initialSongs = [
+[
   {
     "title": "Piss In The Wind",
     "artist": "Joji",
@@ -1388,4 +1388,4 @@
       }
     ]
   }
-];
+]

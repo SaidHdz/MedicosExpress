@@ -9,36 +9,17 @@ import Hero from './components/Hero';
 import Grain from './components/Grain';
 import { initialSongs } from './data/songs';
 
-function App() {
-  const { collection, addEntry, deleteEntry, updateEntry, resetCollection, exportCollection, importCollection } = useSongs();
-  
-  // Si el archivo songs.js tiene datos, asumimos que es la versión de "producción" para invitados
-  const isProduction = initialSongs && initialSongs.length > 0;
+import Tutorial from './components/Tutorial';
 
+function App() {
+  const { collection, deleteEntry, updateEntry } = useSongs();
+  
   const [selectedItem, setSelectedItem] = useState(null);
   const [activeMood, setActiveMood] = useState('all');
-  const [activeYear, setActiveYear] = useState('all');
   const [activeType, setActiveType] = useState('all'); // all, album, single, only-songs
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleEdit = (item) => {
-    setEditingItem(item);
-    setIsFormOpen(true);
-  };
-
-  const handleFormClose = () => {
-    setIsFormOpen(false);
-    setEditingItem(null);
-  };
-
-  const handleFormSubmit = (data) => {
-    if (editingItem) {
-      updateEntry(data);
-    } else {
-      addEntry(data);
-    }
+    // Desactivado en versión final
   };
 
   const getDisplayCollection = () => {
@@ -68,7 +49,6 @@ function App() {
   const displayCollection = getDisplayCollection();
 
   const filteredCollection = displayCollection.map(item => {
-    // Si es un álbum, pre-filtramos sus canciones para la visualización
     const songsToFilter = item.songs || [];
     const displaySongs = activeMood === 'all' 
       ? songsToFilter 
@@ -79,27 +59,27 @@ function App() {
       displaySongs: displaySongs
     };
   }).filter(item => {
-    const itemYear = new Date(item.date).getFullYear();
-    const currentYear = new Date().getFullYear();
-    
-    // Un ítem coincide si:
-    // 1. El mood es 'all'
-    // 2. Es un single y su mood coincide
-    // 3. Es un álbum y tiene al menos una canción que coincide (displaySongs no está vacío)
     const matchesMood = activeMood === 'all' || 
                        (item.type === 'single' && item.mood === activeMood) || 
                        (item.type === 'album' && item.displaySongs.length > 0);
                        
-    const matchesYear = activeYear === 'all' || (activeYear === 'Older' ? itemYear < currentYear - 1 : itemYear === activeYear);
     const matchesType = activeType === 'all' || activeType === 'only-songs' || item.type === activeType;
-    return matchesMood && matchesYear && matchesType;
-  });
+    return matchesMood && matchesType;
+  }).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const handleNextItem = () => {
+    if (!selectedItem) return;
+    const currentIndex = filteredCollection.findIndex(item => item.id === selectedItem.id);
+    const nextIndex = (currentIndex + 1) % filteredCollection.length;
+    setSelectedItem(filteredCollection[nextIndex]);
+  };
 
   return (
     <div className="min-h-screen bg-deep-black text-aged-cream relative selection:bg-wine-red selection:text-white">
       <Grain />
+      <Tutorial />
       
-      {/* Navbar Mobile/Desktop */}
+      {/* Navbar Simple */}
       <nav className="sticky top-0 z-[40] bg-deep-black/60 backdrop-blur-xl border-b border-white/5 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
@@ -109,82 +89,11 @@ function App() {
             <span className="font-display italic text-xl tracking-tight hidden sm:block">Rokola</span>
           </div>
 
-          {/* Desktop Actions - Ocultos en producción */}
-          {!isProduction && (
-            <div className="hidden md:flex items-center gap-6">
-              <button 
-                onClick={exportCollection}
-                className="flex items-center gap-2 text-[10px] uppercase tracking-widest opacity-40 hover:opacity-100 transition-all hover:translate-y-[-1px]"
-              >
-                <Download size={14} /> Exportar
-              </button>
-              <label className="flex items-center gap-2 text-[10px] uppercase tracking-widest opacity-40 hover:opacity-100 transition-all cursor-pointer hover:translate-y-[-1px]">
-                <Upload size={14} /> Importar
-                <input type="file" accept=".json" className="hidden" onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (ev) => importCollection(ev.target.result);
-                    reader.readAsText(file);
-                  }
-                }} />
-              </label>
-              <button 
-                onClick={() => setIsFormOpen(true)}
-                className="bg-wine-red hover:bg-wine-red/80 px-6 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-body transition-all active:scale-95 shadow-xl flex items-center gap-2"
-              >
-                <Plus size={16} /> Añadir Memoria
-              </button>
-            </div>
-          )}
-
-          {/* Mobile Menu Toggle - Solo si no es producción */}
-          {!isProduction && (
-            <button className="md:hidden p-2 text-aged-cream/60" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              {isMobileMenuOpen ? <CloseIcon size={24} /> : <Menu size={24} />}
-            </button>
-          )}
+          <div className="text-[9px] uppercase tracking-[0.4em] opacity-40 font-body hidden md:block">
+            Archivo Digital de Memorias
+          </div>
         </div>
       </nav>
-
-      {/* Mobile Menu Overlay - Solo si no es producción */}
-      {!isProduction && (
-        <div className={`fixed inset-0 z-[45] bg-deep-black transition-all duration-500 md:hidden ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
-          <div className="absolute top-6 right-6">
-            <button className="p-3 text-aged-cream/60 bg-white/5 rounded-full" onClick={() => setIsMobileMenuOpen(false)}>
-              <CloseIcon size={32} />
-            </button>
-          </div>
-          
-          <div className="flex flex-col items-center justify-center h-full gap-8 p-8">
-            <button 
-              onClick={() => { setIsFormOpen(true); setIsMobileMenuOpen(false); }}
-              className="w-full bg-wine-red py-6 rounded-2xl text-xl font-display italic flex items-center justify-center gap-4 shadow-[0_0_30px_rgba(114,47,55,0.4)]"
-            >
-              <Plus size={24} /> Añadir Memoria
-            </button>
-            <div className="grid grid-cols-2 gap-4 w-full">
-              <button onClick={() => { exportCollection(); setIsMobileMenuOpen(false); }} className="bg-white/5 py-6 rounded-xl text-xs uppercase tracking-widest flex flex-col items-center gap-3 border border-white/5">
-                <Download size={24} /> Exportar
-              </button>
-              <label className="bg-white/5 py-6 rounded-xl text-xs uppercase tracking-widest flex flex-col items-center gap-3 border border-white/5 cursor-pointer">
-                <Upload size={24} /> Importar
-                <input type="file" accept=".json" className="hidden" onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (ev) => { importCollection(ev.target.result); setIsMobileMenuOpen(false); };
-                    reader.readAsText(file);
-                  }
-                }} />
-              </label>
-            </div>
-            <button onClick={() => { if(window.confirm('¿Borrar todo el archivo local?')) { resetCollection(); setIsMobileMenuOpen(false); } }} className="mt-12 text-[10px] uppercase tracking-[0.4em] opacity-30 flex items-center gap-2 py-4 px-8 border border-white/5 rounded-full">
-              <Trash2 size={14} /> Limpiar Archivo
-            </button>
-          </div>
-        </div>
-      )}
 
       <div className="pt-12 md:pt-24 pb-24">
         <Hero />
@@ -193,18 +102,16 @@ function App() {
           <FilterBar 
             activeMood={activeMood}
             onMoodChange={setActiveMood}
-            activeYear={activeYear}
-            onYearChange={setActiveYear}
             activeType={activeType}
             onTypeChange={setActiveType}
             totalSongs={displayCollection.length}
             visibleSongs={filteredCollection.length}
           />
           <SongGrid 
-          songs={filteredCollection} 
-          onSongClick={(item) => setSelectedItem(item)} 
-          isModalOpen={!!selectedItem}
-        />
+            songs={filteredCollection} 
+            onSongClick={(item) => setSelectedItem(item)} 
+            isModalOpen={!!selectedItem}
+          />
         </main>
       </div>
       
@@ -214,13 +121,7 @@ function App() {
         onClose={() => setSelectedItem(null)} 
         onDelete={deleteEntry}
         onEdit={handleEdit}
-      />
-
-      <AddSongForm 
-        isOpen={isFormOpen} 
-        onClose={handleFormClose} 
-        onAdd={handleFormSubmit}
-        initialData={editingItem}
+        onNext={handleNextItem}
       />
       
       <footer className="max-w-7xl mx-auto px-6 py-24 border-t border-white/5 text-center">
