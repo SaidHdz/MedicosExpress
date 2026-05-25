@@ -103,34 +103,81 @@ const BookingForm: React.FC = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900 p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-100 dark:border-slate-800 flex flex-col gap-6 relative overflow-hidden transition-colors duration-300">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-900 p-10 md:p-14 rounded-[3rem] shadow-premium-xl border border-slate-100 dark:border-slate-800 flex flex-col gap-8 relative overflow-hidden transition-all duration-300">
+            {/* Header del Formulario con confianza */}
+            <div className="flex flex-col gap-2 mb-2">
+                <div className="flex items-center gap-2 text-[currentClient.primaryColor] mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ color: currentClient.primaryColor }}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span className="text-xs font-black uppercase tracking-[0.2em]" style={{ color: currentClient.primaryColor }}>Conexión Segura 256-bit</span>
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Datos del Paciente</h3>
+            </div>
+
             {status === 'loading' && (
-                <div className="absolute inset-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center gap-4">
-                    <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                    <p className="font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest text-sm">Procesando...</p>
+                <div className="absolute inset-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-50 flex flex-col items-center justify-center gap-6">
+                    <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin shadow-lg" style={{ borderColor: currentClient.primaryColor, borderTopColor: 'transparent' }}></div>
+                    <p className="font-black uppercase tracking-[0.3em] text-sm animate-pulse" style={{ color: currentClient.primaryColor }}>Verificando Horarios...</p>
                 </div>
             )}
 
-            <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Nombre Completo</label>
-                <input required type="text" placeholder="Ej. Juan Pérez" className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600" onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">WhatsApp (10 dígitos)</label>
-                    <input required type="tel" value={formData.phone} placeholder="Ej. 899 123 4567" className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600" onChange={handlePhoneChange} />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Correo Electrónico</label>
-                    <input required type="email" placeholder="ejemplo@correo.com" className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600" onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+            <div className="flex flex-col gap-3 group/field">
+                <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 ml-1 group-focus-within/field:text-slate-900 dark:group-focus-within/field:text-white transition-colors">Nombre Completo</label>
+                <div className="relative">
+                    <input 
+                        required 
+                        type="text" 
+                        placeholder="Ej. Juan Pérez" 
+                        className="w-full px-7 py-5 bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-slate-800 focus:border-[var(--primary)] dark:focus:border-[var(--primary)] focus:bg-white dark:focus:bg-slate-950 rounded-[1.5rem] outline-none transition-all font-bold text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 shadow-sm"
+                        style={{ '--primary': currentClient.primaryColor } as any}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })} 
+                    />
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Sucursal</label>
-                    <select required className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none" onChange={(e) => setFormData({ ...formData, branch: e.target.value })}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex flex-col gap-3 group/field">
+                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 ml-1 group-focus-within/field:text-slate-900 dark:group-focus-within/field:text-white transition-colors">WhatsApp</label>
+                    <div className="relative">
+                        <div className="absolute left-6 top-1/2 -translate-y-1/2 text-green-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.031 2c-5.517 0-9.993 4.476-9.993 9.993 0 1.764.46 3.42 1.261 4.86L2 22l5.304-1.391a9.92 9.92 0 0 0 4.727 1.192l.001-.001c5.517 0 9.993-4.476 9.993-9.993 0-5.517-4.476-9.993-9.993-9.993zM6.783 16.945l-.307-.488a8.216 8.216 0 0 1-1.259-4.327c0-4.544 3.697-8.241 8.241-8.241 4.544 0 8.241 3.697 8.241 8.241s-3.697 8.241-8.241 8.241c-1.575 0-3.047-.45-4.307-1.23l-.462-.286-3.21.842.844-3.13z"/>
+                            </svg>
+                        </div>
+                        <input 
+                            required 
+                            type="tel" 
+                            value={formData.phone} 
+                            placeholder="Ej. 899 123 4567" 
+                            className="w-full pl-14 pr-7 py-5 bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-slate-800 focus:border-[var(--primary)] dark:focus:border-[var(--primary)] focus:bg-white dark:focus:bg-slate-950 rounded-[1.5rem] outline-none transition-all font-bold text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 shadow-sm" 
+                            style={{ '--primary': currentClient.primaryColor } as any}
+                            onChange={handlePhoneChange} 
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-col gap-3 group/field">
+                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 ml-1 group-focus-within/field:text-slate-900 dark:group-focus-within/field:text-white transition-colors">Correo Electrónico</label>
+                    <input 
+                        required 
+                        type="email" 
+                        placeholder="ejemplo@correo.com" 
+                        className="w-full px-7 py-5 bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-slate-800 focus:border-[var(--primary)] dark:focus:border-[var(--primary)] focus:bg-white dark:focus:bg-slate-950 rounded-[1.5rem] outline-none transition-all font-bold text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-600 shadow-sm" 
+                        style={{ '--primary': currentClient.primaryColor } as any}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
+                    />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex flex-col gap-3 group/field">
+                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 ml-1 group-focus-within/field:text-slate-900 dark:group-focus-within/field:text-white transition-colors">Sucursal</label>
+                    <select 
+                        required 
+                        className="w-full px-7 py-5 bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-slate-800 focus:border-[var(--primary)] dark:focus:border-[var(--primary)] focus:bg-white dark:focus:bg-slate-950 rounded-[1.5rem] outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none cursor-pointer shadow-sm" 
+                        style={{ '--primary': currentClient.primaryColor } as any}
+                        onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
+                    >
                         <option value="">Seleccionar Sucursal</option>
                         {currentClient.branches.map(branch => (
                             <option key={branch.name} value={branch.name}>{branch.name}</option>
@@ -138,9 +185,14 @@ const BookingForm: React.FC = () => {
                     </select>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Servicio</label>
-                    <select required className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none" onChange={(e) => setFormData({ ...formData, service: e.target.value })}>
+                <div className="flex flex-col gap-3 group/field">
+                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 ml-1 group-focus-within/field:text-slate-900 dark:group-focus-within/field:text-white transition-colors">Servicio Requerido</label>
+                    <select 
+                        required 
+                        className="w-full px-7 py-5 bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-slate-800 focus:border-[var(--primary)] dark:focus:border-[var(--primary)] focus:bg-white dark:focus:bg-slate-950 rounded-[1.5rem] outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none cursor-pointer shadow-sm" 
+                        style={{ '--primary': currentClient.primaryColor } as any}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    >
                         <option value="">Seleccionar Servicio</option>
                         {currentClient.bookingServices.map(service => (
                             <option key={service} value={service}>{service}</option>
@@ -149,19 +201,27 @@ const BookingForm: React.FC = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Fecha Preferida</label>
-                    <input required type="date" min={minDate} className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white" onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex flex-col gap-3 group/field">
+                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 ml-1 group-focus-within/field:text-slate-900 dark:group-focus-within/field:text-white transition-colors">Fecha de Cita</label>
+                    <input 
+                        required 
+                        type="date" 
+                        min={minDate} 
+                        className="w-full px-7 py-5 bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-slate-800 focus:border-[var(--primary)] dark:focus:border-[var(--primary)] focus:bg-white dark:focus:bg-slate-950 rounded-[1.5rem] outline-none transition-all font-bold text-slate-900 dark:text-white shadow-sm" 
+                        style={{ '--primary': currentClient.primaryColor } as any}
+                        onChange={(e) => setFormData({ ...formData, date: e.target.value })} 
+                    />
                 </div>
-                <div className="flex flex-col gap-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">
+                <div className="flex flex-col gap-3 group/field">
+                    <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 ml-1 group-focus-within/field:text-slate-900 dark:group-focus-within/field:text-white transition-colors">
                         {loadingSlots ? 'Consultando disponibilidad...' : 'Hora Preferida'}
                     </label>
                     <select 
                         required 
                         disabled={loadingSlots || !formData.date || !formData.branch}
-                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:border-blue-500 dark:focus:border-blue-400 focus:bg-white dark:focus:bg-slate-950 rounded-2xl outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none disabled:opacity-50 disabled:cursor-not-allowed" 
+                        className="w-full px-7 py-5 bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-100 dark:border-slate-800 focus:border-[var(--primary)] dark:focus:border-[var(--primary)] focus:bg-white dark:focus:bg-slate-950 rounded-[1.5rem] outline-none transition-all font-bold text-slate-900 dark:text-white appearance-none disabled:opacity-50 disabled:cursor-not-allowed shadow-sm" 
+                        style={{ '--primary': currentClient.primaryColor } as any}
                         onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                         value={formData.time}
                     >
@@ -179,14 +239,27 @@ const BookingForm: React.FC = () => {
                 </div>
             </div>
 
-            <button type="submit" disabled={status === 'loading' || formData.phone.length !== 10} className="group mt-4 bg-blue-600 disabled:bg-slate-300 dark:disabled:bg-slate-800 hover:bg-blue-700 text-white font-black py-5 px-10 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center justify-center gap-3 text-xl cursor-pointer disabled:cursor-not-allowed">
-                Confirmar Solicitud
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            <button 
+                type="submit" 
+                disabled={status === 'loading' || formData.phone.length !== 10} 
+                className="group mt-6 text-white font-black py-6 px-12 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center justify-center gap-4 text-xl cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed overflow-hidden relative"
+                style={{ backgroundColor: currentClient.primaryColor }}
+            >
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span className="relative z-10">Confirmar Solicitud</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 group-hover:translate-x-2 transition-transform relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
             </button>
             
-            <p className="text-center text-xs font-bold text-slate-400 dark:text-slate-500 px-4">
-                🔒 Sus datos están protegidos bajo nuestro Aviso de Privacidad.
-            </p>
+            <div className="flex flex-col items-center gap-2 mt-2">
+                <p className="text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 px-4">
+                    🛡️ Sus datos sensibles de salud están protegidos
+                </p>
+                <p className="text-center text-[10px] font-bold text-slate-300 dark:text-slate-600">
+                    Cumplimiento con Ley Federal de Protección de Datos Personales
+                </p>
+            </div>
         </form>
     );
 };

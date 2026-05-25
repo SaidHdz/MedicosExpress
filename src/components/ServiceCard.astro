@@ -12,23 +12,41 @@ const { title, description, iconName } = Astro.props;
 ---
 
 <div 
-	class="group p-8 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col items-start gap-4 cursor-default"
+	class="group p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem] transition-all duration-500 hover:shadow-premium-xl hover:-translate-y-2 flex flex-col items-start gap-6 cursor-default relative overflow-hidden"
 	style={`--primary: ${currentClient.primaryColor};`}
 >
+	<!-- Efecto de gradiente sutil en el fondo al hacer hover -->
 	<div 
-		class="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:text-white transition-all duration-300"
-		style={`background-color: ${currentClient.primaryColor}1A; color: ${currentClient.primaryColor}; --hover-bg: ${currentClient.primaryColor};`}
+		class="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500 pointer-events-none"
+		style={`background-image: radial-gradient(circle at top right, ${currentClient.primaryColor}, transparent);`}
+	></div>
+
+	<div 
+		class="w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-500 relative z-10"
+		style={`background-color: ${currentClient.primaryColor}14; color: ${currentClient.primaryColor}; shadow-color: ${currentClient.primaryColor}33;`}
 	>
 		<Icon name={iconName} class="w-8 h-8" />
 	</div>
 	
-	<h3 class="text-xl font-bold text-slate-900 dark:text-white mt-2">
-		{title}
-	</h3>
+	<div class="relative z-10">
+		<h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
+			{title}
+		</h3>
+		
+		<p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium text-lg">
+			{description}
+		</p>
+	</div>
 	
-	<p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-		{description}
-	</p>
+	<div class="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0 relative z-10">
+		<span 
+			class="text-sm font-black uppercase tracking-widest flex items-center gap-2"
+			style={`color: ${currentClient.primaryColor};`}
+		>
+			Saber más
+			<Icon name="lucide:arrow-right" class="w-4 h-4" />
+		</span>
+	</div>
 </div>
 
 <style>

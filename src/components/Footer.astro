@@ -4,68 +4,86 @@ import { currentClient } from '../config/clients';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 py-24 px-6 transition-colors duration-300">
+<footer class="bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 py-32 px-6 transition-colors duration-300">
 	<div class="max-w-7xl mx-auto">
-		<!-- Testimonios Reales -->
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-			{currentClient.testimonials.map((testimonial) => (
-				<div class="p-8 bg-slate-50 dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800">
-					<div class="flex gap-1 text-yellow-400 mb-4">
+		<!-- Testimonios Reales Premium -->
+		<div class={`grid grid-cols-1 ${currentClient.testimonials.length >= 3 ? 'md:grid-cols-3' : 'md:flex md:justify-center md:flex-wrap'} gap-10 mb-32`}>
+			{currentClient.testimonials.map((testimonial, idx) => (
+				<div class={`p-10 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-premium-lg transition-all duration-500 group ${currentClient.testimonials.length < 3 ? 'md:max-w-md w-full' : ''}`}>
+					<div class="flex gap-1.5 text-yellow-400 mb-6 group-hover:scale-105 transition-transform origin-left">
 						{[1, 2, 3, 4, 5].map(() => (
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
 								<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
 							</svg>
 						))}
 					</div>
-					<p class="text-slate-600 dark:text-slate-300 italic mb-6">"{testimonial.quote}"</p>
-					<p class="text-sm font-bold text-slate-900 dark:text-white">— {testimonial.author}</p>
+					<p class="text-slate-600 dark:text-slate-300 italic mb-8 text-lg leading-relaxed">"{testimonial.quote}"</p>
+					<div class="flex items-center gap-4">
+						<div 
+							class="w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-black text-white shadow-sm"
+							style={`background-color: ${[currentClient.primaryColor, '#F59E0B', '#10B981', '#6366F1'][idx % 4]};`}
+						>
+							{testimonial.author.split(' ').map(n => n[0]).join('')}
+						</div>
+						<p class="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">— {testimonial.author}</p>
+					</div>
 				</div>
 			))}
 		</div>
 
-		<div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-16 md:gap-32 border-t border-slate-100 dark:border-slate-800 pt-16">
+		<div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-16 border-t border-slate-100 dark:border-slate-800 pt-24">
 			
 			<!-- Izquierda: Autoridad -->
-			<div class="text-center md:text-left max-w-sm">
-				<h2 class="text-2xl font-black text-slate-900 dark:text-white mb-4 italic">
+			<div class="text-center md:text-left max-w-md">
+				<h2 class="text-3xl font-black text-slate-900 dark:text-white mb-6 italic tracking-tight">
 					{currentClient.shortName} <span style={`color: ${currentClient.primaryColor};`}>{currentClient.name.split(' ').slice(1).join(' ')}</span>
 				</h2>
-				<div class="flex flex-col gap-3">
-					<div class="flex items-center justify-center md:justify-start gap-2 text-slate-500 dark:text-slate-400 font-bold text-sm">
-						<Icon name="lucide:map-pin" class="w-5 h-5" style={`color: ${currentClient.primaryColor};`} />
+				<div class="flex flex-col gap-5">
+					<div class="flex items-center justify-center md:justify-start gap-3 text-slate-500 dark:text-slate-400 font-bold text-base leading-relaxed">
+						<Icon name="lucide:map-pin" class="w-6 h-6 shrink-0" style={`color: ${currentClient.primaryColor};`} />
 						{currentClient.address}
 					</div>
-					<div class="flex items-center justify-center md:justify-start gap-2 text-slate-500 dark:text-slate-400 font-bold text-sm">
-						<Icon name="lucide:shield-check" class="w-5 h-5" style={`color: ${currentClient.primaryColor};`} />
-						Profesionales Certificados | Aviso de Privacidad
+					<div class="flex items-center justify-center md:justify-start gap-3 text-slate-500 dark:text-slate-400 font-bold text-sm uppercase tracking-widest">
+						<Icon name="lucide:shield-check" class="w-6 h-6 shrink-0" style={`color: ${currentClient.primaryColor};`} />
+						Profesionales Certificados | Reynosa
 					</div>
 				</div>
 			</div>
 
 			<!-- Centro: Navegación -->
-			<div class="flex flex-col items-center md:items-start gap-4">
-				<p class="text-slate-900 dark:text-white font-bold uppercase tracking-[0.2em] text-xs mb-2">Explora</p>
-				<nav class="flex flex-col md:flex-row gap-4 md:gap-8 text-slate-600 dark:text-slate-400 font-bold text-sm text-center md:text-left">
-					<a href="#" class="hover:opacity-80 transition-colors" style={`color: ${currentClient.primaryColor};`}>Inicio</a>
-					<a href="/#sucursales" class="hover:opacity-80 transition-colors" style={`color: ${currentClient.primaryColor};`}>Ubicación</a>
-					<a href="/privacidad" class="hover:opacity-80 transition-colors" style={`color: ${currentClient.primaryColor};`}>Privacidad</a>
+			<div class="flex flex-col items-center md:items-end gap-8">
+				<nav class="flex flex-col md:flex-row gap-6 md:gap-12 text-slate-900 dark:text-white font-black uppercase tracking-[0.2em] text-xs">
+					<a href="#" class="hover:opacity-60 transition-opacity">Inicio</a>
+					<a href="/#servicios" class="hover:opacity-60 transition-opacity">Servicios</a>
+					<a href="/#sucursales" class="hover:opacity-60 transition-opacity">Ubicación</a>
+					<a href="/privacidad" class="hover:opacity-60 transition-opacity">Privacidad</a>
 				</nav>
 				
 				<!-- Social Integrado -->
-				<div class="flex gap-6 text-slate-400 dark:text-slate-500 mt-4">
-					{currentClient.fbLink && <a href={currentClient.fbLink} target="_blank" class="hover:opacity-80 transition-colors" style={`color: ${currentClient.primaryColor};`}><Icon name="lucide:facebook" class="w-6 h-6" /></a>}
-					{currentClient.igLink && <a href={currentClient.igLink} target="_blank" class="hover:opacity-80 transition-colors" style={`color: ${currentClient.primaryColor};`}><Icon name="lucide:instagram" class="w-6 h-6" /></a>}
-					<a href="#" class="hover:opacity-80 transition-colors" style={`color: ${currentClient.primaryColor};`}><Icon name="lucide:mail" class="w-6 h-6" /></a>
+				<div class="flex gap-8 items-center">
+					{currentClient.fbLink && (
+						<a href={currentClient.fbLink} target="_blank" class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 hover:scale-110 transition-all shadow-sm" style={`color: ${currentClient.primaryColor};`}>
+							<Icon name="lucide:facebook" class="w-6 h-6" />
+						</a>
+					)}
+					{currentClient.igLink && (
+						<a href={currentClient.igLink} target="_blank" class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 hover:scale-110 transition-all shadow-sm" style={`color: ${currentClient.primaryColor};`}>
+							<Icon name="lucide:instagram" class="w-6 h-6" />
+						</a>
+					)}
+					<a href="#" class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 hover:scale-110 transition-all shadow-sm" style={`color: ${currentClient.primaryColor};`}>
+						<Icon name="lucide:mail" class="w-6 h-6" />
+					</a>
 				</div>
 			</div>
 		</div>
 
-		<div class="mt-16 pt-10 border-t border-slate-50 dark:border-slate-900 flex flex-col items-center gap-4">
-			<p class="text-slate-400 dark:text-slate-500 text-xs text-center">
-				&copy; {currentYear} {currentClient.name}. Todos los derechos reservados.
+		<div class="mt-24 pt-12 border-t border-slate-50 dark:border-slate-900/50 flex flex-col md:flex-row justify-between items-center gap-8">
+			<p class="text-slate-400 dark:text-slate-600 text-[10px] font-black uppercase tracking-[0.3em] text-center md:text-left">
+				&copy; {currentYear} {currentClient.name}. All Rights Reserved. Reynosa, México.
 			</p>
-			<p class="text-slate-400 dark:text-slate-500 text-sm font-medium">
-				RavynSet | Sistema desarrollado por <a href="https://github.com/said" class="font-bold hover:underline" style={`color: ${currentClient.primaryColor};`}>Ravyn Studio</a>
+			<p class="text-slate-400 dark:text-slate-600 text-xs font-bold tracking-wide">
+				RavynSet | Crafted by <a href="https://github.com/said" class="font-black hover:underline" style={`color: ${currentClient.primaryColor};`}>Ravyn Studio</a>
 			</p>
 		</div>
 	</div>

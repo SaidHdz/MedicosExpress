@@ -12,38 +12,39 @@ const heroImage = currentClient.heroImage;
 <Layout title={`${currentClient.name}: ${currentClient.tagline}`}>
 	<main class="bg-white dark:bg-slate-950 overflow-hidden transition-colors duration-300">
 		<!-- Hero Section -->
-		<section class="relative min-h-[85vh] flex items-center bg-slate-50 dark:bg-slate-950 overflow-hidden">
+		<section class="relative min-h-[90vh] flex items-center bg-slate-50 dark:bg-slate-950 overflow-hidden !py-12 md:!py-20">
+			<!-- Decoración de Fondo -->
 			<div 
-				class="absolute inset-0 opacity-5 pointer-events-none"
-				style={`background-image: radial-gradient(${currentClient.primaryColor} 1px, transparent 1px); background-size: 40px 40px;`}
+				class="absolute inset-0 opacity-10 pointer-events-none"
+				style={`background-image: radial-gradient(${currentClient.primaryColor} 1.5px, transparent 1.5px); background-size: 60px 60px;`}
 			></div>
 			
-			<div class="max-w-7xl mx-auto px-6 py-12 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
+			<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
 				
 				<!-- Contenido: Texto -->
 				<div class="flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-1 mt-8 lg:mt-0">
 					<div 
-						class="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold tracking-wide uppercase border animate-fade-in shadow-sm"
-						style={`background-color: ${currentClient.primaryColor}1A; color: ${currentClient.primaryColor}; border-color: ${currentClient.primaryColor}33;`}
+						class="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-black tracking-[0.2em] uppercase border animate-fade-in shadow-sm"
+						style={`background-color: ${currentClient.primaryColor}14; color: ${currentClient.primaryColor}; border-color: ${currentClient.primaryColor}26;`}
 					>
 						<Icon name={currentClient.logoIcon} class="w-5 h-5" />
 						{currentClient.tagline}
 					</div>
 
 					<h1 
-						class="text-4xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 md:mb-8 leading-[1.05]"
+						class="text-5xl md:text-8xl font-black tracking-[-0.04em] text-slate-900 dark:text-white mb-8 md:mb-10 leading-[0.95] text-balance"
 						style={`--primary: ${currentClient.primaryColor};`}
 						set:html={currentClient.heroTitle}
 					></h1>
 					
-					<p class="text-lg md:text-2xl text-slate-600 dark:text-slate-300 mb-8 md:mb-10 max-w-xl leading-relaxed font-medium">
-						Sistema automatizado de citas para <span class="text-slate-900 dark:text-white font-bold italic">{currentClient.name}</span>. Rápido, moderno y sin esperas.
+					<p class="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-10 md:mb-12 max-w-xl leading-relaxed font-medium text-balance">
+						Sistema automatizado de citas para <span class="text-slate-900 dark:text-white font-bold italic underline decoration-2 underline-offset-4" style={`text-decoration-color: ${currentClient.primaryColor};`}>{currentClient.name}</span>. Rápido, moderno y sin esperas.
 					</p>
 					
-					<div class="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
+					<div class="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
 						<a 
 							href="#agendar" 
-							class="group text-white font-bold py-5 px-10 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98] flex items-center justify-center gap-3 text-xl"
+							class="group text-white font-black py-6 px-12 rounded-2xl transition-all shadow-xl hover:shadow-2xl active:scale-[0.98] flex items-center justify-center gap-3 text-xl"
 							style={`background-color: ${currentClient.primaryColor};`}
 						>
 							<Icon name="lucide:calendar-check" class="w-7 h-7" />
@@ -52,7 +53,7 @@ const heroImage = currentClient.heroImage;
 						</a>
 						<a 
 							href="#servicios"
-							class="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-slate-700 dark:text-slate-200 font-bold py-5 px-10 rounded-2xl transition-all hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-[0.98] text-xl shadow-sm text-center"
+							class="glass border-2 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-slate-700 dark:text-slate-200 font-bold py-6 px-12 rounded-2xl transition-all hover:bg-white dark:hover:bg-slate-900 active:scale-[0.98] text-xl text-center"
 						>
 							Nuestros Servicios
 						</a>
@@ -60,33 +61,48 @@ const heroImage = currentClient.heroImage;
 				</div>
 
 				<!-- Contenido: Imagen -->
-				<div class="relative order-2 lg:order-2 flex justify-center lg:justify-end overflow-visible">
-					<div class="relative w-full max-w-[450px] lg:max-w-none">
+				<div class="relative order-2 lg:order-2 flex justify-center lg:justify-end">
+					<!-- Glow Sutil Detrás de la Imagen -->
+					<div 
+						class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full opacity-15 blur-[120px] pointer-events-none"
+						style={`background: radial-gradient(circle, ${currentClient.primaryColor} 0%, transparent 70%);`}
+					></div>
+
+					<!-- Elementos Decorativos Detrás de la Imagen -->
+					<div 
+						class="absolute -top-12 -right-12 w-64 h-64 rounded-full opacity-20 blur-3xl"
+						style={`background-color: ${currentClient.primaryColor};`}
+					></div>
+					<div 
+						class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full opacity-10 blur-2xl"
+						style={`background-color: ${currentClient.primaryColor};`}
+					></div>
+					
+					<div class="relative">
 						<div 
-							class="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-50 blur-3xl -z-10"
-							style={`background-color: ${currentClient.primaryColor}33;`}
+							class="absolute inset-0 rounded-[3rem] border-2 border-slate-200 dark:border-slate-800 rotate-3 scale-105 -z-10"
 						></div>
-						
 						<Image 
 							src={heroImage} 
 							alt={`${currentClient.name} Reynosa`}
 							width={1200}
-							height={800}
-							class="rounded-[2.5rem] shadow-2xl object-cover aspect-[4/5] lg:aspect-auto h-auto max-h-[550px] border-8 border-white dark:border-slate-800 animate-float relative z-20"
+							height={1500}
+							class="rounded-[3rem] shadow-premium-xl object-cover aspect-[4/5] lg:aspect-[3/4] h-auto max-h-[600px] border-4 border-white dark:border-slate-800 animate-float relative z-20"
 							loading="eager"
 						/>
 						
-						<div class="absolute -bottom-6 -right-4 md:right-10 bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-2xl border border-slate-50 dark:border-slate-700 z-30 hidden sm:block animate-bounce-slow">
-							<div class="flex items-center gap-4">
+						<!-- Badge Flotante Mejorado -->
+						<div class="absolute -bottom-8 -right-4 md:-right-8 bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-premium-lg border border-slate-50 dark:border-slate-700 z-30 hidden sm:block animate-bounce-slow">
+							<div class="flex items-center gap-5">
 								<div 
-									class="w-12 h-12 rounded-full flex items-center justify-center text-white"
+									class="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg"
 									style={`background-color: ${currentClient.primaryColor};`}
 								>
-									<Icon name="lucide:shield-check" class="w-7 h-7" />
+									<Icon name="lucide:shield-check" class="w-8 h-8" />
 								</div>
 								<div>
-									<p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Acreditado</p>
-									<p class="text-lg font-black text-slate-900 dark:text-white">100% Certificado</p>
+									<p class="text-[0.65rem] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em]">Acreditado</p>
+									<p class="text-xl font-black text-slate-900 dark:text-white">100% Certificado</p>
 								</div>
 							</div>
 						</div>
@@ -96,75 +112,75 @@ const heroImage = currentClient.heroImage;
 		</section>
 
 		<!-- Sistema Pro -->
-		<section class="py-32 px-6 bg-white dark:bg-slate-950 transition-colors duration-300 border-b border-slate-100 dark:border-slate-900">
-			<div class="max-w-7xl mx-auto">
-				<div class="text-center mb-20">
+		<section class="bg-white dark:bg-slate-950 transition-colors duration-300 border-b border-slate-100 dark:border-slate-900">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center mb-24">
 					<h2 
-						class="text-sm font-black uppercase tracking-[0.3em] mb-4"
+						class="text-xs font-black uppercase tracking-[0.4em] mb-6"
 						style={`color: ${currentClient.primaryColor};`}
 					>
 						Tecnología de Vanguardia
 					</h2>
-					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
-						El Sistema <span class="italic" style={`color: ${currentClient.primaryColor};`}>{currentClient.shortName} Pro</span>
+					<h3 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-[-0.02em]">
+						El Sistema <span class="italic font-serif" style={`color: ${currentClient.primaryColor};`}>{currentClient.shortName} Pro</span>
 					</h3>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<div class="group relative p-10 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
-						<div class="absolute -bottom-6 -right-2 text-9xl font-black text-slate-200/50 dark:text-slate-800/30 group-hover:opacity-5 transition-colors italic pointer-events-none select-none">01</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+					<div class="group relative p-12 bg-slate-50 dark:bg-slate-900/50 rounded-[3rem] border border-slate-100 dark:border-slate-800/50 transition-all hover:shadow-premium-lg hover:-translate-y-2 overflow-hidden">
+						<div class="absolute -bottom-8 -right-4 text-[12rem] font-black text-slate-200/40 dark:text-slate-800/20 group-hover:opacity-10 transition-colors italic pointer-events-none select-none leading-none">01</div>
 						<div 
-							class="w-12 h-12 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg relative z-10"
+							class="w-14 h-14 text-white rounded-2xl flex items-center justify-center mb-10 shadow-lg relative z-10"
 							style={`background-color: ${currentClient.primaryColor};`}
 						>
-							<Icon name="lucide:calendar-days" class="w-6 h-6" />
+							<Icon name="lucide:calendar-days" class="w-7 h-7" />
 						</div>
-						<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 relative z-10">Agendamiento 24/7</h4>
-						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">Elige tu horario ideal desde cualquier dispositivo, a cualquier hora del día.</p>
+						<h4 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 relative z-10">Agendamiento 24/7</h4>
+						<p class="text-slate-600 dark:text-slate-400 font-medium text-lg leading-relaxed relative z-10">Elige tu horario ideal desde cualquier dispositivo, a cualquier hora del día.</p>
 					</div>
-					<div class="group relative p-10 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
-						<div class="absolute -bottom-6 -right-2 text-9xl font-black text-slate-200/50 dark:text-slate-800/30 group-hover:opacity-5 transition-colors italic pointer-events-none select-none">02</div>
+					<div class="group relative p-12 bg-slate-50 dark:bg-slate-900/50 rounded-[3rem] border border-slate-100 dark:border-slate-800/50 transition-all hover:shadow-premium-lg hover:-translate-y-2 overflow-hidden">
+						<div class="absolute -bottom-8 -right-4 text-[12rem] font-black text-slate-200/40 dark:text-slate-800/20 group-hover:opacity-10 transition-colors italic pointer-events-none select-none leading-none">02</div>
 						<div 
-							class="w-12 h-12 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg relative z-10"
+							class="w-14 h-14 text-white rounded-2xl flex items-center justify-center mb-10 shadow-lg relative z-10"
 							style={`background-color: ${currentClient.primaryColor};`}
 						>
-							<Icon name="lucide:check-circle" class="w-6 h-6" />
+							<Icon name="lucide:check-circle" class="w-7 h-7" />
 						</div>
-						<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 relative z-10">Sin Empalmes</h4>
-						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">Nuestro sistema inteligente garantiza que tu tiempo sea respetado sin retrasos.</p>
+						<h4 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 relative z-10">Sin Empalmes</h4>
+						<p class="text-slate-600 dark:text-slate-400 font-medium text-lg leading-relaxed relative z-10">Nuestro sistema inteligente garantiza que tu tiempo sea respetado sin retrasos.</p>
 					</div>
-					<div class="group relative p-10 bg-slate-50 dark:bg-slate-900/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:-translate-y-1 overflow-hidden">
-						<div class="absolute -bottom-6 -right-2 text-9xl font-black text-slate-200/50 dark:text-slate-800/30 group-hover:opacity-5 transition-colors italic pointer-events-none select-none">03</div>
+					<div class="group relative p-12 bg-slate-50 dark:bg-slate-900/50 rounded-[3rem] border border-slate-100 dark:border-slate-800/50 transition-all hover:shadow-premium-lg hover:-translate-y-2 overflow-hidden">
+						<div class="absolute -bottom-8 -right-4 text-[12rem] font-black text-slate-200/40 dark:text-slate-800/20 group-hover:opacity-10 transition-colors italic pointer-events-none select-none leading-none">03</div>
 						<div 
-							class="w-12 h-12 text-white rounded-xl flex items-center justify-center mb-8 shadow-lg relative z-10"
+							class="w-14 h-14 text-white rounded-2xl flex items-center justify-center mb-10 shadow-lg relative z-10"
 							style={`background-color: ${currentClient.primaryColor};`}
 						>
-							<Icon name="lucide:bell" class="w-6 h-6" />
+							<Icon name="lucide:bell" class="w-7 h-7" />
 						</div>
-						<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 relative z-10">Recordatorios</h4>
-						<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed relative z-10">Recibe una notificación automática por WhatsApp para que nunca olvides tu cita.</p>
+						<h4 class="text-3xl font-bold text-slate-900 dark:text-white mb-6 relative z-10">Recordatorios</h4>
+						<p class="text-slate-600 dark:text-slate-400 font-medium text-lg leading-relaxed relative z-10">Recibe una notificación automática por WhatsApp para que nunca olvides tu cita.</p>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Services Section -->
-		<section id="servicios" class="py-32 px-6 bg-white dark:bg-slate-900 transition-colors duration-300">
-			<div class="max-w-7xl mx-auto">
-				<div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-20 px-4">
+		<section id="servicios" class="bg-white dark:bg-slate-900 transition-colors duration-300">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="flex flex-col md:flex-row justify-between items-end gap-12 mb-24">
 					<div class="max-w-2xl">
 						<h2 
-							class="text-sm font-black uppercase tracking-[0.3em] mb-4"
+							class="text-xs font-black uppercase tracking-[0.4em] mb-6"
 							style={`color: ${currentClient.primaryColor};`}
 						>
 							Nuestros Servicios
 						</h2>
-						<h3 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">Especialidades <span class="text-slate-400 dark:text-slate-600">Certificadas.</span></h3>
+						<h3 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight tracking-[-0.02em]">Especialidades <span class="text-slate-300 dark:text-slate-600">Certificadas.</span></h3>
 					</div>
-					<p class="text-lg text-slate-500 dark:text-slate-400 font-medium max-w-md">Soluciones modernas con la calidez y profesionalismo que tú y tu familia merecen.</p>
+					<p class="text-xl text-slate-500 dark:text-slate-400 font-medium max-w-md leading-relaxed">Soluciones modernas con la calidez y profesionalismo que tú y tu familia merecen.</p>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
 					{currentClient.services.map(service => (
 						<ServiceCard title={service.title} description={service.description} iconName={service.icon} />
 					))}
@@ -173,34 +189,45 @@ const heroImage = currentClient.heroImage;
 		</section>
 
 		<!-- Especialidades Section -->
-		<section class="py-32 px-6 bg-white dark:bg-slate-900 overflow-hidden">
-			<div class="max-w-7xl mx-auto">
-				<div class="text-center mb-20">
+		<section class="bg-slate-50 dark:bg-slate-950 overflow-hidden relative transition-colors duration-500">
+			<!-- Grilla con Fade Periférico (Adaptada para ambos modos) -->
+			<div 
+				class="absolute inset-0 opacity-[0.05] dark:opacity-20 pointer-events-none"
+				style={`
+					background-image: linear-gradient(to right, ${currentClient.primaryColor} 1px, transparent 1px), linear-gradient(to bottom, ${currentClient.primaryColor} 1px, transparent 1px); 
+					background-size: 80px 80px;
+					mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+					-webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+				`}
+			></div>
+			
+			<div class="max-w-7xl mx-auto px-6 relative z-10">
+				<div class="text-center mb-24">
 					<h2 
-						class="text-sm font-black uppercase tracking-[0.3em] mb-4"
+						class="text-xs font-black uppercase tracking-[0.4em] mb-6"
 						style={`color: ${currentClient.primaryColor};`}
 					>
 						Autoridad Médica
 					</h2>
-					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">Expertos <span class="italic" style={`color: ${currentClient.primaryColor};`}>Certificados</span></h3>
-					<p class="mt-6 text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">Contamos con un equipo altamente calificado dedicado a tu bienestar integral.</p>
+					<h3 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight tracking-[-0.02em]">Expertos <span class="italic font-serif" style={`color: ${currentClient.primaryColor};`}>Certificados</span></h3>
+					<p class="mt-8 text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed text-balance">Contamos con un equipo altamente calificado dedicado a tu bienestar integral.</p>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap lg:justify-center gap-8">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap lg:justify-center gap-10">
 					{currentClient.specialties.map(spec => (
-						<div class="group p-8 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 transition-all hover:shadow-2xl hover:-translate-y-2 w-full lg:w-[calc(25%-2rem)] flex flex-col">
+						<div class="group p-10 bg-white dark:bg-slate-900/50 rounded-[3rem] border border-slate-200 dark:border-white/5 transition-all hover:shadow-premium-xl hover:-translate-y-2 w-full lg:w-[calc(25%-2.5rem)] flex flex-col backdrop-blur-sm shadow-sm dark:shadow-none">
 							<div 
-								class="w-14 h-14 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:text-white transition-all duration-300"
-								style={`color: ${currentClient.primaryColor}; --hover-bg: ${currentClient.primaryColor};`}
+								class="w-16 h-16 bg-slate-50 dark:bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-all duration-500 shadow-inner"
+								style={`color: ${currentClient.primaryColor};`}
 							>
-								<Icon name={spec.icon} class="w-7 h-7" />
+								<Icon name={spec.icon} class="w-8 h-8" />
 							</div>
-							<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">{spec.name}</h4>
+							<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">{spec.name}</h4>
 							<p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed flex-grow">{spec.desc}</p>
-							<div class="mt-6 pt-6 border-t border-slate-200/50 dark:border-slate-700/50">
+							<div class="mt-8 pt-8 border-t border-slate-100 dark:border-white/5">
 								<a 
 									href="#agendar" 
-									class="text-sm font-bold flex items-center gap-2 group/link"
+									class="text-sm font-black uppercase tracking-widest flex items-center gap-2 group/link"
 									style={`color: ${currentClient.primaryColor};`}
 								>
 									Agendar cita
@@ -214,36 +241,36 @@ const heroImage = currentClient.heroImage;
 		</section>
 
 		<!-- Sucursales Section -->
-		<section id="sucursales" class="py-32 px-6 bg-slate-50 dark:bg-slate-950">
-			<div class="max-w-7xl mx-auto">
-				<div class="text-center mb-20">
+		<section id="sucursales" class="bg-slate-50 dark:bg-slate-950">
+			<div class="max-w-7xl mx-auto px-6">
+				<div class="text-center mb-24">
 					<h2 
-						class="text-sm font-black uppercase tracking-[0.3em] mb-4"
+						class="text-xs font-black uppercase tracking-[0.4em] mb-6"
 						style={`color: ${currentClient.primaryColor};`}
 					>
 						Nuestras Ubicaciones
 					</h2>
-					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight italic">{currentClient.shortName} Reynosa</h3>
+					<h3 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight italic tracking-[-0.02em]">{currentClient.shortName} Reynosa</h3>
 				</div>
-				<div class={`grid grid-cols-1 ${currentClient.branches.length > 1 ? 'md:grid-cols-2 lg:grid-cols-4' : 'max-w-lg mx-auto'} gap-8`}>
+				<div class={`grid grid-cols-1 ${currentClient.branches.length > 1 ? 'md:grid-cols-2 lg:grid-cols-4' : 'max-w-xl mx-auto'} gap-10`}>
 					{currentClient.branches.map(branch => (
-						<div class="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl group flex flex-col items-center text-center transition-all hover:shadow-2xl hover:-translate-y-1">
+						<div class="bg-white dark:bg-slate-900 p-12 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-premium-lg group flex flex-col items-center text-center transition-all hover:shadow-premium-xl hover:-translate-y-2">
 							<div 
-								class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-								style={`background-color: ${currentClient.primaryColor}1A; color: ${currentClient.primaryColor};`}
+								class="w-20 h-20 rounded-[2rem] flex items-center justify-center mb-8 group-hover:scale-110 transition-all duration-500"
+								style={`background-color: ${currentClient.primaryColor}14; color: ${currentClient.primaryColor};`}
 							>
-								<Icon name="lucide:map-pin" class="w-8 h-8" />
+								<Icon name="lucide:map-pin" class="w-10 h-10" />
 							</div>
-							<h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">{branch.name}</h4>
-							<p class="text-slate-500 dark:text-slate-400 text-lg mb-8 leading-relaxed flex-grow">{branch.address}</p>
-							<div class="mb-10">
-								<div class="inline-flex items-center gap-2 text-sm font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-full italic">{branch.schedule}</div>
+							<h4 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">{branch.name}</h4>
+							<p class="text-slate-500 dark:text-slate-400 text-lg mb-10 leading-relaxed flex-grow">{branch.address}</p>
+							<div class="mb-12">
+								<div class="inline-flex items-center gap-2 text-sm font-black text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-6 py-2.5 rounded-full italic tracking-wide">{branch.schedule}</div>
 							</div>
 							<a 
 								href={branch.mapsLink} 
 								target="_blank" 
-								class="flex items-center justify-center gap-3 w-full py-5 text-white rounded-2xl font-bold text-lg transition-all shadow-lg"
-								style={`background-color: ${currentClient.primaryColor}; shadow-color: ${currentClient.primaryColor}33;`}
+								class="flex items-center justify-center gap-3 w-full py-6 text-white rounded-2xl font-black text-lg transition-all shadow-xl hover:shadow-2xl"
+								style={`background-color: ${currentClient.primaryColor};`}
 							>
 								Ver en Google Maps <Icon name="lucide:external-link" class="w-5 h-5" />
 							</a>
@@ -254,40 +281,45 @@ const heroImage = currentClient.heroImage;
 		</section>
 
 		<!-- Booking Section -->
-		<section id="agendar" class="py-32 px-6 bg-white dark:bg-slate-900">
-			<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+		<section id="agendar" class="bg-white dark:bg-slate-900 relative">
+			<div 
+				class="absolute top-0 right-0 w-1/3 h-full bg-slate-50 dark:bg-slate-950 -z-10 hidden lg:block"
+			></div>
+			<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 				<div>
 					<h2 
-						class="text-sm font-black uppercase tracking-[0.3em] mb-4"
+						class="text-xs font-black uppercase tracking-[0.4em] mb-6"
 						style={`color: ${currentClient.primaryColor};`}
 					>
 						Agenda tu Cita
 					</h2>
-					<h3 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">Tu bienestar a un <span class="italic" style={`color: ${currentClient.primaryColor};`}>click de distancia.</span></h3>
-					<p class="text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed font-medium">Nuestro sistema automatizado confirmará tu horario de atención al instante.</p>
-					<div class="space-y-6">
+					<h3 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-10 leading-[1.1] tracking-[-0.02em]">Tu bienestar a un <span class="italic font-serif" style={`color: ${currentClient.primaryColor};`}>click de distancia.</span></h3>
+					<p class="text-2xl text-slate-600 dark:text-slate-400 mb-12 leading-relaxed font-medium">Nuestro sistema automatizado confirmará tu horario de atención al instante.</p>
+					<div class="space-y-8">
 						{[ "Confirmación vía WhatsApp", "Especialistas Certificados", "Tecnología Digital"].map(text => (
-							<div class="flex items-center gap-4">
+							<div class="flex items-center gap-5 group">
 								<div 
-									class="w-12 h-12 rounded-2xl flex items-center justify-center"
-									style={`background-color: ${currentClient.primaryColor}1A; color: ${currentClient.primaryColor};`}
+									class="w-14 h-14 rounded-2xl flex items-center justify-center transition-all group-hover:scale-110"
+									style={`background-color: ${currentClient.primaryColor}14; color: ${currentClient.primaryColor};`}
 								>
-									<Icon name="lucide:check-circle-2" class="w-6 h-6" />
+									<Icon name="lucide:check-circle-2" class="w-7 h-7" />
 								</div>
-								<p class="text-lg font-bold text-slate-700 dark:text-slate-300">{text}</p>
+								<p class="text-xl font-bold text-slate-700 dark:text-slate-300">{text}</p>
 							</div>
 						))}
 					</div>
 				</div>
 				<div class="relative">
 					<div 
-						class="absolute -inset-4 blur-3xl rounded-[3rem] -z-10"
-						style={`background-color: ${currentClient.primaryColor}0D;`}
+						class="absolute -inset-10 blur-3xl rounded-[4rem] -z-10 opacity-30"
+						style={`background-color: ${currentClient.primaryColor};`}
 					></div>
 					<BookingForm client:load />
 				</div>
 			</div>
 		</section>
+	</main>
+</Layout>
 	</main>
 </Layout>
 
