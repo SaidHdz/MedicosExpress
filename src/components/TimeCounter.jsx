@@ -1,101 +1,69 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const LargeCounter = ({ timePassed }) => {
-  const NumberBlock = ({ value, label }) => (
-    <div className="flex flex-col items-center min-w-[28px] sm:min-w-[40px]">
+const NumberBlock = ({ value, label, size }) => {
+  const isSmall = size === 'small';
+  return (
+    <div className={`flex flex-col items-center ${isSmall ? 'min-w-[16px] sm:min-w-[20px]' : 'min-w-[28px] sm:min-w-[40px]'}`}>
       <div className="relative flex justify-center items-center">
-        <span className="invisible font-display italic leading-none text-2xl sm:text-4xl">00</span>
+        <span className={`invisible font-display italic leading-none ${isSmall ? 'text-sm sm:text-xl' : 'text-2xl sm:text-4xl'}`}>00</span>
         <AnimatePresence>
           <motion.span
             key={value}
-            initial={{ y: 15, opacity: 0, scale: 0.8 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: -15, opacity: 0, scale: 0.8 }}
-            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="absolute font-display italic text-[#fdfd96] text-2xl sm:text-4xl leading-none drop-shadow-[0_0_8px_rgba(253,253,150,0.5)]"
+            initial={{ opacity: 0, scale: 0.5, y: 5 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 1.6, y: -5, position: "absolute" }}
+            transition={{ type: "spring", stiffness: 500, damping: 25, mass: 0.5 }}
+            className={`absolute font-display italic text-[#fdfd96] leading-none ${isSmall ? 'text-sm sm:text-xl' : 'text-2xl sm:text-4xl drop-shadow-[0_0_8px_rgba(253,253,150,0.5)]'}`}
           >
             {value.toString().padStart(2, '0')}
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="font-body uppercase tracking-[0.2em] text-white/50 text-[8px] sm:text-[10px] mt-1 sm:mt-2">
-        {label}
+      <span className={`font-body uppercase tracking-[0.2em] text-white/50 ${isSmall ? 'text-[5px] sm:text-[7px] mt-0.5' : 'text-[8px] sm:text-[10px] mt-1 sm:mt-2'}`}>
+        {isSmall ? label.substring(0,3) : label}
       </span>
     </div>
   );
+};
 
+const LargeCounter = ({ timePassed }) => {
   return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-      className="flex flex-col items-center sm:items-start bg-deep-black/60 border border-wine-red/30 rounded-2xl px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto mt-4 sm:mt-0 backdrop-blur-md shadow-[0_0_25px_rgba(114,47,55,0.25)]"
-    >
+    <div className="flex flex-col items-center sm:items-start bg-deep-black/60 border border-wine-red/30 rounded-2xl px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto backdrop-blur-md shadow-[0_0_25px_rgba(114,47,55,0.25)]">
       <span className="text-[9px] sm:text-xs uppercase tracking-[0.4em] text-wine-red font-bold mb-2 sm:mb-3 flex items-center gap-2 drop-shadow-[0_0_5px_rgba(114,47,55,0.8)]">
         <span className="w-2 h-2 rounded-full bg-wine-red shadow-[0_0_10px_rgba(114,47,55,1)] animate-pulse" />
         Tiempo conociéndonos
       </span>
       <div className="flex items-center justify-center sm:justify-start gap-4 sm:gap-6">
-        {timePassed.years > 0 && <><NumberBlock value={timePassed.years} label="Años" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
-        {timePassed.months > 0 && <><NumberBlock value={timePassed.months} label="Meses" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
-        <NumberBlock value={timePassed.days} label="Días" />
+        {timePassed.years > 0 && <><NumberBlock size="large" value={timePassed.years} label="Años" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
+        {timePassed.months > 0 && <><NumberBlock size="large" value={timePassed.months} label="Meses" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
+        <NumberBlock size="large" value={timePassed.days} label="Días" />
         <span className="text-white/20 font-display italic -translate-y-1">:</span>
-        <NumberBlock value={timePassed.hours} label="Horas" />
+        <NumberBlock size="large" value={timePassed.hours} label="Horas" />
         <span className="text-white/20 font-display italic -translate-y-1">:</span>
-        <NumberBlock value={timePassed.minutes} label="Minutos" />
+        <NumberBlock size="large" value={timePassed.minutes} label="Minutos" />
         <span className="text-white/20 font-display italic -translate-y-1">:</span>
-        <NumberBlock value={timePassed.seconds} label="Segundos" />
+        <NumberBlock size="large" value={timePassed.seconds} label="Segundos" />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const SmallCounter = ({ timePassed }) => {
-  const NumberBlock = ({ value, label }) => (
-    <div className="flex flex-col items-center min-w-[16px] sm:min-w-[20px]">
-      <div className="relative flex justify-center items-center">
-        <span className="invisible font-display italic leading-none text-sm sm:text-xl">00</span>
-        <AnimatePresence>
-          <motion.span
-            key={value}
-            initial={{ y: 8, opacity: 0, scale: 0.8 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: -8, opacity: 0, scale: 0.8 }}
-            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="absolute font-display italic text-[#fdfd96] text-sm sm:text-xl leading-none"
-          >
-            {value.toString().padStart(2, '0')}
-          </motion.span>
-        </AnimatePresence>
-      </div>
-      <span className="font-body uppercase tracking-[0.2em] text-white/50 text-[5px] sm:text-[7px] mt-0.5">
-        {label.substring(0,3)}
-      </span>
-    </div>
-  );
-
   return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-      className="flex items-center bg-deep-black/90 border border-wine-red/30 rounded-full px-4 sm:px-6 py-1.5 sm:py-2 backdrop-blur-md shadow-lg"
-    >
+    <div className="flex items-center bg-deep-black/90 border border-wine-red/30 rounded-full px-4 sm:px-6 py-1.5 sm:py-2 backdrop-blur-md shadow-lg">
       <div className="flex items-center gap-1.5 sm:gap-3">
-        {timePassed.years > 0 && <><NumberBlock value={timePassed.years} label="Años" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
-        {timePassed.months > 0 && <><NumberBlock value={timePassed.months} label="Meses" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
-        <NumberBlock value={timePassed.days} label="Días" />
+        {timePassed.years > 0 && <><NumberBlock size="small" value={timePassed.years} label="Años" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
+        {timePassed.months > 0 && <><NumberBlock size="small" value={timePassed.months} label="Meses" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
+        <NumberBlock size="small" value={timePassed.days} label="Días" />
         <span className="text-white/20 font-display italic -translate-y-1">:</span>
-        <NumberBlock value={timePassed.hours} label="Horas" />
+        <NumberBlock size="small" value={timePassed.hours} label="Horas" />
         <span className="text-white/20 font-display italic -translate-y-1">:</span>
-        <NumberBlock value={timePassed.minutes} label="Minutos" />
+        <NumberBlock size="small" value={timePassed.minutes} label="Minutos" />
         <span className="text-white/20 font-display italic -translate-y-1">:</span>
-        <NumberBlock value={timePassed.seconds} label="Segundos" />
+        <NumberBlock size="small" value={timePassed.seconds} label="Segundos" />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -126,14 +94,24 @@ const TimeCounter = ({ isScrolled = false }) => {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center w-full sm:w-auto h-full">
-      <AnimatePresence mode="wait">
-        {isScrolled ? (
-          <SmallCounter key="small" timePassed={timePassed} />
-        ) : (
-          <LargeCounter key="large" timePassed={timePassed} />
-        )}
-      </AnimatePresence>
+    <div className={`relative flex justify-center w-full sm:w-auto transition-all duration-300 ${isScrolled ? 'h-[36px] sm:h-[40px] items-center' : 'h-[105px] sm:h-[90px] items-start mt-4 sm:mt-0'}`}>
+      <motion.div 
+        initial={false}
+        animate={{ opacity: isScrolled ? 0 : 1, scale: isScrolled ? 0.9 : 1, y: isScrolled ? -10 : 0 }}
+        transition={{ duration: 0.25, ease: "easeInOut" }}
+        className={`absolute top-0 w-full sm:w-auto flex justify-center sm:justify-start origin-top ${isScrolled ? 'pointer-events-none' : ''}`}
+      >
+        <LargeCounter timePassed={timePassed} />
+      </motion.div>
+      
+      <motion.div 
+        initial={false}
+        animate={{ opacity: isScrolled ? 1 : 0, scale: isScrolled ? 1 : 0.9, y: isScrolled ? 0 : 10 }}
+        transition={{ duration: 0.25, ease: "easeInOut" }}
+        className={`absolute top-0 w-full sm:w-auto flex justify-center sm:justify-start origin-top ${isScrolled ? '' : 'pointer-events-none'}`}
+      >
+        <SmallCounter timePassed={timePassed} />
+      </motion.div>
     </div>
   );
 };

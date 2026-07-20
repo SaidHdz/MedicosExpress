@@ -44,10 +44,10 @@ function App() {
       <Tutorial isOpen={isTutorialOpen} onClose={() => setIsTutorialOpen(false)} />
       
       {/* Navbar Simple */}
-      <nav className={`sticky top-0 z-[40] transition-colors duration-300 ease-in-out backdrop-blur-xl border-b border-white/5 ${isScrolled ? 'bg-deep-black/95 py-2 px-3 sm:px-6 shadow-2xl' : 'bg-deep-black/60 px-4 py-4 sm:px-6'}`}>
+      <nav className={`fixed w-full top-0 left-0 z-[40] transition-all duration-300 ease-in-out backdrop-blur-xl border-b border-white/5 ${isScrolled ? 'bg-deep-black/95 py-2 px-3 sm:px-6 shadow-2xl' : 'bg-deep-black/60 px-4 py-4 sm:px-6'}`}>
         <div className={`max-w-7xl mx-auto flex ${isScrolled ? 'flex-row' : 'flex-col xl:flex-row'} justify-between items-center gap-3 xl:gap-0`}>
           <div className={`flex ${isScrolled ? 'flex-row justify-between w-full' : 'flex-col lg:flex-row w-full xl:w-auto'} items-center gap-4 lg:gap-8`}>
-            <div className={`flex items-center gap-3 group cursor-pointer ${isScrolled ? 'scale-75 origin-left sm:scale-100' : ''}`} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+            <div className={`flex items-center gap-3 group cursor-pointer transition-all duration-300 ${isScrolled ? 'scale-75 origin-left sm:scale-100' : ''}`} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
               <div className="w-10 h-10 bg-wine-red rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(114,47,55,0.4)] shrink-0">
                 <span className="font-display italic font-bold text-xl">H</span>
               </div>
@@ -62,7 +62,7 @@ function App() {
         </div>
       </nav>
 
-      <div key={isTutorialOpen ? 'tutorial' : 'content'} className="pt-12 md:pt-24 pb-24">
+      <div key={isTutorialOpen ? 'tutorial' : 'content'} className="pt-48 md:pt-36 pb-24">
         <Hero />
 
         <main className="max-w-7xl mx-auto px-4 md:px-12 relative">
