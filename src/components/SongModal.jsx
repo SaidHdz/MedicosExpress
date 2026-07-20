@@ -1,6 +1,18 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, PlayCircle, ChevronRight, Layers } from 'lucide-react';
+import { X, PlayCircle, ChevronRight, Layers, Calendar } from 'lucide-react';
 import { useState, useEffect } from 'react';
+
+const formatDate = (isoString) => {
+  if (!isoString) return '';
+  // Usamos utc para que no haya desfase por la zona horaria del usuario si el dev pone 00:00:00Z
+  const date = new Date(isoString);
+  return new Intl.DateTimeFormat('es-MX', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC'
+  }).format(date);
+};
 
 const SongModal = ({ song: item, isOpen, onClose }) => {
   const [selectedSubSong, setSelectedSubSong] = useState(null);
@@ -19,6 +31,7 @@ const SongModal = ({ song: item, isOpen, onClose }) => {
 
   const isAlbum = item.type === 'album';
   const currentView = selectedSubSong || (!isAlbum ? item : null);
+  const displayDate = currentView?.date || item.date;
 
   return (
     <AnimatePresence>
@@ -71,7 +84,14 @@ const SongModal = ({ song: item, isOpen, onClose }) => {
                            </span>
                         </div>
                         <h2 className="font-display italic text-white text-4xl lg:text-5xl tracking-tighter leading-none">{item.title}</h2>
-                        <p className="text-[#fdfd96] font-body uppercase tracking-[0.3em] text-[12px] opacity-80">{item.artist}</p>
+                        <div className="flex flex-col gap-2">
+                          <p className="text-[#fdfd96] font-body uppercase tracking-[0.3em] text-[12px] opacity-80">{item.artist}</p>
+                          {item.date && (
+                            <p className="text-white/40 font-body flex items-center gap-1.5 uppercase tracking-widest text-[9px]">
+                              <Calendar size={10} /> Añadido el {formatDate(item.date)}
+                            </p>
+                          )}
+                        </div>
                     </div>
 
                     <div className="space-y-3">
@@ -97,7 +117,14 @@ const SongModal = ({ song: item, isOpen, onClose }) => {
                     
                     <div className="flex flex-col gap-4">
                         <h2 className="font-display italic text-white text-4xl lg:text-5xl tracking-tighter leading-none">{currentView.title}</h2>
-                        <p className="text-[#fdfd96] font-body uppercase tracking-[0.3em] text-[12px] opacity-80">{item.artist}</p>
+                        <div className="flex flex-col gap-2">
+                          <p className="text-[#fdfd96] font-body uppercase tracking-[0.3em] text-[12px] opacity-80">{item.artist}</p>
+                          {displayDate && (
+                            <p className="text-white/40 font-body flex items-center gap-1.5 uppercase tracking-widest text-[9px]">
+                              <Calendar size={10} /> Añadido el {formatDate(displayDate)}
+                            </p>
+                          )}
+                        </div>
                     </div>
 
                     <div className="mt-8 space-y-6">
