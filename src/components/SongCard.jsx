@@ -41,9 +41,9 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
 
   // Transformaciones lineales ligeras sin useSpring para evitar lag
   // 0 = elemento entra por abajo, 0.5 = elemento al centro, 1 = elemento sale por arriba
-  const scale = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.75, 1.02, 1.02, 0.75]);
+  const scale = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.8, 1, 1, 0.8]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3]);
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [35, 0, -35]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [-50, 0, 50]);
   const y = useTransform(scrollYProgress, [0, 0.5, 1], [50, 0, -50]);
 
   useEffect(() => {
