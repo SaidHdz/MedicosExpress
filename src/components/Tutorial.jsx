@@ -15,24 +15,24 @@ const Tutorial = () => {
 
   const steps = [
     {
-      title: "HOLA DETH",
-      message: "Espero que sí estés viendo esto, es un regalo que te hice.",
+      title: "Hola richelle",
+      message: "espero te guste este regalo",
       button: "Continuar"
     },
     {
-      title: "Nuestras Memorias",
-      message: "Aquí están las canciones que me hacen pensar en ti, junto con los mensajes que te escribí.",
-      button: "Ver más"
+      title: "Canciones",
+      message: "aqui estan canciones que me hacen alimentar mi cariño a ti",
+      button: "Siguiente"
     },
     {
-      title: "¿Cómo usarlo?",
-      message: "Solo dale clic a las portadas de las canciones o álbumes. Dentro encontrarás la música y mis palabras para ti.",
+      title: "Como usarlo",
+      message: "solo dale clik a la cancion, esta el link directo a ella",
       button: "Entendido"
     },
     {
       title: "ESPERO TE GUSTE",
-      message: "Llevo dos meses trabajando en esto, ojalá te guste, te quiero.",
-      button: "Entrar al Archivo"
+      message: "",
+      button: "Entrar"
     }
   ];
 
@@ -92,7 +92,9 @@ const Tutorial = () => {
               >
                 <div className="space-y-4 pt-4">
                   <h3 className="text-4xl md:text-5xl font-display italic text-white leading-tight">{steps[currentStep].title}</h3>
-                  <p className="text-xl font-body opacity-60 leading-relaxed italic">{steps[currentStep].message}</p>
+                  {steps[currentStep].message && (
+                    <p className="text-xl font-body opacity-60 leading-relaxed italic">{steps[currentStep].message}</p>
+                  )}
                 </div>
                 <button
                   onClick={handleNext}

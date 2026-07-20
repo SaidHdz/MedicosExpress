@@ -1,54 +1,24 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Calendar, User, ChevronRight, Trash2, Edit2 } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import { initialSongs } from '../data/songs';
-import TextType from './TextType';
+import { X, PlayCircle, ChevronRight, Layers } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit, onNext }) => {
+const SongModal = ({ song: item, isOpen, onClose }) => {
   const [selectedSubSong, setSelectedSubSong] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const scrollRef = useRef(null);
-  
-  const handleNextClick = () => {
-    if (item.type === 'album' && selectedSubSong) {
-      const currentIndex = item.displaySongs.findIndex(s => s.id === selectedSubSong.id);
-      if (currentIndex < item.displaySongs.length - 1) {
-        setSelectedSubSong(item.displaySongs[currentIndex + 1]);
-        scrollRef.current?.scrollTo(0,0);
-        return;
-      }
-    }
-    // Si es single o el último track del álbum, cerrar el modal
-    onClose();
-  };
-  
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
-      setSelectedSubSong(null); // Reset when closing
+      setSelectedSubSong(null);
     }
     return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
 
   if (!item) return null;
-  const isAlbum = item.type === 'album';
-  const isProduction = initialSongs && initialSongs.length > 0;
 
-  const handleDelete = () => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar esta memoria?')) {
-      onDelete(item.id);
-      onClose();
-    }
-  };
+  const isAlbum = item.type === 'album';
+  const currentView = selectedSubSong || (!isAlbum ? item : null);
 
   return (
     <AnimatePresence>
@@ -65,7 +35,7 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit, onNext }) =>
           <motion.div
             layoutId={`card-${item.id}`}
             transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.8 }}
-            className="relative w-full max-w-6xl h-full lg:h-[750px] bg-[#080808] rounded-none sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row"
+            className="relative w-full max-w-5xl h-full lg:h-[600px] bg-[#080808] rounded-none sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row"
           >
             {/* ACTION BUTTONS */}
             <div className="absolute top-4 right-4 lg:top-8 lg:right-8 z-[100] flex gap-2">
@@ -77,175 +47,85 @@ const SongModal = ({ song: item, isOpen, onClose, onDelete, onEdit, onNext }) =>
             {/* IMAGE SECTION */}
             <motion.div 
               layout
-              className={`relative overflow-hidden shrink-0 transition-all duration-700 ease-in-out z-20
-                ${isMobile 
-                    ? selectedSubSong ? 'h-[12vh] w-full sticky top-0 bg-[#080808]/90 backdrop-blur-xl border-b border-white/5' : 'aspect-square w-full'
-                    : selectedSubSong ? 'w-56 h-56 m-8 rounded-2xl shadow-2xl border border-white/10' : 'w-1/2 h-full'}`}
+              className="relative overflow-hidden shrink-0 transition-all duration-700 ease-in-out z-20 w-full lg:w-1/2 h-[40vh] lg:h-full"
             >
-              <div className={`w-full h-full flex items-center transition-all duration-700 ${isMobile && selectedSubSong ? 'justify-start px-6 gap-4' : 'justify-center'}`}>
+              <div className="w-full h-full flex items-center justify-center">
                 <motion.img 
                   layoutId={`image-${item.id}`}
                   src={item.cover} 
                   alt="cover" 
-                  className={`object-cover transition-all duration-700 shadow-2xl w-full h-full
-                    ${isMobile && selectedSubSong ? '!w-12 !h-14 rounded-lg' : 'rounded-none'}`} 
+                  className="object-cover transition-all duration-700 shadow-2xl w-full h-full" 
                 />
-                
-                {/* Mobile Sticky Title when song is selected */}
-                {isMobile && selectedSubSong && (
-                    <motion.div 
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="overflow-hidden pr-16"
-                    >
-                        <TextType
-                            key={selectedSubSong.id}
-                            text={selectedSubSong.title}
-                            as="h4"
-                            className="font-display italic text-white text-base truncate leading-tight"
-                            typingSpeed={80}
-                            showCursor={false}
-                            loop={false}
-                        />
-                        <p className="text-[8px] uppercase tracking-widest text-amber-accent opacity-60">{item.artist}</p>
-                    </motion.div>
-                )}
               </div>
-              {isMobile && !selectedSubSong && <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent pointer-events-none" />}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent pointer-events-none lg:hidden" />
             </motion.div>
 
             {/* CONTENT AREA */}
-            <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#080808]">
+            <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#080808] p-8 lg:p-12 justify-start lg:justify-center overflow-y-auto custom-modal-scroll">
               
-              {/* DESKTOP HEADER */}
-              {!isMobile && (
-                <header className="px-12 pt-12 pb-6 shrink-0 border-b border-white/5 bg-[#080808]">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="px-2 py-0.5 bg-white/5 rounded-full border border-white/10 flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: item.moodColor }} />
-                      <span className="text-[9px] uppercase tracking-widest opacity-60 font-body">{item.mood}</span>
+              <AnimatePresence mode="wait">
+                {!currentView && isAlbum ? (
+                  <motion.div key="album-list" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full">
+                    <div className="flex flex-col gap-4 mb-8">
+                        <div className="flex items-center gap-2">
+                           <span className="px-3 py-1 bg-wine-red/20 text-wine-red text-[10px] uppercase tracking-widest rounded-full border border-wine-red/20 font-bold flex items-center gap-2 w-max">
+                             <Layers size={14} /> Álbum
+                           </span>
+                        </div>
+                        <h2 className="font-display italic text-white text-4xl lg:text-5xl tracking-tighter leading-none">{item.title}</h2>
+                        <p className="text-[#fdfd96] font-body uppercase tracking-[0.3em] text-[12px] opacity-80">{item.artist}</p>
                     </div>
-                    {isAlbum && <span className="px-2 py-0.5 bg-wine-red/20 text-wine-red text-[9px] uppercase tracking-widest rounded-full border border-wine-red/20 font-bold">Álbum</span>}
-                  </div>
-                  
-                  <div className="flex flex-col gap-2">
-                        <TextType
-                            key={selectedSubSong ? selectedSubSong.id : item.id}
-                            text={selectedSubSong ? selectedSubSong.title : item.title}
-                            as={isMobile && selectedSubSong ? "h4" : "h2"}
-                            className={isMobile && selectedSubSong ? "font-display italic text-white text-base truncate leading-tight" : "font-display italic text-white text-5xl lg:text-6xl tracking-tighter leading-none truncate"}
-                            typingSpeed={80}
-                            showCursor={false}
-                            loop={false}
-                        />
-                  </div>
-                  
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="text-amber-accent font-body uppercase tracking-[0.3em] text-[10px] flex items-center gap-2 opacity-60">
-                      <User size={12} /> {item.artist}
+
+                    <div className="space-y-3">
+                      {item.songs?.map((song) => (
+                        <button 
+                          key={song.id} 
+                          onClick={() => setSelectedSubSong(song)}
+                          className="w-full flex items-center justify-between p-4 bg-white/[0.03] hover:bg-[#fdfd96]/10 border border-white/5 rounded-2xl transition-all group text-left"
+                        >
+                          <span className="font-body text-base opacity-70 group-hover:text-white transition-colors">{song.title}</span>
+                          <ChevronRight size={18} className="opacity-10 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-[#fdfd96]" />
+                        </button>
+                      ))}
                     </div>
-                    {selectedSubSong && (
-                      <button onClick={() => setSelectedSubSong(null)} className="flex items-center gap-2 px-3 py-1 bg-white/5 hover:bg-wine-red/20 border border-white/10 rounded-lg text-[9px] uppercase tracking-widest text-aged-cream/60 hover:text-white transition-all">
-                        <ChevronRight size={12} className="rotate-180" /> Volver al álbum
+                  </motion.div>
+                ) : (
+                  <motion.div key="song-detail" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="w-full">
+                    {isAlbum && (
+                      <button onClick={() => setSelectedSubSong(null)} className="flex items-center gap-2 text-wine-red text-[10px] uppercase tracking-widest font-bold mb-6 hover:text-[#fdfd96] transition-colors w-max">
+                        <ChevronRight size={14} className="rotate-180" /> Volver al álbum
                       </button>
                     )}
-                  </div>
-                </header>
-              )}
+                    
+                    <div className="flex flex-col gap-4">
+                        <h2 className="font-display italic text-white text-4xl lg:text-5xl tracking-tighter leading-none">{currentView.title}</h2>
+                        <p className="text-[#fdfd96] font-body uppercase tracking-[0.3em] text-[12px] opacity-80">{item.artist}</p>
+                    </div>
 
-              {/* SCROLLABLE CONTENT */}
-              <div ref={scrollRef} className="flex-1 overflow-y-auto custom-modal-scroll">
-                <div className={`p-8 lg:p-12 ${isMobile && selectedSubSong ? 'pt-6' : ''}`}>
-                  
-                  {isMobile && !selectedSubSong && (
-                      <header className="mb-10">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="px-2 py-0.5 bg-white/5 rounded-full border border-white/10 flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: item.moodColor }} />
-                                <span className="text-[9px] uppercase tracking-widest opacity-60 font-body">{item.mood}</span>
-                            </div>
-                            {isAlbum && <span className="px-2 py-0.5 bg-wine-red/20 text-wine-red text-[9px] uppercase tracking-widest rounded-full border border-wine-red/20 font-bold">Álbum</span>}
-                        </div>
-                        <TextType
-                            key={item.id}
-                            text={item.title}
-                            as="h2"
-                            className="text-5xl font-display italic text-white leading-none tracking-tighter mb-4"
-                            typingSpeed={80}
-                            showCursor={false}
-                            loop={false}
-                        />
-                        <p className="text-amber-accent font-body uppercase tracking-[0.3em] text-[10px] opacity-60">{item.artist}</p>
-                      </header>
-                  )}
+                    <div className="mt-8 space-y-8">
+                      {currentView.note && (
+                        <p className="text-xl lg:text-2xl font-display italic leading-snug text-aged-cream/90 border-l-4 border-[#fdfd96] pl-6 py-2">
+                          "{currentView.note}"
+                        </p>
+                      )}
 
-                  <AnimatePresence mode="wait">
-                    {!selectedSubSong ? (
-                      <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
-                        {!isAlbum ? (
-                          <div className="space-y-10">
-                            <p className="text-2xl lg:text-4xl font-display italic leading-snug text-aged-cream/90 border-l-4 border-wine-red pl-8 py-2">"{item.quote}"</p>
-                            <p className="text-lg lg:text-xl font-body leading-relaxed opacity-60 italic max-w-3xl">{item.interpretation}</p>
-                          </div>
-                        ) : (
-                          <div className="grid grid-cols-1 gap-3 max-w-xl pb-10">
-                            <span className="text-[9px] uppercase tracking-[0.4em] opacity-20 mb-4 block font-body">Tracks del archivo</span>
-                            {item.displaySongs?.map((song) => (
-                              <button key={song.id} onClick={() => { setSelectedSubSong(song); scrollRef.current?.scrollTo(0,0); }} className="w-full flex items-center justify-between p-6 bg-white/[0.03] hover:bg-wine-red/10 border border-white/5 rounded-2xl transition-all group text-left">
-                                <div className="flex items-center gap-4">
-                                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: song.moodColor, boxShadow: `0 0 8px ${song.moodColor}` }} />
-                                  <span className="font-body text-base opacity-70 group-hover:text-white transition-colors">{song.title}</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                  <span className="text-[8px] uppercase tracking-widest opacity-30 font-body group-hover:opacity-100 transition-opacity">{song.mood}</span>
-                                  <ChevronRight size={18} className="opacity-10 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-wine-red" />
-                                </div>
-                              </button>
-                            ))}
-                          </div>
-                        )}
-                      </motion.div>
-                    ) : (
-                      <motion.div key="sub" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-10">
-                        {isMobile && (
-                           <button onClick={() => setSelectedSubSong(null)} className="flex items-center gap-2 text-wine-red text-[10px] uppercase tracking-widest font-bold mb-6">
-                            <ChevronRight size={14} className="rotate-180" /> Volver al álbum
-                          </button>
-                        )}
-                        <div className="flex items-center gap-3">
-                          <div className="px-2 py-0.5 bg-white/5 rounded-full border border-white/10 flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: selectedSubSong.moodColor }} />
-                            <span className="text-[9px] uppercase tracking-widest opacity-60 font-body">{selectedSubSong.mood}</span>
-                          </div>
-                        </div>
-                        <p className="text-2xl lg:text-4xl font-display italic leading-snug text-aged-cream/90 border-l-4 border-wine-red pl-8 py-2">"{selectedSubSong.quote}"</p>
-                        <p className="text-lg lg:text-xl font-body leading-relaxed opacity-60 italic max-w-3xl">{selectedSubSong.interpretation}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
+                      {currentView.spotifyUrl ? (
+                        <a 
+                          href={currentView.spotifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#1DB954] text-white rounded-full font-body uppercase tracking-[0.2em] text-[10px] font-bold hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-[#1DB954]/20 w-max"
+                        >
+                          <PlayCircle size={20} /> Reproducir en Spotify
+                        </a>
+                      ) : (
+                        <div className="text-white/30 text-xs italic">Link de Spotify no disponible.</div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-              {/* FOOTER */}
-              <footer className="shrink-0 p-6 lg:p-8 border-t border-white/5 flex items-center justify-between bg-[#080808]">
-                <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.4em] opacity-20 font-body">
-                  <Calendar size={14} />
-                  {new Date(item.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
-                </div>
-
-                <button 
-                  onClick={handleNextClick}
-                  className="flex items-center gap-4 px-8 py-3 bg-wine-red text-white rounded-full text-[10px] uppercase tracking-[0.3em] font-bold hover:brightness-125 transition-all active:scale-95 shadow-lg group"
-                >
-                  {item.type === 'album' && selectedSubSong && 
-                   item.displaySongs.findIndex(s => s.id === selectedSubSong.id) < item.displaySongs.length - 1 
-                   ? 'Siguiente Track' : 'Cerrar Memoria'}
-                  {item.type === 'album' && selectedSubSong && 
-                   item.displaySongs.findIndex(s => s.id === selectedSubSong.id) < item.displaySongs.length - 1 
-                   ? <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" /> 
-                   : <X size={16} className="group-hover:rotate-90 transition-transform" />}
-                </button>
-              </footer>
             </div>
           </motion.div>
         </div>

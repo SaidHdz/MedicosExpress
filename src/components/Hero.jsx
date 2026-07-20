@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero = () => {
-  const letters = "Rokola".split("");
+  const letters = "para ti richelle".split("");
   const { scrollY } = useScroll();
 
   const y1 = useTransform(scrollY, [0, 500], [0, -100]);
@@ -49,20 +49,20 @@ const Hero = () => {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="flex perspective-1000 py-4" // Added padding to prevent letter clipping
+        className="flex flex-wrap justify-center md:justify-start perspective-1000 py-4 gap-x-1 md:gap-x-2" 
       >
         {letters.map((letter, index) => (
           <motion.span
             variants={child}
             key={index}
-            className="text-7xl sm:text-8xl md:text-[14rem] font-display italic tracking-tighter inline-block origin-bottom drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative"
+            className="text-4xl sm:text-6xl md:text-[6rem] lg:text-[7rem] font-display italic tracking-tighter inline-block origin-bottom drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative"
           >
             {/* Base Letter */}
-            <span className="relative z-10 text-aged-cream inline-block pb-2">{letter}</span>
+            <span className="relative z-10 text-aged-cream inline-block pb-2 whitespace-pre">{letter}</span>
             
             {/* Shiny Overlay */}
             <motion.span 
-              className="absolute inset-0 z-20 text-transparent animate-shiny inline-block pb-2"
+              className="absolute inset-0 z-20 text-transparent animate-shiny inline-block pb-2 whitespace-pre"
               style={{ WebkitTextFillColor: 'transparent' }}
             >
               {letter}
@@ -80,16 +80,13 @@ const Hero = () => {
         <div className="space-y-6 max-w-lg">
           <div className="h-[1px] w-24 bg-gradient-to-r from-wine-red to-transparent shadow-[0_0_15px_var(--color-wine-red)]" />
           <p className="text-xl md:text-3xl font-body opacity-60 leading-relaxed italic tracking-tight">
-            "Algunas canciones que me recuerdan a ti"
+            "aun que llevemos poco conociendonos, quiero que sepas que me gustas, te quiero, y me haces sentir muy querido, gracias, esto es para ti richesita"
           </p>
         </div>
         
-        <div className="flex flex-col items-start md:items-end gap-3">
+        <div className="flex flex-col items-start md:items-end gap-3 hidden md:flex">
           <div className="px-4 py-1 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
-            <span className="text-[10px] uppercase tracking-[0.5em] text-amber-accent font-body">Nuestro Archivo</span>
-          </div>
-          <div className="text-[9px] uppercase tracking-[0.3em] opacity-30 font-body">
-            Analog Memories &bull; Vol. I
+            <span className="text-[10px] uppercase tracking-[0.5em] text-amber-accent font-body">Solo Para Ti</span>
           </div>
         </div>
       </motion.div>

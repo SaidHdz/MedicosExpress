@@ -16,15 +16,10 @@ const CardOverlay = ({ item, x, y, isMobile }) => {
         style={{ x: isMobile ? 0 : parallaxX, y: isMobile ? 0 : parallaxY }}
       >
         <div className="flex items-center gap-2 mb-2">
-          {isAlbum ? (
-            <>
-              <span className="px-2 py-0.5 bg-wine-red text-[8px] uppercase tracking-widest rounded flex items-center gap-1 shadow-lg border border-white/10 text-white font-bold text-xs">
-                <Layers size={8} /> Álbum
-              </span>
-              <span className="text-[8px] uppercase tracking-widest opacity-70 font-body drop-shadow-md text-white font-medium text-xs">
-                {item.displaySongs?.length || 0} canciones
-              </span>
-            </>
+          {item.type === 'album' ? (
+            <span className="px-2 py-0.5 bg-wine-red text-[8px] uppercase tracking-widest rounded flex items-center gap-1 shadow-lg border border-white/10 text-white font-bold text-xs">
+              <Layers size={8} /> Álbum
+            </span>
           ) : (
             <span className="px-2 py-0.5 bg-white/10 text-[8px] uppercase tracking-widest rounded flex items-center gap-1 shadow-lg border border-white/10 text-white font-bold text-xs">
               <Music size={8} /> Sencillo
@@ -74,7 +69,7 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
         transition={{ type: "spring", stiffness: 350, damping: 30, mass: 0.8 }}
         className="w-full h-full absolute inset-0 z-10"
         style={{
-          filter: `drop-shadow(0 20px 30px ${item.moodColor}22)`
+          filter: `drop-shadow(0 20px 30px rgba(0,0,0,0.5))`
         }}
       >
         <motion.div
