@@ -18,7 +18,7 @@ export const initialSongs = [
     note: "vamos a escribir nuestras iniciales juntas, eh, la verdad que tu me gustas",
     spotifyUrl: "https://open.spotify.com/search/Saiko%20COSAS%20QUE%20NO%20TE%20DIJE",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "kyotto-cosas-que-jamas",
@@ -28,7 +28,7 @@ export const initialSongs = [
     note: "ven y vamos a querernos como si na' de esto doliera",
     spotifyUrl: "https://open.spotify.com/search/Kyotto%20Cosas%20Que%20Jamas%20Diria%20a%20Nadie",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "alvarodiaz-gatillera",
@@ -38,7 +38,7 @@ export const initialSongs = [
     note: "no se que dia e' ya va a anochece' y no quiero hacer nada mas que mirar tu cara",
     spotifyUrl: "https://open.spotify.com/search/Alvaro%20Diaz%20Gatillera",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "alvarodiaz-sinpoderes",
@@ -48,7 +48,7 @@ export const initialSongs = [
     note: "es que tu na ma, me dejas sin poderes",
     spotifyUrl: "https://open.spotify.com/search/Alvaro%20Diaz%20SIN%20PODERES",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "relsb-tu-vas-sin",
@@ -58,7 +58,7 @@ export const initialSongs = [
     note: "yo quiero todo, quiero que tu te enamores, baby, yo te quiero solo pa mi",
     spotifyUrl: "https://open.spotify.com/search/Rels%20B%20TU%20VAS%20SIN",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "bigsempa-laguera",
@@ -68,7 +68,7 @@ export const initialSongs = [
     note: "Porque somos raros y nos entendemos, Ya no importa nada porque nos tenemos",
     spotifyUrl: "https://open.spotify.com/search/Big%20Sempa%20La%20Guera",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "aceleraaa",
@@ -78,7 +78,7 @@ export const initialSongs = [
     note: "Ma, tú ere mi estilo, tú mi type beat",
     spotifyUrl: "https://open.spotify.com/search/ACELERAA%C3%81",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "nsqk-nadie-mas",
@@ -88,7 +88,7 @@ export const initialSongs = [
     note: "por que eres tu, no quiero a nadie mas",
     spotifyUrl: "https://open.spotify.com/search/NSQK%20NADIE%20MAS!",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "nsqk-si-en-tu-mente",
@@ -98,7 +98,7 @@ export const initialSongs = [
     note: "Que solo quiero saber Si una mariposa viste en tu ventana Cómo te pediste el café por la mañana Y si en tu mente estuve",
     spotifyUrl: "https://open.spotify.com/search/NSQK%20Si%20en%20tu%20mente%20estuve",
     type: "single",
-    date: new Date().toISOString()
+    date: '2026-07-19T00:00:00Z'
   },
   {
     id: "omakase-album",
@@ -106,31 +106,25 @@ export const initialSongs = [
     artist: "Álvaro Díaz",
     cover: omakaseCover,
     type: "album",
-    date: new Date().toISOString(),
+    date: '2026-07-19T00:00:00Z',
     songs: [
       {
         id: "bimel",
         title: "BIMEL.",
-        note: "", 
+        note: "Tu te ve' bien, pero conmigo te veria' mejor", 
         spotifyUrl: "https://open.spotify.com/search/Alvaro%20Diaz%20BIMEL"
       },
       {
         id: "spacexxx",
         title: "SPACEXXX.",
-        note: "pensando en ti pensando en ti to el dia, toa despeinada con una tshirt mia", 
+        note: "pensando en ti pensando en ti to el dia, toa despeina' con una t-shirt mia", 
         spotifyUrl: "https://open.spotify.com/search/Alvaro%20Diaz%20SPACEXXX"
       },
       {
         id: "inarow62",
         title: "INAROW62.",
-        note: "", 
+        note: "Tus ojitos chinos, mami, siempre quiero, Si, eso es lo que quiero", 
         spotifyUrl: "https://open.spotify.com/search/Alvaro%20Diaz%20INAROW62"
-      },
-      {
-        id: "nopodemos",
-        title: "NO PODEMOS SER AMIGOS",
-        note: "", 
-        spotifyUrl: "https://open.spotify.com/search/Alvaro%20Diaz%20NO%20PODEMOS%20SER%20AMIGOS"
       }
     ]
   }

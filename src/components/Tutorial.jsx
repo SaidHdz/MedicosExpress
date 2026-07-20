@@ -2,16 +2,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Music, Layers, Filter, MousePointer2, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
-const Tutorial = () => {
+const Tutorial = ({ isOpen, onClose }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const hasSeenTutorial = localStorage.getItem('rokola_tutorial_seen');
-    if (!hasSeenTutorial) {
-      setIsOpen(true);
-    }
-  }, []);
 
   const steps = [
     {
@@ -45,8 +37,8 @@ const Tutorial = () => {
   };
 
   const closeTutorial = () => {
-    setIsOpen(false);
     localStorage.setItem('rokola_tutorial_seen', 'true');
+    if (onClose) onClose();
   };
 
   return (
