@@ -37,19 +37,19 @@ function App() {
       <Tutorial isOpen={isTutorialOpen} onClose={() => setIsTutorialOpen(false)} />
       
       {/* Navbar Simple */}
-      <nav className="sticky top-0 z-[40] bg-deep-black/60 backdrop-blur-xl border-b border-white/5 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
-            <div className="flex items-center gap-2 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-              <div className="w-8 h-8 bg-wine-red rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(114,47,55,0.4)] shrink-0">
-                <span className="font-display italic font-bold text-lg">H</span>
+      <nav className="sticky top-0 z-[40] bg-deep-black/60 backdrop-blur-xl border-b border-white/5 px-4 py-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-center gap-4 xl:gap-0">
+          <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 w-full xl:w-auto">
+            <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+              <div className="w-10 h-10 bg-wine-red rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(114,47,55,0.4)] shrink-0">
+                <span className="font-display italic font-bold text-xl">H</span>
               </div>
-              <span className="font-display italic text-xl tracking-tight hidden lg:block">para ti richelle</span>
+              <span className="font-display italic text-2xl tracking-tight">para ti richelle</span>
             </div>
             <TimeCounter />
           </div>
 
-          <div className="text-[9px] uppercase tracking-[0.4em] opacity-40 font-body hidden md:block max-w-[200px] text-right">
+          <div className="text-[10px] uppercase tracking-[0.4em] opacity-40 font-body hidden xl:block max-w-[250px] text-right">
             archivo de canciones que me hacen pensar en ti
           </div>
         </div>
