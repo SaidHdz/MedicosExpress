@@ -100,25 +100,48 @@ const SongModal = ({ song: item, isOpen, onClose }) => {
                         <p className="text-[#fdfd96] font-body uppercase tracking-[0.3em] text-[12px] opacity-80">{item.artist}</p>
                     </div>
 
-                    <div className="mt-8 space-y-8">
+                    <div className="mt-8 space-y-6">
                       {currentView.note && (
                         <p className="text-xl lg:text-2xl font-display italic leading-snug text-aged-cream/90 border-l-4 border-[#fdfd96] pl-6 py-2">
                           "{currentView.note}"
                         </p>
                       )}
 
-                      {currentView.spotifyUrl ? (
-                        <a 
-                          href={currentView.spotifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#1DB954] text-white rounded-full font-body uppercase tracking-[0.2em] text-[10px] font-bold hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-[#1DB954]/20 w-max"
-                        >
-                          <PlayCircle size={20} /> Reproducir en Spotify
-                        </a>
-                      ) : (
-                        <div className="text-white/30 text-xs italic">Link de Spotify no disponible.</div>
-                      )}
+                      {(() => {
+                        // Intentar extraer el ID para el reproductor embebido
+                        const url = currentView.spotifyUrl;
+                        if (!url) return <div className="text-white/30 text-xs italic">Link de Spotify no disponible.</div>;
+                        
+                        const match = url.match(/(track|album)\/([a-zA-Z0-9]+)/);
+                        if (match) {
+                          const embedUrl = `https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator&theme=0`;
+                          return (
+                            <iframe 
+                              style={{ borderRadius: "12px" }} 
+                              src={embedUrl} 
+                              width="100%" 
+                              height="152" 
+                              frameBorder="0" 
+                              allowFullScreen="" 
+                              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                              loading="lazy"
+                              className="shadow-2xl shadow-black/50"
+                            ></iframe>
+                          );
+                        }
+
+                        // Fallback al botón si es un link de búsqueda
+                        return (
+                          <a 
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#1DB954] text-white rounded-full font-body uppercase tracking-[0.2em] text-[10px] font-bold hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-[#1DB954]/20 w-max"
+                          >
+                            <PlayCircle size={20} /> Reproducir en Spotify
+                          </a>
+                        );
+                      })()}
                     </div>
                   </motion.div>
                 )}
