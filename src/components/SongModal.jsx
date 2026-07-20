@@ -33,8 +33,10 @@ const SongModal = ({ song: item, isOpen, onClose }) => {
           />
 
           <motion.div
-            layoutId={`card-${item.id}`}
-            transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.8 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30, mass: 0.8 }}
             className="relative w-full max-w-5xl h-full lg:h-[600px] bg-[#080808] rounded-none sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/5 flex flex-col lg:flex-row"
           >
             {/* ACTION BUTTONS */}
@@ -45,20 +47,16 @@ const SongModal = ({ song: item, isOpen, onClose }) => {
             </div>
 
             {/* IMAGE SECTION */}
-            <motion.div 
-              layout
-              className="relative overflow-hidden shrink-0 transition-all duration-700 ease-in-out z-20 w-full lg:w-1/2 h-[40vh] lg:h-full"
-            >
-              <div className="w-full h-full flex items-center justify-center">
-                <motion.img 
-                  layoutId={`image-${item.id}`}
+            <div className="relative overflow-hidden shrink-0 z-20 w-full lg:w-1/2 h-[40vh] lg:h-full">
+              <div className="w-full h-full flex items-center justify-center bg-black/20">
+                <img 
                   src={item.cover} 
                   alt="cover" 
-                  className="object-cover transition-all duration-700 shadow-2xl w-full h-full" 
+                  className="object-cover shadow-2xl w-full h-full" 
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent pointer-events-none lg:hidden" />
-            </motion.div>
+            </div>
 
             {/* CONTENT AREA */}
             <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#080808] p-8 lg:p-12 justify-start lg:justify-center overflow-y-auto custom-modal-scroll">
