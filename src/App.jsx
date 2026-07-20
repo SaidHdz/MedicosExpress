@@ -16,12 +16,19 @@ function App() {
   
   const [selectedItem, setSelectedItem] = useState(null);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const hasSeen = localStorage.getItem('rokola_tutorial_seen');
     if (!hasSeen) {
       setIsTutorialOpen(true);
     }
+    
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNextItem = () => {
@@ -37,19 +44,19 @@ function App() {
       <Tutorial isOpen={isTutorialOpen} onClose={() => setIsTutorialOpen(false)} />
       
       {/* Navbar Simple */}
-      <nav className="sticky top-0 z-[40] bg-deep-black/60 backdrop-blur-xl border-b border-white/5 px-4 py-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col xl:flex-row justify-between items-center gap-4 xl:gap-0">
-          <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 w-full xl:w-auto">
-            <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+      <nav className={`sticky top-0 z-[40] transition-all duration-500 ease-in-out backdrop-blur-xl border-b border-white/5 ${isScrolled ? 'bg-deep-black/90 py-2 px-3 sm:px-6 shadow-2xl' : 'bg-deep-black/60 px-4 py-4 sm:px-6'}`}>
+        <div className={`max-w-7xl mx-auto flex ${isScrolled ? 'flex-row' : 'flex-col xl:flex-row'} justify-between items-center gap-3 xl:gap-0`}>
+          <div className={`flex ${isScrolled ? 'flex-row justify-between w-full' : 'flex-col lg:flex-row w-full xl:w-auto'} items-center gap-4 lg:gap-8`}>
+            <div className={`flex items-center gap-3 group cursor-pointer transition-all duration-500 ${isScrolled ? 'scale-75 origin-left sm:scale-100' : ''}`} onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
               <div className="w-10 h-10 bg-wine-red rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(114,47,55,0.4)] shrink-0">
                 <span className="font-display italic font-bold text-xl">H</span>
               </div>
-              <span className="font-display italic text-2xl tracking-tight">para ti richelle</span>
+              <span className={`font-display italic text-2xl tracking-tight ${isScrolled ? 'hidden sm:block' : ''}`}>para ti richelle</span>
             </div>
-            <TimeCounter />
+            <TimeCounter isScrolled={isScrolled} />
           </div>
 
-          <div className="text-[10px] uppercase tracking-[0.4em] opacity-40 font-body hidden xl:block max-w-[250px] text-right">
+          <div className={`text-[10px] uppercase tracking-[0.4em] opacity-40 font-body hidden xl:block max-w-[250px] text-right transition-all duration-500 ${isScrolled ? 'w-0 overflow-hidden opacity-0' : ''}`}>
             archivo de canciones que me hacen pensar en ti
           </div>
         </div>
