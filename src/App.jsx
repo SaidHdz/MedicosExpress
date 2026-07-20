@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Download, Upload, Trash2, Menu, X as CloseIcon } from 'lucide-react';
 import { useSongs } from './hooks/useSongs';
 import SongGrid from './components/SongGrid';
