@@ -16,7 +16,7 @@ export const initialSongs = [
     artist: "Saiko",
     cover: cosasCover,
     note: "vamos a escribir nuestras iniciales juntas, eh, la verdad que tu me gustas",
-    spotifyUrl: "https://open.spotify.com/search/Saiko%20COSAS%20QUE%20NO%20TE%20DIJE",
+    spotifyUrl: "https://open.spotify.com/track/5xSt1wxZobFcLzHrFakv6z?si=6b3074694fb14b4e",
     type: "single",
     date: '2026-07-19T00:00:00Z'
   },
