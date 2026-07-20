@@ -19,6 +19,14 @@ function App() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    // Precargar todas las portadas para que la web se sienta instantánea
+    collection.forEach(song => {
+      if (song.cover) {
+        const img = new Image();
+        img.src = song.cover;
+      }
+    });
+
     const hasSeen = localStorage.getItem('rokola_tutorial_seen');
     if (!hasSeen) {
       setIsTutorialOpen(true);
@@ -29,7 +37,7 @@ function App() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [collection]);
 
   const handleNextItem = () => {
     if (!selectedItem) return;
