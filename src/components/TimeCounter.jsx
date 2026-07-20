@@ -51,7 +51,7 @@ const LargeCounter = ({ timePassed }) => {
 
 const SmallCounter = ({ timePassed }) => {
   return (
-    <div className="flex items-center bg-deep-black/90 border border-wine-red/30 rounded-full px-4 sm:px-6 py-1.5 sm:py-2 backdrop-blur-md shadow-lg">
+    <div className="flex items-center bg-deep-black/95 border border-wine-red/50 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 backdrop-blur-xl shadow-[0_0_30px_rgba(114,47,55,0.4)]">
       <div className="flex items-center gap-1.5 sm:gap-3">
         {timePassed.years > 0 && <><NumberBlock size="small" value={timePassed.years} label="Años" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
         {timePassed.months > 0 && <><NumberBlock size="small" value={timePassed.months} label="Meses" /><span className="text-white/20 font-display italic -translate-y-1">:</span></>}
@@ -94,25 +94,26 @@ const TimeCounter = ({ isScrolled = false }) => {
   }, []);
 
   return (
-    <div className={`relative flex justify-center w-full sm:w-auto transition-all duration-300 ${isScrolled ? 'h-[36px] sm:h-[40px] items-center' : 'h-[105px] sm:h-[90px] items-start mt-4 sm:mt-0'}`}>
-      <motion.div 
-        initial={false}
-        animate={{ opacity: isScrolled ? 0 : 1, scale: isScrolled ? 0.9 : 1, y: isScrolled ? -10 : 0 }}
-        transition={{ duration: 0.25, ease: "easeInOut" }}
-        className={`absolute top-0 w-full sm:w-auto flex justify-center sm:justify-start origin-top ${isScrolled ? 'pointer-events-none' : ''}`}
-      >
-        <LargeCounter timePassed={timePassed} />
-      </motion.div>
-      
-      <motion.div 
-        initial={false}
-        animate={{ opacity: isScrolled ? 1 : 0, scale: isScrolled ? 1 : 0.9, y: isScrolled ? 0 : 10 }}
-        transition={{ duration: 0.25, ease: "easeInOut" }}
-        className={`absolute top-0 w-full sm:w-auto flex justify-center sm:justify-start origin-top ${isScrolled ? '' : 'pointer-events-none'}`}
-      >
-        <SmallCounter timePassed={timePassed} />
-      </motion.div>
-    </div>
+    <>
+      {/* El contador original se queda en su lugar normal, fluyendo con la página sin causar lag */}
+      <LargeCounter timePassed={timePassed} />
+
+      {/* El contador pequeño hace POP en la esquina superior cuando scrolleas hacia abajo */}
+      <AnimatePresence>
+        {isScrolled && (
+          <motion.div 
+            initial={{ scale: 0.5, opacity: 0, y: -20, rotate: -5 }}
+            animate={{ scale: 1, opacity: 1, y: 0, rotate: 0 }}
+            exit={{ scale: 0.5, opacity: 0, y: -20, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 450, damping: 25, mass: 0.8 }}
+            className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[100] origin-top-right cursor-pointer"
+            onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+          >
+            <SmallCounter timePassed={timePassed} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
