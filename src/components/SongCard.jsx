@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Music, Layers } from 'lucide-react';
 import TiltedCard from './TiltedCard';
 
@@ -34,6 +34,18 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Transformaciones lineales ligeras sin useSpring para evitar lag
+  // 0 = elemento entra por abajo, 0.5 = elemento al centro, 1 = elemento sale por arriba
+  const scale = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.75, 1.02, 1.02, 0.75]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [35, 0, -35]);
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [50, 0, -50]);
+
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -50,15 +62,20 @@ const SongCard = ({ item, onClick, isModalOpen }) => {
   } : { rotateZ: 0, rotateX: 0, rotateY: 0 };
 
   return (
-    <div ref={containerRef} className="w-full h-full relative">
+    <div ref={containerRef} className="w-full h-full relative" style={{ perspective: isMobile ? '1200px' : 'none' }}>
       <motion.div 
         className="w-full h-full absolute inset-0 z-10"
         style={{
-          filter: `drop-shadow(0 20px 30px rgba(0,0,0,0.5))`
+          filter: `drop-shadow(0 20px 30px rgba(0,0,0,0.5))`,
+          scale: isMobile && !isModalOpen ? scale : 1,
+          opacity: isMobile && !isModalOpen ? opacity : 1,
+          rotateX: isMobile && !isModalOpen ? rotateX : 0,
+          y: isMobile && !isModalOpen ? y : 0,
+          transformStyle: "preserve-3d"
         }}
       >
         <motion.div
-          className={`w-full h-full cursor-pointer relative preserve-3d rounded-[30px] ${isMobile ? 'touch-pan-y' : ''}`}
+          className="w-full h-full cursor-pointer relative preserve-3d rounded-[30px]"
           animate={!isModalOpen && !isMobile ? desktopIdle : {}}
           transition={!isMobile && !isModalOpen ? { duration: 10, repeat: Infinity, ease: "easeInOut" } : { type: "spring", stiffness: 350, damping: 30 }}
           onClick={(e) => {
