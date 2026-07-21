@@ -18,7 +18,7 @@ export const initialSongs = [
     artist: "Artista",
     cover: dbtmCover,
     note: "te vo'a llenar de besitos la carita, un dia conmigo es lo que tu necesita', sonriendo tu te ves mas bonita",
-    spotifyUrl: "https://open.spotify.com/track/79x7xtoCLpf6l32Zz6mWo4?si=eb9284e341054367",
+    spotifyUrl: "https://open.spotify.com/track/5WEF0icHWmAZBBMglBd599?si=cae952b22401465f",
     type: "single",
     date: '2026-07-20T00:00:00Z'
   },
