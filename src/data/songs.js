@@ -11,8 +11,19 @@ import cosasCover from '../assets/cosas.jpg';
 import misaCover from '../assets/misa.png';
 import dbtmCover from '../assets/dbtm.jpg';
 import ughCover from '../assets/ugh.png';
+import soneCover from '../assets/soñe.jpg';
 
 export const initialSongs = [
+  {
+    id: "zoe-sone",
+    title: "Soñé",
+    artist: "Zoé",
+    cover: soneCover,
+    note: "Y todo el tiempo estoy pensando en ti, En el brillo del sol y en un rincón del cielo",
+    spotifyUrl: "https://open.spotify.com/track/2VhJ4nrPorAbySEgO4V0BS?si=f8d29336a6634011",
+    type: "single",
+    date: '2026-07-20T00:00:00Z'
+  },
   {
     id: "nsqk-ugh",
     title: "UGH",
