@@ -12,8 +12,19 @@ import misaCover from '../assets/misa.png';
 import dbtmCover from '../assets/dbtm.jpg';
 import ughCover from '../assets/ugh.png';
 import soneCover from '../assets/soñe.jpg';
+import tequieroCover from '../assets/tequiero.jpg';
 
 export const initialSongs = [
+  {
+    id: "hombresg-tequiero",
+    title: "Te quiero",
+    artist: "Hombres G",
+    cover: tequieroCover,
+    note: "Necesito verte, Dondequiera que estés, Te quiero, te quiero, te quiero, Y no hago otra cosa que pensar en ti",
+    spotifyUrl: "https://open.spotify.com/track/6tu2FHuKL9C8pwNrityweQ?si=7e34be716349404a",
+    type: "single",
+    date: '2026-07-20T00:00:00Z'
+  },
   {
     id: "zoe-sone",
     title: "Soñé",
