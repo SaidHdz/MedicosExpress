@@ -8,8 +8,30 @@ import sayonaraCover from '../assets/sayonara.jpg';
 import felicilandiaCover from '../assets/ab67616d0000b2734385062efd655ededc0d2caa (1)felicilandia.jpg';
 import deidadCover from '../assets/deidad.jpg';
 import cosasCover from '../assets/cosas.jpg';
+import misaCover from '../assets/misa.png';
+import dbtmCover from '../assets/dbtm.jpg';
 
 export const initialSongs = [
+  {
+    id: "weltita",
+    title: "WELTiTA",
+    artist: "Artista",
+    cover: dbtmCover,
+    note: "te vo'a llenar de besitos la carita, un dia conmigo es lo que tu necesita', sonriendo tu te ves mas bonita",
+    spotifyUrl: "https://open.spotify.com/track/79x7xtoCLpf6l32Zz6mWo4?si=eb9284e341054367",
+    type: "single",
+    date: '2026-07-20T00:00:00Z'
+  },
+  {
+    id: "nsqk-misa",
+    title: "misa",
+    artist: "nsqk",
+    cover: misaCover,
+    note: "Es que tu tienes ese algo, hablas y parece misa, que bien te ves a mi lado, roba todas mis camisas",
+    spotifyUrl: "https://open.spotify.com/track/0sfpzvSPMTq14wpUyIQZvQ?si=a2d903759ac54d34",
+    type: "single",
+    date: '2027-07-20T00:00:00Z'
+  },
   {
     id: "saiko-cosas",
     title: "COSAS QUE NO TE DIJE",
