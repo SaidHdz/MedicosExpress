@@ -10,8 +10,19 @@ import deidadCover from '../assets/deidad.jpg';
 import cosasCover from '../assets/cosas.jpg';
 import misaCover from '../assets/misa.png';
 import dbtmCover from '../assets/dbtm.jpg';
+import ughCover from '../assets/ugh.png';
 
 export const initialSongs = [
+  {
+    id: "nsqk-ugh",
+    title: "UGH",
+    artist: "nsqk",
+    cover: ughCover,
+    note: "Hay algo de ti, Tú lo sabes bien, no puedo escapar, Baby, cuando Dios te dibujó, Se quiso esmerar",
+    spotifyUrl: "https://open.spotify.com/track/10nzrF5MvultORvKZQkGNu?si=b6b3b50d1d5243c7",
+    type: "single",
+    date: '2026-07-20T00:00:00Z'
+  },
   {
     id: "weltita",
     title: "WELTiTA",
