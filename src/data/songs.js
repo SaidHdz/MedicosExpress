@@ -13,8 +13,19 @@ import dbtmCover from '../assets/dbtm.jpg';
 import ughCover from '../assets/ugh.png';
 import soneCover from '../assets/soñe.jpg';
 import tequieroCover from '../assets/tequiero.jpg';
+import matecocidoCover from '../assets/matecocido.png';
 
 export const initialSongs = [
+  {
+    id: "trashu-quedate",
+    title: "Quédate",
+    artist: "Trashu",
+    cover: matecocidoCover,
+    note: "Hay algo que haces tan bien, Para pelarme la piel hasta encontrarme, Me serruchaste la sien, Vivís ahí sin alquiler",
+    spotifyUrl: "https://open.spotify.com/track/5lRpJsVLTktXhGL0FYbuLu?si=5f463c5d6e4d4eb9",
+    type: "single",
+    date: '2026-07-20T00:00:00Z'
+  },
   {
     id: "hombresg-tequiero",
     title: "Te quiero",
@@ -63,7 +74,7 @@ export const initialSongs = [
     note: "Es que tu tienes ese algo, hablas y parece misa, que bien te ves a mi lado, roba todas mis camisas",
     spotifyUrl: "https://open.spotify.com/track/0sfpzvSPMTq14wpUyIQZvQ?si=a2d903759ac54d34",
     type: "single",
-    date: '2027-07-20T00:00:00Z'
+    date: '2026-07-20T00:00:00Z'
   },
   {
     id: "saiko-cosas",
